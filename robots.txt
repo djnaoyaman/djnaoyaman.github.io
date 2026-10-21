@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /MINERALion/
 
 Sitemap: https://djnaoyaman.github.io/cratediggin/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/sanreikotaiyoku/sitemap.xml
