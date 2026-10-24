@@ -1,0 +1,28 @@
+# NAOYA WEB
+
+> ずっと、あれも、これも。宮崎直哉のWebプロジェクト集。
+
+- 正規URL: https://djnaoyaman.github.io/
+- 作者: 宮崎直哉（Naoya Miyazaki / DJ Naoyaman）
+- 内容: 11のWebプロジェクトを紹介するポートフォリオ。
+- 本サイトは各テーマへの入口です。個別の内容・出典・改訂情報はリンク先を参照してください。
+
+## プロジェクト
+
+- [gooooooooood expression](https://djnaoyaman.github.io/gooooooooood_expression/): 見て、触って、覚えて、使えるWeb表現図鑑。タイポグラフィから粒子、音、3Dまで、実演と解説、コードをつないだ表現の実験室。
+- [Crate Diggin’](https://djnaoyaman.github.io/cratediggin/): サンプリングとヴィンテージ・グルーヴを掘る音楽ガイド。曲の背景や聴きどころを読み、自分だけのMY CRATEへ。
+- [Earth Number](https://djnaoyaman.github.io/earthnumber/): 地球、宇宙、水、鉱物。単位と出典を手がかりに、身のまわりから惑星のスケールまで探索する、インタラクティブな科学アトラス。
+- [my Chems](https://djnaoyaman.github.io/chems/): The Chemical Brothersの作品を、音楽性、テクノロジー、周辺環境から読み解く。日本語と英語で巡る、私的な作品の本棚。
+- [SUBURBIA CLASSICA](https://djnaoyaman.github.io/suburbia-classica/): ピアノ、映画、CMで出会ったクラシックへ。作曲の経緯、構成、録音のエピソードを読みながら聴く、楽曲データベース。
+- [鎌・くらんぽ](https://djnaoyaman.github.io/kuranpo/): 神社仏閣を、出発点から解散点までつなぐ鎌倉散歩ガイド。コース、距離、拝観情報と歴史を携え、いつもの街のその先へ。
+- [一見坊の日本妖怪学体系](https://djnaoyaman.github.io/youkai/): 各地の妖怪を、伝承、出典、信頼度とともに巡る図鑑。民俗学の視点から、起源、土地、怪談、現代の妖怪までたどる。
+- [花鳥風月、そして魚と虫。](https://djnaoyaman.github.io/sakanamushi/): 魚、虫、鳥、植物。自然にまつわる漢字を、一字ずつ大きく読むクイズ図鑑。読めたら、うれしい。その発見を、次の一字へ。
+- [酸冷交代浴](https://djnaoyaman.github.io/sanreikotaiyoku/): 炭酸泉と水風呂を交互に楽しむ入浴体験。体感のことば、日常での楽しみ方、各地の施設と研究・出典を紹介する。
+- [掌蹠膿疱症.com](https://djnaoyaman.github.io/ppp/): 掌蹠膿疱症の症状、原因、治療の選択肢を整理した情報サイト。標準医療から漢方、セルフケアまで、テーマごとに読み進める。
+- [Book Keeping](https://djnaoyaman.github.io/bookkeeping/): 日商簿記、全経簿記、USCPAの反復演習。金額と仕訳を入力し、間違えた問題を解き直しながら理解を積み重ねる学習サイト。
+
+## 詳細
+
+- [全文情報](https://djnaoyaman.github.io/llms-full.txt)
+- [サイトマップ](https://djnaoyaman.github.io/sitemap.xml)
+- [GitHub](https://github.com/djnaoyaman)
