@@ -16,7 +16,7 @@
         if (!project.hidden) visible++;
       });
       buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === theme)));
-      count.textContent = theme === 'all' ? `${projects.length} websites` : `${visible} / ${projects.length} websites`;
+      count.textContent = theme === 'all' ? `全${projects.length}サイト` : `${projects.length}サイト中${visible}サイトを表示`;
       count.setAttribute('aria-label', theme === 'all' ? `全${projects.length}件` : `${projects.length}件中${visible}件を表示`);
     };
     // Counts come from the actual cards, so adding a work cannot leave stale badges.
@@ -71,7 +71,7 @@
         await navigator.clipboard.writeText(canonical);
         announce('リンクをコピーしました。');
       } catch {
-        announce(`コピーできませんでした。URLを選択してコピーしてください：${canonical}`);
+        announce(`コピーできませんでした。次のURLを選択してコピーしてください：${canonical}`);
       } finally { copyButton.disabled = false; }
     });
   }
@@ -85,7 +85,7 @@
       try {
         await navigator.share({title:document.title,text:'音楽も、科学も、表現も、暮らしも。宮崎直哉のWebプロジェクト集。',url:canonical});
       } catch (error) {
-        if (error?.name !== 'AbortError') announce('共有を開けませんでした。Xでシェア、またはリンクのコピーをご利用ください。');
+        if (error?.name !== 'AbortError') announce('共有メニューを開けませんでした。「Xでシェア」または「リンクをコピー」をお試しください。');
       } finally { shareButton.disabled = false; }
     });
   }
