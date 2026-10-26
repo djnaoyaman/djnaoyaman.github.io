@@ -1,0 +1,38 @@
+/* Profile page: shared brand, comfortable reading and clear section rhythm. */
+.profile-main{max-width:960px;margin:0 auto;padding:0 40px 90px}
+.profile-hero{max-width:760px;padding:100px 0 60px}
+.profile-eyebrow{font:11px Arial,sans-serif;letter-spacing:.13em;color:var(--sub);margin:0 0 30px}
+.profile-hero h1{text-align:left;font-size:clamp(36px,6vw,64px);line-height:1.5;letter-spacing:.08em;margin:0}
+.profile-name{font:11px Arial,sans-serif;letter-spacing:.16em;color:var(--sub);margin:18px 0 30px}
+.profile-role{font-size:13px;line-height:2;color:var(--sub);margin:0 0 50px}
+.profile-lead{font-size:clamp(23px,3.2vw,34px);font-weight:600;line-height:1.85;letter-spacing:.025em;margin:0 0 32px}
+.profile-intro,.profile-section>p{font-size:14px;line-height:2.3;max-width:720px;margin:0 0 22px}
+.profile-contents{display:flex;gap:4px 26px;flex-wrap:wrap;padding:22px 0 34px;border-top:1px solid var(--ink);font-size:12px}
+.profile-contents a,.profile-inline-links a,.profile-reading>a,.profile-social a{display:inline-flex;align-items:center;min-height:44px}
+.profile-section{padding:68px 0 55px;border-top:1px solid var(--line)}
+.profile-section .profile-eyebrow{margin-bottom:18px}
+.profile-section h2{font-size:clamp(21px,3vw,27px);font-weight:600;line-height:1.8;letter-spacing:.025em;margin:0 0 30px;text-wrap:balance}
+.profile-section h3{font-size:15px;margin:36px 0 16px}
+.profile-career,.profile-aliases{margin:30px 0 0}
+.profile-career>div,.profile-aliases>div{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,2.2fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--line)}
+.profile-career dt,.profile-aliases dt{font-size:13px;font-weight:600;line-height:2}
+.profile-career dd,.profile-aliases dd{margin:0;font-size:13px;line-height:2;color:var(--sub)}
+.profile-background{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.profile-background p,.profile-reading li{font-size:13px;line-height:2.2;color:var(--sub);margin:0}
+.profile-inline-links{display:flex;gap:4px 26px;flex-wrap:wrap;font-size:12px!important}
+.profile-reading{margin-top:36px;padding:4px 28px 24px;background:#f7f7f7}
+.profile-reading ul{padding-left:1.2em;margin:0}
+.profile-reading li{padding:6px 0}
+.profile-reading>a{font-size:12px;margin-top:12px}
+.profile-works{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.profile-works li{min-width:0;padding:24px 0;border-top:1px solid var(--line);break-inside:avoid}
+.profile-works a{font-size:15px;font-weight:600;line-height:1.8;min-height:44px;display:inline-flex;align-items:center;overflow-wrap:anywhere}
+.profile-works p{font-size:12px;line-height:2;color:var(--sub);margin:8px 0 0}
+.profile-quote{margin:45px 0 0;border-left:2px solid var(--ink);padding:5px 0 5px 25px}
+.profile-quote p{font-size:23px;font-weight:600;line-height:2;margin:0}
+.profile-social{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 30px}
+.profile-social li{min-width:0}
+.profile-social a{font-size:12px;overflow-wrap:anywhere}
+.profile-section .profile-note{font-size:11px;line-height:2;color:var(--sub);margin-top:36px}
+@media(max-width:600px){.profile-main{padding:0 24px 40px}.profile-hero{padding:65px 0 42px}.profile-role{margin-bottom:32px}.profile-lead{font-size:23px}.profile-intro,.profile-section>p{font-size:13px;line-height:2.2}.profile-section{padding:42px 0}.profile-section h2{font-size:21px;margin-bottom:24px}.profile-career>div,.profile-aliases>div{grid-template-columns:1fr;gap:7px;padding:18px 0}.profile-background,.profile-works{grid-template-columns:1fr;gap:0}.profile-reading{padding:1px 18px 20px}.profile-quote{padding-left:18px}.profile-quote p{font-size:21px}.profile-contents{gap:2px 20px}.profile-eyebrow{font-size:10px}}
+@media print{.profile-main{max-width:none;padding:0}.profile-hero{padding:20pt 0}.profile-hero h1{font-size:28pt}.profile-lead{font-size:18pt}.profile-section{padding:20pt 0}.profile-section h2{font-size:16pt;break-after:avoid}.profile-contents{display:none}.profile-intro,.profile-section>p{font-size:10pt;line-height:1.8}.profile-career>div,.profile-aliases>div,.profile-reading{break-inside:avoid}.profile-reading{background:none}.profile-works a,.profile-social a{min-height:0}.profile-works p{font-size:9pt}.profile-section .profile-note{font-size:8pt}}

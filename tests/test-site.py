@@ -70,7 +70,7 @@ with sync_playwright() as p:
     audit_context=browser.new_context(bypass_csp=True)
     audit_context.route('**/*',route)
     a=audit_context.new_page()
-    for url in [ORIGIN+'/',ORIGIN+'/?theme=music#projects',ORIGIN+'/missing/']:
+    for url in [ORIGIN+'/',ORIGIN+'/profile.html',ORIGIN+'/?theme=music#projects',ORIGIN+'/missing/']:
         a.goto(url);audit(a)
     nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',route)
     q=nojs.new_page();q.goto(ORIGIN+'/?theme=music');assert q.locator('.project:visible').count()==12
@@ -87,5 +87,15 @@ with sync_playwright() as p:
             assert (ROOT/urlparse(value).path.lstrip('/')).is_file(),value
     manifest=json.loads((ROOT/'site.webmanifest').read_text())
     for icon in manifest['icons']:assert (ROOT/urlparse(icon['src']).path.lstrip('/')).is_file()
+    # The standalone profile must work without JavaScript, and remain readable at each width.
+    q.goto(ORIGIN+'/profile.html')
+    assert q.locator('h1').inner_text()=='宮崎 直哉'
+    assert q.locator('.profile-works li').count()==12
+    for width in [280,320,390,600,768,1280]:
+        q.set_viewport_size({'width':width,'height':844})
+        assert q.evaluate('document.documentElement.scrollWidth<=innerWidth'),('profile',width)
+    q.locator('a[href="/"]').first.click()
+    assert q.url==ORIGIN+'/'
+    assert q.locator('a[href="/profile.html"]').count()>=2
     browser.close()
 print('PASS: filters/history, 6 widths, 44px targets, print, reduced motion, keyboard, clipboard/share, no-JS, deep 404, metadata/assets'+(', axe WCAG AA' if os.environ.get('AXE_PATH') else ''))
