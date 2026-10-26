@@ -10,13 +10,19 @@ with sync_playwright() as p:
  browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
  page=browser.new_page(device_scale_factor=1)
  svg=(ROOT/'assets-source/mark.svg').read_text()
+ tab=(ROOT/'assets-source/tab-mark.svg').read_text()
  for name,size in [('apple-touch-icon.png',180),('icon-192.png',192),('icon-512.png',512),('icon-maskable-192.png',192),('icon-maskable-512.png',512),('favicon-16.png',16),('favicon-32.png',32),('favicon-48.png',48)]:
   page.set_viewport_size({'width':size,'height':size})
-  page.set_content('<style>html,body{margin:0;width:100%;height:100%;background:white}svg{width:100%;height:100%;display:block}</style>'+svg)
+  art=tab if name.startswith('favicon-') else svg
+  page.set_content('<style>html,body{margin:0;width:100%;height:100%;background:white}svg{width:100%;height:100%;display:block}</style>'+art)
   page.screenshot(path=str(ROOT/name))
   # Encoding only; all creative content is the declarative SVG above.
   with Image.open(ROOT/name) as im:im.convert('RGB').save(ROOT/name,optimize=True)
- with Image.open(ROOT/'icon-512.png') as im:im.save(ROOT/'favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
+ page.set_viewport_size({'width':64,'height':64})
+ page.set_content('<style>html,body{margin:0}svg{display:block;width:64px;height:64px}</style>'+tab)
+ ico_source=page.screenshot()
+ import io
+ with Image.open(io.BytesIO(ico_source)) as im:im.save(ROOT/'favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
  page.set_viewport_size({'width':1200,'height':630})
  page.set_content((ROOT/'assets-source/share-card.html').read_text())
  page.evaluate('document.fonts.ready')

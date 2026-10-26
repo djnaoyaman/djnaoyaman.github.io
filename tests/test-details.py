@@ -27,6 +27,10 @@ for filename in ['apple-touch-icon.png','icon-192.png','icon-512.png','icon-mask
     if min(im.getpixel((x,y)))<240:
      assert math.hypot(x+.5-n/2,y+.5-n/2)<n*.4,(filename,x,y)
  assert im.mode=='RGB'
+for n in [16,32,48]:
+ im=Image.open(ROOT/f'favicon-{n}.png').convert('RGB')
+ box=ImageChops.difference(im,Image.new('RGB',im.size,'white')).getbbox()
+ assert box[3]-box[1]>=n*.75,(n,box)
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),args=['--no-sandbox'])
  context=browser.new_context(viewport={'width':390,'height':844});context.route('**/*',serve)

@@ -69,3 +69,5 @@ index.htmlの作品カード、件数、JSON-LD ItemList、llms.txt / llms-full.
 `python tests/test-details.py` で画素の中央配置/安全円、CSPによる実行阻止、404応答、共有の非同期競合、文字間隔拡大、追加の画面寸法、強制配色、明暗faviconを検査。アイコンの切り抜きプレビューは `/tmp/naoya-icon-masks.png` に出力。GitHub Actionsは構造検査に加えPlaywrightとaxe-coreによるブラウザ検査も実行する。ブラウザ実行パスは `CHROMIUM_PATH` で指定でき、未指定時はシステムChromiumまたはPlaywrightのChromiumを利用する。
 
 端末ごとの表示はブラウザで検証した。iPhone/Androidの実機やSNSサービス側の画像キャッシュ更新までは自動検証の対象外。
+
+タブ用faviconはホーム画面用とは別に図柄を1.5倍に拡大する光学補正を行い、16pxでもNの高さを12px確保する。`assets-source/tab-mark.svg` がその描画元。
