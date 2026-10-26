@@ -30,17 +30,18 @@ with sync_playwright() as p:
     context.route('**/*',route)
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(ORIGIN+'/?utm_source=test#projects')
-    assert page.locator('.project:visible').count()==11
+    assert page.locator('.project:visible').count()==12
     page.locator('button[data-theme="music"]').click()
-    assert page.locator('.project:visible').count()==3
+    assert page.locator('.project:visible').count()==4
+    assert page.locator('#project-premiumcuts').is_visible()
     assert 'utm_source=test' in page.url and 'theme=music' in page.url and page.url.endswith('#projects')
     page.locator('button[data-theme="life"]').click()
     assert page.locator('.project:visible').count()==3
     page.go_back();assert page.locator('button[data-theme="music"]').get_attribute('aria-pressed')=='true'
-    page.reload();assert page.locator('.project:visible').count()==3
-    page.emulate_media(media='print');assert page.locator('.project:visible').count()==11
+    page.reload();assert page.locator('.project:visible').count()==4
+    page.emulate_media(media='print');assert page.locator('.project:visible').count()==12
     page.emulate_media(media='screen')
-    page.goto(ORIGIN+'/?theme=%3Cscript%3E#projects');assert page.locator('.project:visible').count()==11
+    page.goto(ORIGIN+'/?theme=%3Cscript%3E#projects');assert page.locator('.project:visible').count()==12
     for width in [320,375,390,600,768,1280]:
         page.set_viewport_size({'width':width,'height':844})
         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
@@ -72,12 +73,12 @@ with sync_playwright() as p:
     for url in [ORIGIN+'/',ORIGIN+'/?theme=music#projects',ORIGIN+'/missing/']:
         a.goto(url);audit(a)
     nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',route)
-    q=nojs.new_page();q.goto(ORIGIN+'/?theme=music');assert q.locator('.project:visible').count()==11
+    q=nojs.new_page();q.goto(ORIGIN+'/?theme=music');assert q.locator('.project:visible').count()==12
     assert not q.locator('.project-filter').is_visible()
     # The displayed collection and machine-readable collection must agree.
     data=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',(ROOT/'index.html').read_text(),re.S)[1])
     items=data['@graph'][2]['mainEntity']['itemListElement']
-    assert len(items)==11
+    assert len(items)==12
     q.goto(ORIGIN+'/')
     assert [item['item']['name'] for item in items]==q.locator('h3').all_text_contents()
     for node in q.locator('[src],link[href]').all():

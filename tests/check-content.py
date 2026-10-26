@@ -42,10 +42,11 @@ for filename in ['index.html','404.html']:
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
-  assert collection['numberOfItems']==len(items)==len(page.headings)==11
+  assert collection['numberOfItems']==len(items)==len(page.headings)==12
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
-  assert [item['position'] for item in items]==list(range(1,12))
+  assert [item['position'] for item in items]==list(range(1,13))
+  assert f'content:"全{len(items)}サイト"' in (ROOT/'site.css').read_text()
   for item in items:
    for filename in ['llms.txt','llms-full.txt']:
     assert item['item']['url'] in (ROOT/filename).read_text(),filename
@@ -71,4 +72,4 @@ assert 'prefers-color-scheme:dark' in (ROOT/'favicon.svg').read_text()
 ET.parse(ROOT/'favicon.svg');ET.parse(ROOT/'safari-pinned-tab.svg')
 ET.parse(ROOT/'sitemap.xml')
 assert 'Sitemap: https://djnaoyaman.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
-print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 11-project JSON-LD/docs, manifest dimensions, OGP, sitemap')
+print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 12-project JSON-LD/docs, manifest dimensions, OGP, sitemap')
