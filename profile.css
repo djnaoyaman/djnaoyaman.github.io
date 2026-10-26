@@ -36,3 +36,12 @@
 .profile-section .profile-note{font-size:11px;line-height:2;color:var(--sub);margin-top:36px}
 @media(max-width:600px){.profile-main{padding:0 24px 40px}.profile-hero{padding:65px 0 42px}.profile-role{margin-bottom:32px}.profile-lead{font-size:23px}.profile-intro,.profile-section>p{font-size:13px;line-height:2.2}.profile-section{padding:42px 0}.profile-section h2{font-size:21px;margin-bottom:24px}.profile-career>div,.profile-aliases>div{grid-template-columns:1fr;gap:7px;padding:18px 0}.profile-background,.profile-works{grid-template-columns:1fr;gap:0}.profile-reading{padding:1px 18px 20px}.profile-quote{padding-left:18px}.profile-quote p{font-size:21px}.profile-contents{gap:2px 20px}.profile-eyebrow{font-size:10px}}
 @media print{.profile-main{max-width:none;padding:0}.profile-hero{padding:20pt 0}.profile-hero h1{font-size:28pt}.profile-lead{font-size:18pt}.profile-section{padding:20pt 0}.profile-section h2{font-size:16pt;break-after:avoid}.profile-contents{display:none}.profile-intro,.profile-section>p{font-size:10pt;line-height:1.8}.profile-career>div,.profile-aliases>div,.profile-reading{break-inside:avoid}.profile-reading{background:none}.profile-works a,.profile-social a{min-height:0}.profile-works p{font-size:9pt}.profile-section .profile-note{font-size:8pt}}
+
+/* A regional project alongside the biography. */
+.profile-section .azumane-concept{font-size:clamp(24px,4vw,34px);font-weight:600;line-height:1.8;letter-spacing:.04em;margin:12px 0 30px}
+.azumane-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:32px 0;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.azumane-pillars dt{font-size:14px;font-weight:600;line-height:2;margin-bottom:8px}
+.azumane-pillars dd{font-size:13px;line-height:2;color:var(--sub);margin:0}
+.azumane-sources{margin-top:24px}
+@media(max-width:600px){.azumane-pillars{grid-template-columns:1fr;gap:20px}.profile-section .azumane-concept{font-size:24px}}
+@media print{.azumane-pillars{break-inside:avoid}.profile-section .azumane-concept{font-size:18pt}}

@@ -45,4 +45,8 @@ for name in ['llms.txt','llms-full.txt']:assert p['url'] in (ROOT/name).read_tex
 audit=(ROOT/'docs/profile-sources.md').read_text(encoding='utf-8')
 assert len(re.findall(r'^\| [a-z].*? \|',audit,re.M))==14
 assert len(text.encode('utf-8'))<50000
+assert 'id="azumane"' in text and 'href="#azumane"' in text
+assert 'href="/profile.html#azumane"' in home
+assert 'town.shiwa.iwate.jp/soshiki/2_3/3_azumane/172677769112728/' in text
+assert 'Partner Noteを読む（PDF・49ページ）' in text
 print('PASS: profile navigation, IDs, labels, Person consistency, 12 works, aliases, canonical, sitemap and 14-repository evidence')
