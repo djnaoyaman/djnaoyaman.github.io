@@ -40,7 +40,8 @@ with sync_playwright() as p:
  context=browser.new_context(viewport={'width':390,'height':844});context.route('**/*',serve)
  page=context.new_page();page.goto(ORIGIN+'/')
  assert not any(path.endswith('og-image.png') or path.startswith('/screenshots/') for path in requests),'Unnecessary preview preload'
- assert sum((ROOT/name).stat().st_size for name in ['index.html','site.css','site.js'])<40000
+ # Allow the added essay, fiction and profile copy while keeping the core payload below 50 KB.
+ assert sum((ROOT/name).stat().st_size for name in ['index.html','site.css','site.js'])<50000
  # Inline scripts are really blocked by the shipped policy.
  page.evaluate("()=>{let s=document.createElement('script');s.textContent='window.untrustedRan=true';document.head.append(s)}")
  assert page.evaluate('window.untrustedRan') is None
