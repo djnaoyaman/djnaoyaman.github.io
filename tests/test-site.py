@@ -1,7 +1,7 @@
 """Run: python tests/test-site.py. Requires Playwright + Chromium.
 Optional AXE_PATH points to a locally supplied axe-core 4 script.
 """
-import json,os,re,mimetypes
+import json,os,re,mimetypes,shutil
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
@@ -25,7 +25,7 @@ def audit(page):
         assert not violations,json.dumps(violations,ensure_ascii=False)
 
 with sync_playwright() as p:
-    browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+    browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),args=['--no-sandbox'])
     context=browser.new_context(viewport={'width':1280,'height':900})
     context.route('**/*',route)
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
@@ -85,6 +85,6 @@ with sync_playwright() as p:
         if value.startswith('/'):
             assert (ROOT/urlparse(value).path.lstrip('/')).is_file(),value
     manifest=json.loads((ROOT/'site.webmanifest').read_text())
-    for icon in manifest['icons']:assert (ROOT/icon['src'].lstrip('/')).is_file()
+    for icon in manifest['icons']:assert (ROOT/urlparse(icon['src']).path.lstrip('/')).is_file()
     browser.close()
 print('PASS: filters/history, 6 widths, 44px targets, print, reduced motion, keyboard, clipboard/share, no-JS, deep 404, metadata/assets'+(', axe WCAG AA' if os.environ.get('AXE_PATH') else ''))

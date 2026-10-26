@@ -41,3 +41,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media(forced-colors:active){.project-filter button[aria-pressed="true"]{background:Highlight;color:HighlightText;border:2px solid Highlight}.project-filter button{border-color:ButtonText}a:focus-visible,button:focus-visible{outline-color:Highlight}nav a[aria-current="location"]::after{background:LinkText}}
 @media print{html{scroll-behavior:auto}body{color:#000;background:#fff;font-size:10pt}header{padding:0 0 12pt}.skip,nav,.project-filter,.share-tools,.footer-bottom a{display:none!important}.hero{min-height:0;padding:25pt 0 30pt}h1{font-size:28pt;line-height:1.5}.hero .byline{margin-top:12pt}.story{padding:20pt 0 30pt;max-width:none}.story p{font-size:10pt;line-height:1.7;margin-bottom:6pt}.story .father-words{margin:18pt 0}.story .turning-point{margin-top:18pt}.story .decision{font-size:16pt}.author{margin-top:18pt}.projects{padding:0;max-width:none}.project{break-inside:avoid;padding:14pt 0;gap:12pt}.project[hidden]{display:grid!important}.project-category{margin-bottom:3pt}h3{font-size:13pt}.description{font-size:10pt;color:#333;line-height:1.7}.project-links{margin-top:4pt;font-size:9pt}.project-links a{min-height:0}.project-links a:first-child::after{content:"  https://djnaoyaman.github.io" attr(href);font-size:8pt;margin-left:4pt}.project-links a:last-child{display:none}.footer{padding:20pt 0 0}.footer-bottom{font-size:8pt}a{text-decoration:none}#project-count{font-size:0}#project-count::after{content:"全11サイト";font:9pt Arial,sans-serif}}
+
+/* Brand punctuation, intrinsic wrapping and opt-in text-spacing resilience. */
+.brand-dot{color:var(--red)}
+header{flex-wrap:wrap}
+nav{flex-wrap:wrap}
+.project:focus-within h3 a{text-decoration:underline;text-decoration-color:var(--red)}
+#share-status{overflow-wrap:anywhere}
+.error-main h1{overflow-wrap:normal}
+@media print{.brand-dot{color:#000}}

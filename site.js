@@ -58,26 +58,39 @@
   const status = document.querySelector('#share-status');
   if (!status) return;
   let announcement;
+  let operation = 0;
+  let copyOperation = 0, shareOperation = 0;
   const announce = message => {
     clearTimeout(announcement);
     status.textContent = '';
     announcement = setTimeout(() => { status.textContent = message; }, 30);
   };
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    operation++;
+    copyOperation = shareOperation = 0;
+    clearTimeout(announcement);
+    status.textContent = '';
+    if (copyButton) copyButton.disabled = false;
+    if (shareButton) shareButton.disabled = false;
+  });
   if (navigator.clipboard && window.isSecureContext && copyButton) {
     copyButton.hidden = false;
     copyButton.addEventListener('click', async () => {
+      const ticket = copyOperation = ++operation;
       copyButton.disabled = true;
       try {
         await navigator.clipboard.writeText(canonical);
-        announce('リンクをコピーしました。');
+        if (ticket === operation) announce('リンクをコピーしました。');
       } catch {
-        announce(`コピーできませんでした。次のURLを選択してコピーしてください：${canonical}`);
-      } finally { copyButton.disabled = false; }
+        if (ticket === operation) announce(`コピーできませんでした。次のURLを選択してコピーしてください：${canonical}`);
+      } finally { if (copyOperation === ticket) copyButton.disabled = false; }
     });
   }
   if (navigator.share && shareButton) {
     shareButton.hidden = false;
     shareButton.addEventListener('click', async () => {
+      const ticket = shareOperation = ++operation;
       shareButton.disabled = true;
       // Do not leave a previous success/error visible if this share is cancelled.
       clearTimeout(announcement);
@@ -85,8 +98,8 @@
       try {
         await navigator.share({title:document.title,text:'音楽も、科学も、表現も、暮らしも。宮崎直哉のWebプロジェクト集。',url:canonical});
       } catch (error) {
-        if (error?.name !== 'AbortError') announce('共有メニューを開けませんでした。「Xでシェア」または「リンクをコピー」をお試しください。');
-      } finally { shareButton.disabled = false; }
+        if (ticket === operation && error?.name !== 'AbortError') announce('共有メニューを開けませんでした。「Xでシェア」または「リンクをコピー」をお試しください。');
+      } finally { if (shareOperation === ticket) shareButton.disabled = false; }
     });
   }
 })();

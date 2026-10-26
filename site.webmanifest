@@ -1,25 +1,73 @@
 {
   "id": "/",
-  "name": "NAOYA WEB",
-  "short_name": "NAOYA WEB",
+  "name": "NAOYA WEB.",
+  "short_name": "NAOYA WEB.",
   "lang": "ja",
   "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/icon-192.png?v=20261026-3",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/icon-512.png?v=20261026-3",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192.png?v=20261026-3",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512.png?v=20261026-3",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "description": "宮崎直哉のWebプロジェクト集。音楽、表現、科学、民俗、暮らし。",
+  "dir": "ltr",
+  "display_override": [
+    "minimal-ui",
+    "browser"
+  ],
+  "shortcuts": [
+    {
+      "name": "つくったもの",
+      "url": "/#projects"
+    },
+    {
+      "name": "音楽のサイト",
+      "url": "/?theme=music#projects"
+    },
+    {
+      "name": "わたし",
+      "url": "/#about"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile.png?v=20261026-3",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "NAOYA WEBのトップページ"
+    },
+    {
+      "src": "/screenshots/desktop.png?v=20261026-3",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "NAOYA WEBのトップページ"
     }
   ]
 }
