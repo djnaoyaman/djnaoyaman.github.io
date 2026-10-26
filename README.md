@@ -55,7 +55,7 @@ index.htmlの作品カード、件数、JSON-LD ItemList、llms.txt / llms-full.
 
 ## 2026-10-26 ブランド・端末対応と細部の再点検
 
-- 中央配置の幾何学的な「N.」にアイコンを統一。180px Apple Touch Icon、192/512px通常アイコン、192/512px Android maskableアイコン、16/32/48px PNG、16/32/48/64pxを格納したICO、明暗に追従するSVG favicon、単色のSafari固定タブ用SVGを用意。
+- ヘッダーのArial系太字と同じ「N」にアイコンを統一。文字の外接矩形を基準に中央配置し、装飾的な点は入れない。180px Apple Touch Icon、192/512px通常アイコン、192/512px Android maskableアイコン、16/32/48px PNG、16/32/48/64pxを格納したICO、明暗に追従するSVG favicon、単色のSafari固定タブ用SVGを用意。
 - Apple Touch Iconは不透明な白地。Androidの図柄は中央80%の安全円に収め、丸型・角丸型で欠けないことを画素から検査。アイコンと共有画像の版番号を参照URLに付け、既存キャッシュとの混在を防ぐ。
 - 共有画像は日本語フォントを指定した1200×630px。ブランド、キャッチコピー、分野、URLを同じ意匠で描画。素材のソースは `assets-source/`、再生成は `python tools/render-assets.py`。Noto Sans CJK JP・Playwright・Pillowが必要。
 - ホーム画面名を `NAOYA WEB.` に明示。manifestに説明・実際のモバイル/PC画面・3つのショートカットを追加。ブラウザの操作が使える `minimal-ui` を優先し、対応しない環境では `browser` に戻る。単なるポートフォリオをブラウザ操作のない画面に閉じ込めない。
@@ -70,4 +70,6 @@ index.htmlの作品カード、件数、JSON-LD ItemList、llms.txt / llms-full.
 
 端末ごとの表示はブラウザで検証した。iPhone/Androidの実機やSNSサービス側の画像キャッシュ更新までは自動検証の対象外。
 
-タブ用faviconはホーム画面用とは別に図柄を1.5倍に拡大する光学補正を行い、16pxでもNの高さを12px確保する。`assets-source/tab-mark.svg` がその描画元。
+タブ用faviconはNの高さを48/64、ホーム画面用は36/64として光学補正し、16pxでもNの高さを12px確保する。`assets-source/tab-mark.svg` がその描画元。
+
+2026-10-26 アイコンの意匠を修正。独自の幾何学的なNと赤い点を廃し、ヘッダーと同じArial系太字のNを使用。ページのブランド末尾のピリオドは黒に統一し、共有画像の重複するNマークも削除。原型は `tools/build-mark.py` でLiberation Sans BoldのNをアウトライン化し、文字自体の中心を合わせている。

@@ -17,7 +17,9 @@ def serve(route):
  route.fulfill(status=status,body=file.read_bytes(),content_type=mimetypes.guess_type(file)[0] or 'application/octet-stream')
 # Validate the visible artwork itself, including Android's safe circle.
 for filename in ['apple-touch-icon.png','icon-192.png','icon-512.png','icon-maskable-192.png','icon-maskable-512.png']:
- im=Image.open(ROOT/filename);assert im.mode=='RGB';n=im.width
+ im=Image.open(ROOT/filename);assert im.mode=='RGB'
+ assert ImageChops.difference(im.getchannel('R'),im.getchannel('G')).getbbox() is None
+ assert ImageChops.difference(im.getchannel('R'),im.getchannel('B')).getbbox() is None;n=im.width
  box=ImageChops.difference(im,Image.new('RGB',im.size,'white')).getbbox()
  assert box and abs((box[0]+box[2])/2-n/2)<n*.02,(filename,box)
  assert abs((box[1]+box[3])/2-n/2)<n*.02,(filename,box)
@@ -27,6 +29,8 @@ for filename in ['apple-touch-icon.png','icon-192.png','icon-512.png','icon-mask
     if min(im.getpixel((x,y)))<240:
      assert math.hypot(x+.5-n/2,y+.5-n/2)<n*.4,(filename,x,y)
  assert im.mode=='RGB'
+ assert ImageChops.difference(im.getchannel('R'),im.getchannel('G')).getbbox() is None
+ assert ImageChops.difference(im.getchannel('R'),im.getchannel('B')).getbbox() is None
 for n in [16,32,48]:
  im=Image.open(ROOT/f'favicon-{n}.png').convert('RGB')
  box=ImageChops.difference(im,Image.new('RGB',im.size,'white')).getbbox()
