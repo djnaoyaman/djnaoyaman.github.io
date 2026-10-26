@@ -50,3 +50,8 @@ nav{flex-wrap:wrap}
 #share-status{overflow-wrap:anywhere}
 .error-main h1{overflow-wrap:normal}
 @media print{.brand-dot{color:#000}}
+
+/* Writing and public profiles share the portfolio's quiet typography. */
+.activities{max-width:960px;margin:auto;padding:0 40px 100px}.activity{padding:32px 0;border-bottom:1px solid var(--line)}.activity-description,.reading-list{max-width:700px;font-size:13px;line-height:2;color:var(--sub)}.activity-description{margin:0}.reading-list{padding-left:1.4em;margin:18px 0 0}.reading-list li{margin:10px 0}.reading-list strong{font-weight:600;color:var(--ink)}.activity-links{margin-top:14px;font-size:12px}.activity-links a,.social-links a{min-height:44px;display:inline-flex;align-items:center}.social-links{display:flex;flex-wrap:wrap;gap:12px 40px;padding-top:24px;font-size:13px}.social-links a{flex-wrap:wrap;gap:6px 14px}.social-links span{font-size:11px;color:var(--sub);overflow-wrap:anywhere}
+@media(max-width:600px){.activities{padding:0 24px 70px}.activity{padding:26px 0}.social-links{gap:8px 24px}nav{gap:8px 16px}}
+@media print{.activities{max-width:none;padding:20pt 0}.activity{padding:14pt 0;break-inside:avoid}.activity-description,.reading-list{font-size:10pt;color:#333}.activity-links a,.social-links a{min-height:0}}

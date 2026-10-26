@@ -80,7 +80,7 @@ with sync_playwright() as p:
     items=data['@graph'][2]['mainEntity']['itemListElement']
     assert len(items)==12
     q.goto(ORIGIN+'/')
-    assert [item['item']['name'] for item in items]==q.locator('h3').all_text_contents()
+    assert [item['item']['name'] for item in items]==q.locator('#project-list h3').all_text_contents()
     for node in q.locator('[src],link[href]').all():
         value=node.get_attribute('src') or node.get_attribute('href')
         if value.startswith('/'):

@@ -75,3 +75,8 @@ index.htmlの作品カード、件数、JSON-LD ItemList、llms.txt / llms-full.
 2026-10-26 アイコンの意匠を修正。独自の幾何学的なNと赤い点を廃し、ヘッダーと同じArial系太字のNを使用。ページのブランド末尾のピリオドは黒に統一し、共有画像の重複するNマークも削除。原型は `tools/build-mark.py` でLiberation Sans BoldのNをアウトライン化し、文字自体の中心を合わせている。
 
 Premium Cuts Listedを音楽分野に追加。全12サイト・音楽4サイトとし、表示順・構造化データ・概要文・印刷用件数・検証の期待値を同期。紹介先は https://djnaoyaman.github.io/premiumcuts/ 。
+
+
+## 2026-10-26 執筆活動・プロフィールの追加
+
+note（宮崎直哉）のエッセイ4分野、紫波金魚の公開小説3作品の紹介、サウナイキタイ・Instagram・Facebookへの導線を追加。作品の12サイトとは別のセクションで紹介。noteの公開プロフィール・マガジン紹介を参照し、サウナとSNSは本人指定URLへのリンクを掲載。

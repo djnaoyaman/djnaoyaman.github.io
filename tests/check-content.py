@@ -15,7 +15,7 @@ class Page(HTMLParser):
    v=a.get('href') or a.get('src')
    if v:self.refs.append((tag,v))
   if tag=='script' and a.get('type')=='application/ld+json':self.in_ld=True
-  if tag=='h3':self.in_h3=True
+  if tag=='h3' and a.get('id','').startswith('project-title-'):self.in_h3=True
   if tag=='p' and a.get('class')=='description':self.in_desc=True
  def handle_endtag(self,tag):
   if tag=='script':self.in_ld=False
