@@ -36,7 +36,7 @@ assert '<link rel="canonical" href="https://djnaoyaman.github.io/profile.html">'
 assert '<meta property="og:url" content="https://djnaoyaman.github.io/profile.html">' in text
 works=re.search(r'<ul class="profile-works">(.*?)</ul>',text,re.S)[1]
 items=graph(home)[2]['mainEntity']['itemListElement']
-assert len(re.findall(r'<li>',works))==len(items)==12
+assert len(re.findall(r'<li>',works))==len(items)==13
 for item in items:assert 'href="'+item['item']['url']+'"' in works
 for alias in ['Nobleman','一見坊','クランポック','湯気文吾','犬井静','紫波金魚']:assert alias in p['alternateName'] and alias in text
 urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').getroot().iter() if e.tag.endswith('}loc')]
@@ -49,4 +49,4 @@ assert 'id="azumane"' in text and 'href="#azumane"' in text
 assert 'href="/profile.html#azumane"' in home
 assert 'town.shiwa.iwate.jp/soshiki/2_3/3_azumane/172677769112728/' in text
 assert 'Partner Noteを読む（PDF・49ページ）' in text
-print('PASS: profile navigation, IDs, labels, Person consistency, 12 works, aliases, canonical, sitemap and 14-repository evidence')
+print('PASS: profile navigation, IDs, labels, Person consistency, 13 works, aliases, canonical, sitemap and 14-repository evidence')

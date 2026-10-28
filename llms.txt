@@ -4,7 +4,7 @@
 
 - 正規URL: https://djnaoyaman.github.io/
 - 作者: 宮崎直哉（Naoya Miyazaki / DJ Naoyaman）
-- 内容: 12のWebプロジェクトを紹介するポートフォリオ。
+- 内容: 13のWebプロジェクトを紹介するポートフォリオ。
 - 本サイトは各テーマへの入口です。個別の内容・出典・改訂情報はリンク先を参照してください。
 
 ## プロジェクト
@@ -21,6 +21,7 @@
 - [酸冷交代浴](https://djnaoyaman.github.io/sanreikotaiyoku/): 炭酸泉と水風呂に交互に入る「酸冷交代浴」を紹介するサイト。体験談や楽しみ方、各地の入浴施設に加え、関連する研究や資料も紹介します。
 - [掌蹠膿疱症.com](https://djnaoyaman.github.io/ppp/): 掌蹠膿疱症の症状や原因、治療の選択肢を整理した情報サイト。標準的な治療、漢方、セルフケアなど、知りたいテーマごとに読めます。
 - [Book Keeping](https://djnaoyaman.github.io/bookkeeping/): 日商簿記・全経簿記・USCPAの試験に向けた学習サイト。金額や仕訳を入力する問題を繰り返し解き、間違えた問題を復習できます。
+- [1minutes — ONE MINUTE FOREVER](https://djnaoyaman.github.io/1minutes/): 「60秒は、いつも同じ長さとは限らない。」待つ、集中する、記憶するなど12の実験で時間の感じ方を体験するWeb作品。感じた秒数を記録し、実験ごとの違いを比べられます。
 
 ## 詳細
 
