@@ -13,7 +13,7 @@ with sync_playwright() as p:
  page=context.new_page();(ROOT/'screenshots').mkdir(exist_ok=True)
  for label,width,height in [('mobile',390,844),('desktop',1280,720)]:
   page.set_viewport_size({'width':width,'height':height});page.goto('https://djnaoyaman.github.io/')
-  page.evaluate('document.fonts.ready');page.locator('img').evaluate_all('(els)=>Promise.all(els.map(e=>e.decode()))');page.screenshot(path=str(ROOT/f'screenshots/{label}.png'))
+  page.evaluate('document.fonts.ready');page.locator('img').evaluate_all('(els)=>Promise.race([Promise.all(els.map(e=>{e.loading="eager";return e.decode()})),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Image decode timeout")),15000))])');page.screenshot(path=str(ROOT/f'screenshots/{label}.png'))
   for route,name in [('profile.html','profile'),('404.html','404')]:
    page.goto('https://djnaoyaman.github.io/'+route);page.evaluate('document.fonts.ready');page.screenshot(path=str(ROOT/f'screenshots/{name}-{label}.png'))
  browser.close()
