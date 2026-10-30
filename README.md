@@ -1,104 +1,45 @@
-# NAOYA WEB
+# MIYAZAKINAOYA
 
-ずっと、あれも、これも。
+ずーっと、あれも、これも。
 
-宮崎直哉の13プロジェクトを紹介するレスポンシブなポートフォリオ。吉田ファームは紹介対象外です。
+宮崎直哉の14のWORLD（独立したWebサイト）をつなぐポートフォリオ。公開先は https://djnaoyaman.github.io/ 。MIXWELLは作者自身の実践として紹介します。吉田ファームは対象外です。
 
-公開先: https://djnaoyaman.github.io/
+## 公開面と共通デザイン
 
-main / root から既存のGitHub Pages設定で公開。ビルドや依存ライブラリは不要です。
+- `/`：WORLDS / JOURNAL / ABOUT。14の点が線と面へつながり、作者の視点を表す軽量SVGアニメーション。
+- `/profile.html`：経歴、活動名義、音楽、執筆、地域活動。既存本文とURLを維持。
+- `/404.html`：深い未知のURLにもルート相対参照で対応。noindex、復帰導線つき。
+- `maisons.css` は互換性のためファイル名を維持した共通スタイル。名称はWORLDS。`profile.css`、`subpages.css`は配下の読み物レイアウト。
+- `#worlds`が新しい入口。`#projects`と`#maisons`の既存リンクも維持。
 
-## 収録
+アイボリー `#f7f6f2`、墨色 `#282823`、淡グレーを基調に統一。14サイト自身の画像・色・名前は変更しません。公式画像の出典とハッシュは `docs/maison-assets.json`。
 
-- 13サイトの静的紹介、GitHubソースリンク
-- 最新版の本人提供のプロフィール文章
-- OGP / X summary_large_image、1200 × 630 PNG
-- SVG / ICO / PNG favicon、180px Apple Touch Icon、192 / 512pxアイコン
-- canonical、robots、sitemap、構造化データ、llms.txt / llms-full.txt
-- Xシェア、対応端末の共有機能、HTTPS環境のリンクコピー
-- キーボード操作、読み上げラベル、動きを抑える設定、JavaScriptなしの全作品表示
+## ブランド素材
 
-## SEM・運用
+`tools/build-mark.py` がフォントからの自動切り出しではない手設計MINAシンボルを生成。MIYAZAKIのMIとNAOYAのNAを2×2に構成し、通常版と小サイズ版で余白を光学調整しています。
 
-UTM付きURLの例:
-https://djnaoyaman.github.io/?utm_source=google&utm_medium=cpc&utm_campaign=naoya_web
+`python tools/render-assets.py` でSVG、16/32/48 PNG、4サイズICO、180 Apple Touch Icon、192/512通常・maskable、Safari pinned、および1200×630のトップ/プロフィール/404共有画像を再生成。PillowとNoto Sans CJK・Liberation Serifを使用します。共有画像の原稿は `tools/render-share-card.py`、制作確認は `assets-source/share-card.html`（noindex）。
 
-canonicalと共有URLはパラメータなしの正規URLに統一しています。計測IDは未提供のため、アクセス解析・広告タグ・コンバージョン計測は未接続です。広告配信・課金・Search Console登録は実施していません。導入時は実アカウントのID、目的、コンバージョン、同意要件を決めてください。
+アイコンは不透明アイボリー、maskableは中央80%の安全円に収容。SVG faviconは明暗に追従。メタデータとmanifestの版番号は同時更新します。
 
-llms.txtは補助資料です。検索順位、AIでの引用、SNSプレビューの更新時期は保証しません。SNSのキャッシュは再取得が必要な場合があります。Service Workerとオフライン対応は含みません。
+## 動き・操作
 
-## 更新
+`world-atlas.js` は外部依存なし。14の実サイトへのリンク、キーボードフォーカス、タッチ可能なテキスト一覧、再生ボタン、画面外/非表示時の一時停止、幅変更、履歴復帰に対応。動きを減らす設定とJavaScript無効時は完成図。派手な点滅や無限ループ、本文を隠すイントロはありません。
 
-index.htmlの作品カード、件数、JSON-LD ItemList、llms.txt / llms-full.txtを同時に更新。OG画像とアイコンは白地と黒文字のデザイン・名称に合わせて更新します。robots.txtの既存制限と他サイトのサイトマップ案内を維持してください。
+既存の4分野フィルターはURLの `?theme=` と履歴に対応。共有は正規URL、コピー失敗とキャンセルを処理。旧本文と執筆詳細は開閉欄で保持しています。
 
+## 更新・検証
 
-## 2026-10-26 の改善
+main/rootの既存GitHub Pages設定で公開。ブラウザの依存ライブラリやビルド工程は不要です。
 
-静かな白地のデザインと本人の文章を維持し、並列する「か」の誤字2か所を修正。
+- `python tests/check-content.py`、`python tests/test-profile.py`
+- `node --check site.js`、`node --check world-atlas.js`
+- CIの `tests/test-site.py` / `tests/test-details.py` / `tests/test-world-atlas.py` はPlaywright、Chromium、Pillow、axe-coreでアクセシビリティ、幅、履歴、印刷、CSP、共有、アイコン、動作を検査。
+- `tools/capture-screenshots.py` は完成図（reduced-motion）の実ブラウザ画面を取得。CIの `identity-screenshots` artifactから最終画像を取り込みます。
+- 項目追加時はカード、SVGカタログ、JSON-LD、llms資料、robotsのサイトマップ案内、件数と検査を同期。
 
-- 4分野の絞り込み。選択は `?theme=music` などで復元し、ブラウザの戻る・進むに対応。既存のUTMやアンカーも保持。共有するURLは正規のトップページ。
-- 件数バッジは実カードから算出。元の通し番号を保ち、表示件数を読み上げる。JavaScriptなしでは操作部を隠し全作品を表示。
-- 主要操作の44pxタップ領域、320pxからのレイアウト、本文スキップ、現在セクション表示、コントラスト、セーフエリア、強制配色、動きを抑える設定。
-- 印刷では絞り込みを解除して全13作品とURLを掲載。操作部を隠し、作品単位の改ページを抑制。
-- コピー失敗時のURL案内、連打防止、同じ通知の再読み上げ、共有キャンセル時の古い通知消去。
-- 深いパスでも相対参照が壊れない404ページ。自動転送せずホーム・作品一覧に復帰。検索登録を抑止。GitHub Pagesのホスト共通404としても機能する。
-- CSS・JavaScriptを外部ファイルに分離。ページ単位のCSPでインライン実行や外部接続を制限し、referrer方針も明示。別プロジェクトのページには適用されない。
-- ビルド・外部ライブラリ・外部フォント・トラッキングの追加なし。
+## 保全と検証範囲
 
-## 検証
+正規URL、プロフィール原稿・出典、各サイトURL、既存robots制限・sitemap方針、CSPを保持。計測IDがないためGA/広告タグは未導入のまま。新しいトラッキング、外部フォント通信、権限、Service Workerは追加しません。
 
-`python3 tests/check-content.py` と `node --check site.js` は依存なし。GitHub Actionsでも実行。
-
-`python tests/test-site.py` はPython Playwrightと `/usr/bin/chromium` を使用。ネットワークをモックして絞り込み・履歴・6画面幅・キーボード・印刷・共有の失敗/キャンセル・JavaScript無効・404を検証。任意の `AXE_PATH` にaxe-coreのローカルファイルを渡すとWCAG A/AAとbest-practiceも自動検査。検査エンジンを注入する専用コンテキストのみCSPを無効化し、通常の機能テストではCSPを有効にする。自動検査だけで完全なアクセシビリティ適合を保証するものではない。
-
-作品の追加時は `index.html` のカード・構造化データ・初期件数・分野ボタン、`llms.txt` / `llms-full.txt` とチェックの期待件数を更新する。
-
-## 2026-10-26 ブランド・端末対応と細部の再点検
-
-- ヘッダーのArial系太字と同じ「N」にアイコンを統一。文字の外接矩形を基準に中央配置し、装飾的な点は入れない。180px Apple Touch Icon、192/512px通常アイコン、192/512px Android maskableアイコン、16/32/48px PNG、16/32/48/64pxを格納したICO、明暗に追従するSVG favicon、単色のSafari固定タブ用SVGを用意。
-- Apple Touch Iconは不透明な白地。Androidの図柄は中央80%の安全円に収め、丸型・角丸型で欠けないことを画素から検査。アイコンと共有画像の版番号を参照URLに付け、既存キャッシュとの混在を防ぐ。
-- 共有画像は日本語フォントを指定した1200×630px。ブランド、キャッチコピー、分野、URLを同じ意匠で描画。素材のソースは `assets-source/`、再生成は `python tools/render-assets.py`。Noto Sans CJK JP・Playwright・Pillowが必要。
-- ホーム画面名を `NAOYA WEB.` に明示。manifestに説明・実際のモバイル/PC画面・3つのショートカットを追加。ブラウザの操作が使える `minimal-ui` を優先し、対応しない環境では `browser` に戻る。単なるポートフォリオをブラウザ操作のない画面に閉じ込めない。
-- 404にもアイコン・ホーム画面名・manifest設定を統一。`viewport-fit=cover` と既存セーフエリア指定を接続。明るいページ背景を初回表示前から明示。
-- 文字間隔・行間の拡大に備えヘッダーを折り返す。キーボードで作品にフォーカスしたときにも見出しの下線を表示。
-- 履歴から復帰したときの共有ボタン状態を復旧。ページ復帰前の非同期結果が新しい共有操作を上書きしないよう、通知とボタン状態をそれぞれ管理。
-- ページ本体・CSS・JSの合計は非圧縮で50KB未満。OGPやインストール用スクリーンショットは通常表示では読み込まない。
-
-`python tools/capture-screenshots.py` でmanifest用の実画面を明示的に更新する。通常テストは公開用画像を書き換えない。
-
-`python tests/test-details.py` で画素の中央配置/安全円、CSPによる実行阻止、404応答、共有の非同期競合、文字間隔拡大、追加の画面寸法、強制配色、明暗faviconを検査。アイコンの切り抜きプレビューは `/tmp/naoya-icon-masks.png` に出力。GitHub Actionsは構造検査に加えPlaywrightとaxe-coreによるブラウザ検査も実行する。ブラウザ実行パスは `CHROMIUM_PATH` で指定でき、未指定時はシステムChromiumまたはPlaywrightのChromiumを利用する。
-
-端末ごとの表示はブラウザで検証した。iPhone/Androidの実機やSNSサービス側の画像キャッシュ更新までは自動検証の対象外。
-
-タブ用faviconはNの高さを48/64、ホーム画面用は36/64として光学補正し、16pxでもNの高さを12px確保する。`assets-source/tab-mark.svg` がその描画元。
-
-2026-10-26 アイコンの意匠を修正。独自の幾何学的なNと赤い点を廃し、ヘッダーと同じArial系太字のNを使用。ページのブランド末尾のピリオドは黒に統一し、共有画像の重複するNマークも削除。原型は `tools/build-mark.py` でLiberation Sans BoldのNをアウトライン化し、文字自体の中心を合わせている。
-
-Premium Cuts Listedを音楽分野に追加。全12サイト・音楽4サイトとし、表示順・構造化データ・概要文・印刷用件数・検証の期待値を同期。紹介先は https://djnaoyaman.github.io/premiumcuts/ 。
-
-
-## 2026-10-26 執筆活動・プロフィールの追加
-
-note（宮崎直哉）のエッセイ4分野、紫波金魚の公開小説3作品の紹介、サウナイキタイ・Instagram・Facebookへの導線を追加。作品の12サイトとは別のセクションで紹介。noteの公開プロフィール・マガジン紹介を参照し、サウナとSNSは本人指定URLへのリンクを掲載。
-
-
-## 2026-10-26 統合プロフィール
-
-公開14リポジトリの構成・README・本人プロフィールを照合し、`profile.html` に経歴、DJの歩み、活動名義、執筆、12作品、発信先をまとめた。`profile.css` は個別ページだけで読み込む。トップの本人の文章を保持し、短い紹介文とプロフィール導線を追加。Person/ProfilePage、sitemap、llms資料も同期。調査範囲と根拠は [docs/profile-sources.md](docs/profile-sources.md)。個別サイトの内容・機能の全面監査を意味しない。
-
-`python tests/test-profile.py` で導線、プロフィールとトップのPerson一致、全12作品、リンク・見出し・サイトマップ・調査台帳を検証。既存ブラウザ検査にもプロフィールの画面幅・アクセシビリティ検査を追加。
-
-
-## 2026-10-26 あづまねエリアの紹介
-
-プロフィールの `#azumane` に、本人が関わるあづまねエリアブランディングを追加。紫波町の公式紹介と49ページのPartner Noteに基づき、将来像・3つの成長・本人の関与を整理し、公式資料へリンク。トップから直接移動できる導線、llms資料、出典記録を同期。独自Web作品数は12のまま。
-
-
-## 1minutes の追加（2026-10-29）
-
-既存12作品の順序を保ち、公開済みの1minutesを13番目の「表現」に追加。表示・絞り込み・印刷の件数、JSON-LD、プロフィール作品一覧、llms資料と検査を同期。音楽4／表現2／自然・文化4／暮らし・学び3。
-
-## 2026-10-30 NAOYAMIYAZAKI / MIXWELL
-本人承認のメゾン型ポータルへ刷新。ずーっと、あれも、これも。アイボリー・墨色・淡グレーを基調に、14件の公式共有画像を無加工で小さく配置。吉田ファームは対象外。プロフィール・執筆の詳細・旧アンカー・共有・フィルター履歴・CSPを保持。MIXWELLは本人の実践として記述。
-
-同サイト内の `/profile.html` と `/404.html` も `maisons.css` の共通ヘッダー・ナビ・フッター・色を使用し、`subpages.css` で読み物／エラー画面を整える。別リポジトリの14メゾンは変更しない。OGP制作原稿はnoindex。
+SNS画像キャッシュ更新やiOS/Android実機のインストール表示は自動検査の対象外です。改修一覧と区別は `docs/identity-inventory.md` を参照。

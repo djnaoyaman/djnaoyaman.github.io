@@ -56,8 +56,8 @@ for filename in ['profile.html','404.html']:
  assert 'href="/maisons.css?' in sub and 'href="/subpages.css?' in sub
  assert 'href="/site.css?' not in sub
  assert 'content="#f7f6f2"' in sub
- assert '<a class="wordmark" href="/">NAOYAMIYAZAKI</a>' in sub
- for href,label in [('/#projects','MAISONS'),('/#writing','JOURNAL'),('/#about','ABOUT')]:
+ assert '<a class="wordmark" href="/">' in sub and '<span>MIYAZAKINAOYA</span></a>' in sub and 'class="brand-symbol"' in sub
+ for href,label in [('/#worlds','WORLDS'),('/#writing','JOURNAL'),('/#about','ABOUT')]:
   assert f'<a href="{href}">{label}</a>' in sub
  assert 'ずーっと、あれも、これも。' in sub
  assert len(parsed.ids)==len(set(parsed.ids)),filename
