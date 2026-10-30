@@ -42,7 +42,7 @@ for filename in ['index.html','404.html']:
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
-  assert collection['numberOfItems']==len(items)==len(page.headings)==13
+  assert collection['numberOfItems']==len(items)==len(page.headings)==14
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
   assert [item['position'] for item in items]==list(range(1,len(items)+1))
@@ -52,6 +52,11 @@ for filename in ['index.html','404.html']:
     assert item['item']['url'] in (ROOT/filename).read_text(),filename
     assert item['item']['description'] in (ROOT/filename).read_text(),filename
 manifest=json.loads((ROOT/'site.webmanifest').read_text())
+robots=(ROOT/'robots.txt').read_text()
+sitemaps={line.split(': ',1)[1] for line in robots.splitlines() if line.startswith('Sitemap: ')}
+expected_sitemaps={'https://djnaoyaman.github.io/sitemap.xml'} | {item['item']['url']+'sitemap.xml' for item in items}
+assert sitemaps==expected_sitemaps, 'Root robots.txt must advertise every public project sitemap'
+assert 'Disallow: /MINERALion/' in robots and 'yoshida-farmer' not in robots
 for icon in manifest['icons']:
  data=(ROOT/urlsplit(icon['src']).path.lstrip('/')).read_bytes();width,height=struct.unpack('>II',data[16:24]);assert icon['sizes']==f'{width}x{height}'
 assert struct.unpack('>II',(ROOT/'og-image.png').read_bytes()[16:24])==(1200,630)
@@ -72,4 +77,4 @@ assert 'prefers-color-scheme:dark' in (ROOT/'favicon.svg').read_text()
 ET.parse(ROOT/'favicon.svg');ET.parse(ROOT/'safari-pinned-tab.svg')
 ET.parse(ROOT/'sitemap.xml')
 assert 'Sitemap: https://djnaoyaman.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
-print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 13-project JSON-LD/docs, manifest dimensions, OGP, sitemap')
+print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 14-project JSON-LD/docs, manifest dimensions, OGP, sitemap')

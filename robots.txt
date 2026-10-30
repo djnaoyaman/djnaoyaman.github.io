@@ -1,6 +1,18 @@
 User-agent: *
 Disallow: /MINERALion/
 
-Sitemap: https://djnaoyaman.github.io/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/1minutes/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/bookkeeping/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/chems/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/cratediggin/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/earthnumber/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/gooooooooood_expression/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/kuranpo/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/omochi-touch/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/ppp/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/premiumcuts/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/sakanamushi/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/sanreikotaiyoku/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/suburbia-classica/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/youkai/sitemap.xml
