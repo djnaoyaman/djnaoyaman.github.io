@@ -68,7 +68,7 @@ with sync_playwright() as p:
     assert page.locator('#native-share').is_enabled()
     assert not errors,errors
     page.goto(ORIGIN+'/missing/deep/path?invalid=%3Cscript%3E');assert page.title().startswith('ページが見つかりません')
-    assert page.locator('a[href="/#projects"]').count()==1
+    assert page.locator('a[href="/#projects"]').count()==2
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
     # A separate context allows axe injection without weakening the site's CSP.
     audit_context=browser.new_context(bypass_csp=True)

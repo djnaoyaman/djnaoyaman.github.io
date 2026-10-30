@@ -1,0 +1,32 @@
+/* Same-site pages share the homepage's palette, wordmark, navigation and footer. */
+.maison-subpage{--sub:var(--muted);--red:var(--ink)}
+.maison-subpage header{max-width:none;margin:0}
+.maison-subpage .breadcrumb{font-size:9px;letter-spacing:.15em;color:var(--muted);padding-top:32px;display:flex;gap:12px;align-items:center}
+.maison-subpage .breadcrumb a{min-height:44px;display:inline-flex;align-items:center}
+.maison-subpage .profile-main{max-width:1280px;padding:0 clamp(24px,7vw,112px) 90px}
+.maison-subpage .profile-hero{max-width:850px;padding:50px 0 64px}
+.maison-subpage .profile-hero h1{font-family:'Noto Serif CJK JP','Yu Mincho',serif;font-weight:400;letter-spacing:.06em;font-size:clamp(36px,4.5vw,64px)}
+.maison-subpage .profile-lead{font-family:'Noto Serif CJK JP','Yu Mincho',serif;font-weight:400;line-height:1.9;letter-spacing:.04em}
+.maison-subpage .profile-eyebrow,.maison-subpage .profile-name{font-size:10px;letter-spacing:.18em}
+.maison-subpage .profile-contents{border-color:var(--line);padding:20px 0 26px;gap:4px 26px;justify-content:flex-start}
+.maison-subpage .profile-section{padding:64px 0;border-color:var(--line)}
+.maison-subpage .profile-section h2{font-family:'Noto Serif CJK JP','Yu Mincho',serif;font-weight:400;letter-spacing:.06em;font-size:clamp(24px,3vw,34px)}
+.maison-subpage .profile-section h3,.maison-subpage .profile-works a{font-weight:400;font-family:Georgia,'Yu Mincho',serif}
+.maison-subpage .profile-reading{background:var(--stone);border:1px solid var(--line);padding:8px 30px 26px}
+.maison-subpage .profile-works{gap:24px;margin-top:32px}
+.maison-subpage .profile-works li{background:#f3f2ed;border:1px solid var(--line);padding:24px}
+.maison-subpage .profile-works a{font-size:20px}
+.maison-subpage .profile-career dt,.maison-subpage .profile-aliases dt{font-weight:500}
+.maison-subpage .profile-quote{border-left:1px solid var(--ink)}
+.maison-subpage .profile-quote p{font-family:'Yu Mincho',serif;font-weight:400}
+.maison-subpage .profile-inline-links a,.maison-subpage .profile-reading>a,.maison-subpage .profile-social a{border-bottom:1px solid var(--line)}
+.maison-subpage .profile-section .azumane-concept{font-family:'Yu Mincho',serif;font-weight:400}
+.maison-subpage footer{border-top:1px solid var(--line)}
+.error-main{max-width:1280px;margin:0 auto;padding:80px 7% 110px;min-height:58vh}
+.error-code{font-size:10px;letter-spacing:.19em;color:var(--muted);margin:0 0 28px}
+.error-main h1{font:400 clamp(30px,4.5vw,62px)/1.7 'Noto Serif CJK JP','Yu Mincho',serif;letter-spacing:.06em;margin:0 0 30px;text-align:left}
+.error-main>p:not(.error-code){font-size:13px;line-height:2.3;color:var(--muted);max-width:720px}
+.error-links{display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:40px}
+.error-links a{display:inline-flex;align-items:center;min-height:44px;font-size:12px;padding:10px 0;border-bottom:1px solid var(--ink)}
+@media(max-width:700px){.maison-subpage .profile-main{padding:0 6% 60px}.maison-subpage .breadcrumb{padding-top:18px}.maison-subpage .profile-hero{padding:24px 0 42px}.maison-subpage .profile-lead{font-size:24px}.maison-subpage .profile-section{padding:42px 0}.maison-subpage .profile-contents{gap:4px 20px}.maison-subpage .profile-works{gap:18px}.maison-subpage .profile-works li{padding:22px}.maison-subpage .profile-reading{padding:4px 20px 22px}.error-main{padding:48px 7% 70px}.error-main h1{font-size:clamp(27px,9vw,42px)}.error-links{margin-top:28px}}
+@media print{.maison-subpage header nav,.breadcrumb{display:none}.maison-subpage .profile-main{max-width:none;padding:0}.maison-subpage .profile-section{padding:20pt 0}.maison-subpage .profile-works li,.maison-subpage .profile-reading{background:white}.maison-subpage footer{padding:20pt 0}}

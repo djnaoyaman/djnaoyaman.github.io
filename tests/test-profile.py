@@ -50,3 +50,21 @@ assert 'href="/profile.html#azumane"' in home
 assert 'town.shiwa.iwate.jp/soshiki/2_3/3_azumane/172677769112728/' in text
 assert 'Partner Noteを読む（PDF・49ページ）' in text
 print('PASS: profile navigation, IDs, labels, Person consistency, 14 works, aliases, canonical, sitemap and 14-repository evidence')
+# Same-site subordinate pages must use the maison shell rather than the retired home CSS.
+for filename in ['profile.html','404.html']:
+ sub=(ROOT/filename).read_text(); parsed=Page(sub)
+ assert 'href="/maisons.css?' in sub and 'href="/subpages.css?' in sub
+ assert 'href="/site.css?' not in sub
+ assert 'content="#f7f6f2"' in sub
+ assert '<a class="wordmark" href="/">NAOYAMIYAZAKI</a>' in sub
+ for href,label in [('/#projects','MAISONS'),('/#writing','JOURNAL'),('/#about','ABOUT')]:
+  assert f'<a href="{href}">{label}</a>' in sub
+ assert 'ずーっと、あれも、これも。' in sub
+ assert len(parsed.ids)==len(set(parsed.ids)),filename
+ for tag,url in parsed.links:
+  u=urlsplit(url)
+  if url.startswith('#'):assert u.fragment in parsed.ids,(filename,url)
+  if tag!='a' and u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),(filename,url)
+ assert 'src="/site.js' not in sub
+assert '14の公開プロジェクト' in text
+print('PASS: profile/404 shared maison shell, navigation, palette, tagline, anchors and local CSS')
