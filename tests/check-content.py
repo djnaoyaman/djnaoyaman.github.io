@@ -38,7 +38,7 @@ for filename in ['index.html','404.html']:
  assert "'unsafe-inline'" not in page.meta['Content-Security-Policy']
  assert 'referrer' in page.meta
  assert "manifest-src 'self'" in page.meta['Content-Security-Policy']
- assert page.meta['apple-mobile-web-app-title']=='NAOYAMIYAZAKI'
+ assert page.meta['apple-mobile-web-app-title']=='MIYAZAKINAOYA'
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
@@ -46,7 +46,7 @@ for filename in ['index.html','404.html']:
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
   assert [item['position'] for item in items]==list(range(1,len(items)+1))
-  assert f'content:"全{len(items)}サイト"' in (ROOT/'site.css').read_text()
+  assert f'content:"全{len(items)}サイト"' in (ROOT/'maisons.css').read_text()
   for item in items:
    for filename in ['llms.txt','llms-full.txt']:
     assert item['item']['url'] in (ROOT/filename).read_text(),filename

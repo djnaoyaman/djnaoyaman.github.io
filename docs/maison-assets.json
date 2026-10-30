@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-30T18:18:00Z",
+  "checked_at": "2026-10-30T19:48:00Z",
   "kind": "Official Open Graph artwork; not screenshots of live page layouts",
   "assets": [
     {
@@ -78,9 +78,11 @@
       "slug": "sanreikotaiyoku",
       "status": "ok",
       "url": "https://djnaoyaman.github.io/sanreikotaiyoku/",
-      "image_url": "https://djnaoyaman.github.io/sanreikotaiyoku/assets/ogp-sanrei-20261023.png",
+      "image_url": "https://djnaoyaman.github.io/sanreikotaiyoku/assets/ogp-sanrei-20261030.png",
       "file": "assets/maisons/sanreikotaiyoku-official.png",
-      "sha256": "7c8cfd60914713a82e1a75cab4e04cb645ed696072adf167e852db51657a4968"
+      "sha256": "fdc97fb91451431e9f440e8d6aa078d318315ecdf08030368f7f434eb6b5bdf9",
+      "source_commit": "6b934cf5861de8e0a0f0ce3435e7fb0c75ef7e68",
+      "source_note": "Owner-approved new artwork from Sanrei PR #13; local bytes reviewed. Source agent verified deployed URL HTTP 200 and exact bytes after merge 0f49344b077e9969c08cae4ca32038939aef14b1."
     },
     {
       "slug": "ppp",

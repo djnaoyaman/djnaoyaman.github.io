@@ -6,6 +6,7 @@ from urllib.parse import urlsplit
 import json,math,mimetypes,os,shutil
 from PIL import Image,ImageChops
 from playwright.sync_api import sync_playwright
+PAPER=(247,246,242)
 ROOT=Path(__file__).resolve().parents[1];ORIGIN='https://djnaoyaman.github.io'
 requests=[]
 def serve(route):
@@ -18,9 +19,8 @@ def serve(route):
 # Validate the visible artwork itself, including Android's safe circle.
 for filename in ['apple-touch-icon.png','icon-192.png','icon-512.png','icon-maskable-192.png','icon-maskable-512.png']:
  im=Image.open(ROOT/filename);assert im.mode=='RGB'
- assert ImageChops.difference(im.getchannel('R'),im.getchannel('G')).getbbox() is None
- assert ImageChops.difference(im.getchannel('R'),im.getchannel('B')).getbbox() is None;n=im.width
- box=ImageChops.difference(im,Image.new('RGB',im.size,'white')).getbbox()
+ assert im.getpixel((0,0))==PAPER;n=im.width
+ box=ImageChops.difference(im,Image.new('RGB',im.size,PAPER)).getbbox()
  assert box and abs((box[0]+box[2])/2-n/2)<n*.02,(filename,box)
  assert abs((box[1]+box[3])/2-n/2)<n*.02,(filename,box)
  if 'maskable' in filename:
@@ -29,19 +29,18 @@ for filename in ['apple-touch-icon.png','icon-192.png','icon-512.png','icon-mask
     if min(im.getpixel((x,y)))<240:
      assert math.hypot(x+.5-n/2,y+.5-n/2)<n*.4,(filename,x,y)
  assert im.mode=='RGB'
- assert ImageChops.difference(im.getchannel('R'),im.getchannel('G')).getbbox() is None
- assert ImageChops.difference(im.getchannel('R'),im.getchannel('B')).getbbox() is None
+ assert im.getpixel((0,0))==PAPER
 for n in [16,32,48]:
  im=Image.open(ROOT/f'favicon-{n}.png').convert('RGB')
- box=ImageChops.difference(im,Image.new('RGB',im.size,'white')).getbbox()
+ box=ImageChops.difference(im,Image.new('RGB',im.size,PAPER)).getbbox()
  assert box[3]-box[1]>=n*.75,(n,box)
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),args=['--no-sandbox'])
  context=browser.new_context(viewport={'width':390,'height':844});context.route('**/*',serve)
  page=context.new_page();page.goto(ORIGIN+'/')
  assert not any(path.endswith('og-image.png') or path.startswith('/screenshots/') for path in requests),'Unnecessary preview preload'
- # Allow the added essay, fiction and profile copy while keeping the homepage HTML/CSS/JS below 65 KB after maison redesign.
- assert sum((ROOT/name).stat().st_size for name in ['index.html','maisons.css','site.js'])<65000
+ # Allow the added essay, fiction and profile copy while keeping the homepage HTML/CSS/JS including the SVG network below 90 KB after maison redesign.
+ assert sum((ROOT/name).stat().st_size for name in ['index.html','maisons.css','site.js','world-atlas.js'])<90000
  # Inline scripts are really blocked by the shipped policy.
  page.evaluate("()=>{let s=document.createElement('script');s.textContent='window.untrustedRan=true';document.head.append(s)}")
  assert page.evaluate('window.untrustedRan') is None
@@ -71,7 +70,7 @@ with sync_playwright() as p:
  a.emulate_media(forced_colors='active');a.goto(ORIGIN+'/?theme=music#projects')
  button=a.locator('button[data-theme="music"]');assert button.get_attribute('aria-pressed')=='true'
  assert button.evaluate('(e)=>getComputedStyle(e).borderTopWidth')=='2px'
- # Adaptive favicon is rendered in both schemes; the raster Apple icon stays on opaque white.
+ # Adaptive favicon is rendered in both schemes; the raster Apple icon stays on opaque ivory.
  for scheme in ['light','dark']:
   a.emulate_media(color_scheme=scheme,forced_colors='none')
   a.goto(ORIGIN+'/favicon.svg')

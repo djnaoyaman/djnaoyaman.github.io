@@ -1,29 +1,12 @@
-"""Render the site's vector/HTML source to deterministic browser assets.
-Requires Python Playwright, Pillow, /usr/bin/chromium and Noto Sans CJK JP.
-No external network requests, font downloads or image-generation dependencies.
-"""
+"""Deterministic vector-to-raster identity exports; Pillow only, no network."""
 from pathlib import Path
-from playwright.sync_api import sync_playwright
-from PIL import Image
-ROOT=Path(__file__).resolve().parents[1]
-with sync_playwright() as p:
- browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
- page=browser.new_page(device_scale_factor=1)
- svg=(ROOT/'assets-source/mark.svg').read_text()
- tab=(ROOT/'assets-source/tab-mark.svg').read_text()
- for name,size in [('apple-touch-icon.png',180),('icon-192.png',192),('icon-512.png',512),('icon-maskable-192.png',192),('icon-maskable-512.png',512),('favicon-16.png',16),('favicon-32.png',32),('favicon-48.png',48)]:
-  page.set_viewport_size({'width':size,'height':size})
-  art=tab if name.startswith('favicon-') else svg
-  page.set_content('<style>html,body{margin:0;width:100%;height:100%;background:white}svg{width:100%;height:100%;display:block}</style>'+art)
-  page.screenshot(path=str(ROOT/name))
-  # Encoding only; all creative content is the declarative SVG above.
-  with Image.open(ROOT/name) as im:im.convert('RGB').save(ROOT/name,optimize=True)
- page.set_viewport_size({'width':64,'height':64})
- page.set_content('<style>html,body{margin:0}svg{display:block;width:64px;height:64px}</style>'+tab)
- ico_source=page.screenshot()
- import io
- with Image.open(io.BytesIO(ico_source)) as im:im.save(ROOT/'favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
- browser.close()
+from PIL import Image,ImageDraw
 import runpy
+ROOT=Path(__file__).resolve().parents[1];mark=runpy.run_path(str(ROOT/'tools/build-mark.py'),run_name='__main__')
+def raster(size,tab=False):
+ im=Image.new('RGB',(size*8,size*8),mark['PAPER']);d=ImageDraw.Draw(im)
+ for polygon in mark['polygons'](tab):d.polygon([(x*size*8/64,y*size*8/64) for x,y in polygon],fill=mark['INK'])
+ return im.resize((size,size),Image.Resampling.LANCZOS)
+for name,size in [('apple-touch-icon.png',180),('icon-192.png',192),('icon-512.png',512),('icon-maskable-192.png',192),('icon-maskable-512.png',512),('favicon-16.png',16),('favicon-32.png',32),('favicon-48.png',48)]:raster(size,name.startswith('favicon-')).save(ROOT/name,optimize=True)
+raster(64,True).save(ROOT/'favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
 runpy.run_path(str(ROOT/'tools/render-share-card.py'))
-print('Rendered 8 PNG icons, 4-size ICO and 1200×630 share card.')
