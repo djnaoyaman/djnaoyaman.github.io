@@ -30,9 +30,9 @@ with sync_playwright() as p:
     context.route('**/*',route)
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(ORIGIN+'/?utm_source=test#projects')
-    assert page.locator('.project:visible').count()==13
+    assert page.locator('.project:visible').count()==14
     page.locator('button[data-theme="expression"]').click()
-    assert page.locator('.project:visible').count()==2
+    assert page.locator('.project:visible').count()==3
     assert page.locator('#project-1minutes').is_visible()
     assert page.locator('#project-1minutes h3 a').get_attribute('href')=='/1minutes/'
     page.locator('button[data-theme="music"]').click()
@@ -43,9 +43,9 @@ with sync_playwright() as p:
     assert page.locator('.project:visible').count()==3
     page.go_back();assert page.locator('button[data-theme="music"]').get_attribute('aria-pressed')=='true'
     page.reload();assert page.locator('.project:visible').count()==4
-    page.emulate_media(media='print');assert page.locator('.project:visible').count()==13
+    page.emulate_media(media='print');assert page.locator('.project:visible').count()==14
     page.emulate_media(media='screen')
-    page.goto(ORIGIN+'/?theme=%3Cscript%3E#projects');assert page.locator('.project:visible').count()==13
+    page.goto(ORIGIN+'/?theme=%3Cscript%3E#projects');assert page.locator('.project:visible').count()==14
     for width in [320,375,390,600,768,1280]:
         page.set_viewport_size({'width':width,'height':844})
         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
@@ -77,12 +77,12 @@ with sync_playwright() as p:
     for url in [ORIGIN+'/',ORIGIN+'/profile.html',ORIGIN+'/?theme=music#projects',ORIGIN+'/missing/']:
         a.goto(url);audit(a)
     nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',route)
-    q=nojs.new_page();q.goto(ORIGIN+'/?theme=music');assert q.locator('.project:visible').count()==13
+    q=nojs.new_page();q.goto(ORIGIN+'/?theme=music');assert q.locator('.project:visible').count()==14
     assert not q.locator('.project-filter').is_visible()
     # The displayed collection and machine-readable collection must agree.
     data=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',(ROOT/'index.html').read_text(),re.S)[1])
     items=data['@graph'][2]['mainEntity']['itemListElement']
-    assert len(items)==13
+    assert len(items)==14
     q.goto(ORIGIN+'/')
     assert [item['item']['name'] for item in items]==q.locator('#project-list h3').all_text_contents()
     for node in q.locator('[src],link[href]').all():
@@ -94,7 +94,7 @@ with sync_playwright() as p:
     # The standalone profile must work without JavaScript, and remain readable at each width.
     q.goto(ORIGIN+'/profile.html')
     assert q.locator('h1').inner_text()=='宮崎 直哉'
-    assert q.locator('.profile-works li').count()==13
+    assert q.locator('.profile-works li').count()==14
     for width in [280,320,390,600,768,1280]:
         q.set_viewport_size({'width':width,'height':844})
         assert q.evaluate('document.documentElement.scrollWidth<=innerWidth'),('profile',width)
