@@ -1,0 +1,118 @@
+{
+  "checked_at": "2026-10-30T18:18:00Z",
+  "kind": "Official Open Graph artwork; not screenshots of live page layouts",
+  "assets": [
+    {
+      "slug": "gooooooooood_expression",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/gooooooooood_expression/",
+      "image_url": "https://djnaoyaman.github.io/gooooooooood_expression/assets/og-expression-v2.png",
+      "file": "assets/maisons/gooooooooood_expression-official.png",
+      "sha256": "f47d28ef9ea0682c9a91c085949b413671fde275b1a93419cff41453bb2ab938"
+    },
+    {
+      "slug": "cratediggin",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/cratediggin/",
+      "image_url": "https://djnaoyaman.github.io/cratediggin/og-image.jpg?v=96c00eadd6890fbd",
+      "file": "assets/maisons/cratediggin-official.jpg",
+      "sha256": "3dc6a2bfd90fb89d9f2ab3a43af72fca06962bb38efb617b194f5184bcd2979b"
+    },
+    {
+      "slug": "premiumcuts",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/premiumcuts/",
+      "image_url": "https://djnaoyaman.github.io/premiumcuts/social/index-7e234f7a18e1eb0e.png",
+      "file": "assets/maisons/premiumcuts-official.png",
+      "sha256": "dc4ddfc02669cbce92cbfd128b4820ae028083d7ff632288d8aa484ccee3d914"
+    },
+    {
+      "slug": "earthnumber",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/earthnumber/",
+      "image_url": "https://djnaoyaman.github.io/earthnumber/assets/og-earth-number.png",
+      "file": "assets/maisons/earthnumber-official.png",
+      "sha256": "5201126389cbed5c6ad08b29e1ea06f46fa5a7eb71a5fc06539635d0679fb0da"
+    },
+    {
+      "slug": "chems",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/chems/",
+      "image_url": "https://djnaoyaman.github.io/chems/ogp/ja/top.png",
+      "file": "assets/maisons/chems-official.png",
+      "sha256": "c2c1bc7024b8e023e4c3dbeef9aec7beced7d5c5ff206563624386999269ad6e"
+    },
+    {
+      "slug": "suburbia-classica",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/suburbia-classica/",
+      "image_url": "https://djnaoyaman.github.io/suburbia-classica/ogp/suburbia-classica-supplied-logo-20261025.png",
+      "file": "assets/maisons/suburbia-classica-official.png",
+      "sha256": "c5afdc89ffe0b971fbdd5f7034375ac5de129fb0ff05ca65acdbe6924b9fb55e"
+    },
+    {
+      "slug": "kuranpo",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/kuranpo/",
+      "image_url": "https://djnaoyaman.github.io/kuranpo/ogp/index.png",
+      "file": "assets/maisons/kuranpo-official.png",
+      "sha256": "3c188b96a3220f89c237d62643d47e9c5618b24a6ae3a6241d7be183cd3c2e2c"
+    },
+    {
+      "slug": "youkai",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/youkai/",
+      "image_url": "https://djnaoyaman.github.io/youkai/og-image.jpg",
+      "file": "assets/maisons/youkai-official.jpg",
+      "sha256": "91e844434bedf59e03b1f998eaf40b27bd47041ae5826befd898dcc97afa5a45"
+    },
+    {
+      "slug": "sakanamushi",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/sakanamushi/",
+      "image_url": "https://djnaoyaman.github.io/sakanamushi/og-image.png",
+      "file": "assets/maisons/sakanamushi-official.png",
+      "sha256": "2f6744bb5c365df30cc6c8dbeee81da96aeafbf7adcb222af39ee473539d3b63"
+    },
+    {
+      "slug": "sanreikotaiyoku",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/sanreikotaiyoku/",
+      "image_url": "https://djnaoyaman.github.io/sanreikotaiyoku/assets/ogp-sanrei-20261023.png",
+      "file": "assets/maisons/sanreikotaiyoku-official.png",
+      "sha256": "7c8cfd60914713a82e1a75cab4e04cb645ed696072adf167e852db51657a4968"
+    },
+    {
+      "slug": "ppp",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/ppp/",
+      "image_url": "https://djnaoyaman.github.io/ppp/og/default.png",
+      "file": "assets/maisons/ppp-official.png",
+      "sha256": "47fc1e4b131a286a168ebf054a9a9eea218fec6fe7d7abd3bddfe0b7c2788401"
+    },
+    {
+      "slug": "bookkeeping",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/bookkeeping/",
+      "image_url": "https://djnaoyaman.github.io/bookkeeping/assets/og-bookkeeping.png?v=pen-fork-45-5",
+      "file": "assets/maisons/bookkeeping-official.png",
+      "sha256": "981597a312ce1d7de76f1fafc76d99300cb2e744e71247ccd9ffffdffd486387"
+    },
+    {
+      "slug": "1minutes",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/1minutes/",
+      "image_url": "https://djnaoyaman.github.io/1minutes/assets/og.png",
+      "file": "assets/maisons/1minutes-official.png",
+      "sha256": "4822202acbadde2c1541b09d10d02e5ef9c6703fdc77e7fa44a16e9a6969d45a"
+    },
+    {
+      "slug": "omochi-touch",
+      "status": "ok",
+      "url": "https://djnaoyaman.github.io/omochi-touch/",
+      "image_url": "https://djnaoyaman.github.io/omochi-touch/assets/ogp-wordmark.png",
+      "file": "assets/maisons/omochi-touch-official.png",
+      "sha256": "473b1e2030d5ea720df5837f37088f79b0433004a9c75d5c75b996ca6b279e62"
+    }
+  ]
+}

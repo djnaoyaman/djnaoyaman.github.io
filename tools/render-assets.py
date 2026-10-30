@@ -23,10 +23,7 @@ with sync_playwright() as p:
  ico_source=page.screenshot()
  import io
  with Image.open(io.BytesIO(ico_source)) as im:im.save(ROOT/'favicon.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
- page.set_viewport_size({'width':1200,'height':630})
- page.set_content((ROOT/'assets-source/share-card.html').read_text())
- page.evaluate('document.fonts.ready')
- page.screenshot(path=str(ROOT/'og-image.png'))
- with Image.open(ROOT/'og-image.png') as im:im.convert('RGB').save(ROOT/'og-image.png',optimize=True)
  browser.close()
+import runpy
+runpy.run_path(str(ROOT/'tools/render-share-card.py'))
 print('Rendered 8 PNG icons, 4-size ICO and 1200×630 share card.')
