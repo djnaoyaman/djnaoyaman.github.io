@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "NAOYA WEB.",
-  "short_name": "NAOYA WEB.",
+  "name": "NAOYAMIYAZAKI",
+  "short_name": "NAOYAMIYAZAKI",
   "lang": "ja",
   "start_url": "/",
   "scope": "/",
@@ -54,20 +54,5 @@
       "url": "/#about"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshots/mobile.png?v=20261026-5",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "NAOYA WEBのトップページ"
-    },
-    {
-      "src": "/screenshots/desktop.png?v=20261026-5",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "NAOYA WEBのトップページ"
-    }
-  ]
+  "screenshots": []
 }

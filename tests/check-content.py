@@ -38,7 +38,7 @@ for filename in ['index.html','404.html']:
  assert "'unsafe-inline'" not in page.meta['Content-Security-Policy']
  assert 'referrer' in page.meta
  assert "manifest-src 'self'" in page.meta['Content-Security-Policy']
- assert page.meta['apple-mobile-web-app-title']=='NAOYA WEB.'
+ assert page.meta['apple-mobile-web-app-title']=='NAOYAMIYAZAKI'
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
