@@ -54,5 +54,20 @@
       "url": "/#about"
     }
   ],
-  "screenshots": []
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile.png?v=20261030-mina",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MIYAZAKINAOYA — mobile"
+    },
+    {
+      "src": "/screenshots/desktop.png?v=20261030-mina",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MIYAZAKINAOYA — desktop"
+    }
+  ]
 }

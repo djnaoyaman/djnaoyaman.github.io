@@ -70,7 +70,7 @@ with sync_playwright() as p:
  a.emulate_media(forced_colors='active');a.goto(ORIGIN+'/?theme=music#projects')
  button=a.locator('button[data-theme="music"]');assert button.get_attribute('aria-pressed')=='true'
  assert button.evaluate('(e)=>getComputedStyle(e).borderTopWidth')=='2px'
- # Adaptive favicon is rendered in both schemes; the raster Apple icon stays on opaque white.
+ # Adaptive favicon is rendered in both schemes; the raster Apple icon stays on opaque ivory.
  for scheme in ['light','dark']:
   a.emulate_media(color_scheme=scheme,forced_colors='none')
   a.goto(ORIGIN+'/favicon.svg')
