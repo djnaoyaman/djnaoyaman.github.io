@@ -2,7 +2,7 @@
 from pathlib import Path
 from urllib.parse import urlsplit
 import json,re,mimetypes,os,shutil
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1];ORIGIN='https://djnaoyaman.github.io'
 def serve(route):
  path=ROOT/(urlsplit(route.request.url).path.lstrip('/') or 'index.html')
@@ -14,12 +14,12 @@ with sync_playwright() as p:
  page.goto(ORIGIN+'/');atlas=page.locator('.world-atlas');atlas.scroll_into_view_if_needed()
  assert page.locator('.world-node').count()==14
  assert [ORIGIN+x for x in page.locator('.world-node').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')]==[x['item']['url'] for x in items]
- page.wait_for_function('document.querySelector(".world-atlas").dataset.phase==="complete"',timeout=15000)
+ expect(atlas).to_have_attribute('data-phase','complete',timeout=15000)
  first=page.locator('.world-node').first;first.focus();assert page.locator('#world-caption-name').inner_text()==items[0]['item']['name'];assert page.locator('.world-edge.is-connected').count()>0
  page.locator('.world-replay').click();assert atlas.get_attribute('data-phase')=='building'
- page.locator('footer').scroll_into_view_if_needed();page.wait_for_function('document.querySelector(".world-atlas").classList.contains("is-paused")')
+ page.locator('footer').scroll_into_view_if_needed();expect(atlas).to_have_class(re.compile(r'.*is-paused.*'))
  t=page.locator('.world-signature').evaluate('(e)=>e.getAnimations()[0].currentTime');page.wait_for_timeout(200);assert abs(page.locator('.world-signature').evaluate('(e)=>e.getAnimations()[0].currentTime')-t)<35
- atlas.scroll_into_view_if_needed();page.wait_for_function('!document.querySelector(".world-atlas").classList.contains("is-paused")')
+ atlas.scroll_into_view_if_needed();expect(atlas).not_to_have_class(re.compile(r'.*is-paused.*'))
  page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'))");assert 'is-paused' in atlas.get_attribute('class')
  page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'))")
  for width in [280,320,390,600,768,1280,1920]:

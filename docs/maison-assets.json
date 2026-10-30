@@ -82,7 +82,7 @@
       "file": "assets/maisons/sanreikotaiyoku-official.png",
       "sha256": "fdc97fb91451431e9f440e8d6aa078d318315ecdf08030368f7f434eb6b5bdf9",
       "source_commit": "6b934cf5861de8e0a0f0ce3435e7fb0c75ef7e68",
-      "source_note": "Owner-approved new artwork from Sanrei PR #13; copied from reviewed local bytes, deployment not asserted."
+      "source_note": "Owner-approved new artwork from Sanrei PR #13; local bytes reviewed. Source agent verified deployed URL HTTP 200 and exact bytes after merge 0f49344b077e9969c08cae4ca32038939aef14b1."
     },
     {
       "slug": "ppp",
