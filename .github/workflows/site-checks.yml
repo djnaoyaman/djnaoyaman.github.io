@@ -17,6 +17,7 @@ jobs:
       - run: python3 tests/check-content.py
       - run: python3 tests/test-profile.py
       - run: python3 tests/check-identity.py
+      - run: python3 tests/check-world-logos.py
       - run: node --check site.js
       - run: node --check world-atlas.js
       - run: node --check mina.js
