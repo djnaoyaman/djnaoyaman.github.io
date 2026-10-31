@@ -61,3 +61,7 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 /* The approved circular Youkai seal needs room for its full title and clear space. */
 #project-07 .art-link{height:200px;padding:20px}
 #project-07 .art-link .logo-youkai{width:160px;max-width:80%;height:160px;max-height:160px;object-fit:contain}
+
+/* Approved IL MASTRO lockup: preserve its detailed original art on the neutral frame. */
+#project-11 .art-link{height:200px;padding:20px}
+#project-11 .art-link .logo-bookkeeping{width:148px;max-width:80%;height:160px;max-height:160px;object-fit:contain}
