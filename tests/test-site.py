@@ -94,12 +94,13 @@ with sync_playwright() as p:
     # The standalone profile must work without JavaScript, and remain readable at each width.
     q.goto(ORIGIN+'/profile.html')
     assert q.locator('h1').inner_text()=='宮崎 直哉'
-    assert q.locator('.profile-works li').count()==14
+    assert q.locator('.profile-works li').count()==0
+    assert q.locator('a[href="/#worlds"]').count()>=1
     for width in [280,320,390,600,768,1280]:
         q.set_viewport_size({'width':width,'height':844})
         assert q.evaluate('document.documentElement.scrollWidth<=innerWidth'),('profile',width)
     q.locator('a[href="/"]').first.click()
     assert q.url==ORIGIN+'/'
-    assert q.locator('a[href="/profile.html"]').count()>=2
+    assert q.locator('a[href="/profile.html"]').count()>=1
     browser.close()
 print('PASS: filters/history, 6 widths, 44px targets, print, reduced motion, keyboard, clipboard/share, no-JS, deep 404, metadata/assets'+(', axe WCAG AA' if os.environ.get('AXE_PATH') else ''))

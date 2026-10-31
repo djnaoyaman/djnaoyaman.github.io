@@ -7,7 +7,7 @@
 ## 公開面と共通デザイン
 
 - `/`：WORLDS / JOURNAL / ABOUT。14の点が線と面へつながり、作者の視点を表す軽量SVGアニメーション。
-- `/profile.html`：経歴、活動名義、音楽、執筆、地域活動。既存本文とURLを維持。
+- `/profile.html`：制作姿勢を短く紹介。作品一覧はトップのWORLDSへ集約。旧プロフィールURLと各フラグメントは維持。
 - `/404.html`：深い未知のURLにもルート相対参照で対応。noindex、復帰導線つき。
 - `maisons.css` は互換性のためファイル名を維持した共通スタイル。名称はWORLDS。`profile.css`、`subpages.css`は配下の読み物レイアウト。
 - `#worlds`が新しい入口。`#projects`と`#maisons`の既存リンクも維持。

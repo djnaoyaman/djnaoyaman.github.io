@@ -34,22 +34,25 @@ assert g[0]['@type']=='ProfilePage' and g[0]['mainEntity']['@id']==p['@id']
 assert p['url']=='https://djnaoyaman.github.io/profile.html'
 assert '<link rel="canonical" href="https://djnaoyaman.github.io/profile.html">' in text
 assert '<meta property="og:url" content="https://djnaoyaman.github.io/profile.html">' in text
-works=re.search(r'<ul class="profile-works">(.*?)</ul>',text,re.S)[1]
 items=graph(home)[2]['mainEntity']['itemListElement']
-assert len(re.findall(r'<li>',works))==len(items)==14
-for item in items:assert 'href="'+item['item']['url']+'"' in works
-for alias in ['Nobleman','一見坊','クランポック','湯気文吾','犬井静','紫波金魚']:assert alias in p['alternateName'] and alias in text
+assert len(items)==14
+assert 'profile-works' not in text and 'href="/#worlds"' in text
+assert set(p)=={'@type','@id','name','url'}
+for banned in ['代表取締役','学歴','講演','15歳','父親','50以上','profile-career','profile-aliases']:
+ assert banned not in text,banned
+assert 'MIXWELLという考え方を大切にしています' in text
+assert '確かめられることには出典を添え' in text
 urls=[e.text for e in ET.parse(ROOT/'sitemap.xml').getroot().iter() if e.tag.endswith('}loc')]
 assert 'https://djnaoyaman.github.io/profile.html' in urls
 for name in ['llms.txt','llms-full.txt']:assert p['url'] in (ROOT/name).read_text(encoding='utf-8')
 audit=(ROOT/'docs/profile-sources.md').read_text(encoding='utf-8')
 assert len(re.findall(r'^\| [a-z].*? \|',audit,re.M))==14
 assert len(text.encode('utf-8'))<50000
-assert 'id="azumane"' in text and 'href="#azumane"' in text
-assert 'href="/profile.html#azumane"' in home
-assert 'town.shiwa.iwate.jp/soshiki/2_3/3_azumane/172677769112728/' in text
-assert 'Partner Noteを読む（PDF・49ページ）' in text
-print('PASS: profile navigation, IDs, labels, Person consistency, 14 works, aliases, canonical, sitemap and 14-repository evidence')
+for fragment in ['career','azumane','music','activities','works','approach','links']:
+ assert 'id="'+fragment+'"' in text
+assert '<details class="author-story">' not in home
+assert len(re.sub('<[^>]+>','',re.search(r'<main.*?</main>',text,re.S)[0]))<600
+print('PASS: concise author intent, source policy, minimal Person, legacy fragments,14 WORLDs retained only on home, local assets and metadata')
 # Same-site subordinate pages must use the maison shell rather than the retired home CSS.
 for filename in ['profile.html','404.html']:
  sub=(ROOT/filename).read_text(); parsed=Page(sub)
@@ -66,5 +69,5 @@ for filename in ['profile.html','404.html']:
   if url.startswith('#'):assert u.fragment in parsed.ids,(filename,url)
   if tag!='a' and u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),(filename,url)
  assert 'src="/site.js' not in sub
-assert '14の公開プロジェクト' in text
+assert '音楽も、言葉も、日々の発見も。' in text
 print('PASS: profile/404 shared maison shell, navigation, palette, tagline, anchors and local CSS')
