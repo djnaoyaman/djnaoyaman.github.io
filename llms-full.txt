@@ -16,7 +16,7 @@
 - [my Chems](https://djnaoyaman.github.io/chems/): The Chemical Brothersの作品を、音楽の特徴や制作技術、時代背景から読み解く個人サイト。日本語と英語で、各作品の解説を読めます。
 - [SUBURBIA CLASSICA](https://djnaoyaman.github.io/suburbia-classica/): ピアノや映画、CMで耳にしたクラシックを、解説とともに楽しむ楽曲データベース。作曲の経緯や曲の構成、録音にまつわる話を読みながら聴けます。
 - [鎌・くらんぽ](https://djnaoyaman.github.io/kuranpo/): 鎌倉の神社仏閣を巡る散歩ガイド。出発から散策の終わりまでの道順や距離、拝観情報、各地の歴史を紹介します。
-- [一見坊の日本妖怪学体系](https://djnaoyaman.github.io/youkai/): 各地の妖怪を、伝承や出典とともに紹介する図鑑。民俗学の視点から、妖怪の起源や土地との関わり、怪談、現代の妖怪をたどります。
+- [一見坊の【日本妖怪学体系】](https://djnaoyaman.github.io/youkai/): 各地の妖怪を、伝承や出典とともに紹介する図鑑。民俗学の視点から、妖怪の起源や土地との関わり、怪談、現代の妖怪をたどります。
 - [花鳥風月、そして魚と虫。](https://djnaoyaman.github.io/sakanamushi/): 魚、虫、鳥、植物など、自然にまつわる漢字の読み方を学ぶクイズ図鑑。大きく表示された漢字を見ながら、一問ずつ読み方を確かめられます。
 - [酸冷交代浴](https://djnaoyaman.github.io/sanreikotaiyoku/): 炭酸泉と水風呂に交互に入る「酸冷交代浴」を紹介するサイト。体験談や楽しみ方、各地の入浴施設に加え、関連する研究や資料も紹介します。
 - [掌蹠膿疱症.com](https://djnaoyaman.github.io/ppp/): 掌蹠膿疱症の症状や原因、治療の選択肢を整理した情報サイト。標準的な治療、漢方、セルフケアなど、知りたいテーマごとに読めます。
