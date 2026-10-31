@@ -56,7 +56,9 @@
       "url": "https://djnaoyaman.github.io/kuranpo/",
       "image_url": "https://djnaoyaman.github.io/kuranpo/ogp/index.png",
       "file": "assets/maisons/kuranpo-official.png",
-      "sha256": "3c188b96a3220f89c237d62643d47e9c5618b24a6ae3a6241d7be183cd3c2e2c"
+      "sha256": "23fc6ac159c227141c22a754d8a20b37509584d5c6f68da676e8f1113e20ae30",
+      "checked_at": "2026-10-31T09:29:52Z",
+      "source_commit": "90f9f7d5fa1a89e2f2ba09f820f10d4f796b1ad0"
     },
     {
       "slug": "youkai",
