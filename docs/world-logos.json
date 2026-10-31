@@ -85,13 +85,13 @@
     {
       "slug": "youkai",
       "source_url": "https://djnaoyaman.github.io/youkai/",
-      "checked_at": "2026-10-31T13:23:00Z",
+      "checked_at": "2026-10-31T13:27:00Z",
       "file": "assets/world-logos/youkai.svg",
-      "sha256": "23eb0a59352a751c5166d148565d0f1ef7585d04ff2eacc1f551aaee9ed2282a",
+      "sha256": "e43b656566b163b05d8f95ac37c6c834e0b3c7c85f9f43e9a1ce142518de43e8",
       "method": "Unmodified owner-selected logo09 production SVG, identical master to source-site brand rollout",
       "source_evidence": "Owner selected09 and requested related-site application2026-10-31. Approved production master; source-site publication pending at integration.",
       "text": "一見坊の【日本妖怪学体系】",
-      "geometry": "1:1 outlined circular seal;朱#C1272D/墨#111111; no font dependency; original circles/rules/name unchanged"
+      "geometry": "1:1 outlined circular seal;朱#C1272D/墨#111111; decorative side bars around author removed per owner correction; character一 retained; all other original geometry unchanged"
     },
     {
       "slug": "sakanamushi",
