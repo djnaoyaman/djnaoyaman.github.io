@@ -5,7 +5,7 @@ r=Path(__file__).resolve().parents[1]
 for name in ['index.html','profile.html','404.html']:
  s=(r/name).read_text()
  assert 'MIYAZAKINAOYA' in s and 'NAOYAMIYAZAKI' not in s
- assert '20261030-mina' in s and 'name="theme-color" content="#f7f6f2"' in s
+ assert '20261031-crown' in s and 'name="theme-color" content="#f7f6f2"' in s
  assert 'メゾン' not in s and '>MAISONS<' not in s and '>CURIOSITIES<' not in s
  assert 'そのすべてを、' not in s and '画面キャプチャではありません' not in s
  assert s.count('class="brand-symbol"')==2,name
