@@ -39,6 +39,7 @@ with sync_playwright() as p:
  assert a.locator('.identity-dot').count()==11
  assert [float(a.locator('.identity-dot').nth(i).get_attribute('r')) for i in range(3)]==[13,15,13]
  expect(a.locator('.points-form')).to_have_attribute('opacity','1')
+ assert all(a.locator('.identity-dot').nth(i).get_attribute('opacity')=='0' for i in range(3,11))
  a.locator('[data-point-stage="2"]').press('Home');expect(point).to_have_value('0')
  a.locator('#points-play').click();expect(point).to_have_value('100',timeout=6500)
  assert page.locator('#points-play').is_disabled()

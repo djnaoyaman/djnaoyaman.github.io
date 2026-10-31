@@ -5,7 +5,7 @@ from shapely.ops import unary_union
 import cairosvg
 from PIL import Image,ImageDraw,ImageFont
 R=Path(__file__).resolve().parents[1]; A=R/'assets/mina-study'; m=json.loads((A/'final-outline.json').read_text());P='#f7f6f2';K='#282823'
-base=Polygon(m['contours'][0],m['contours'][1:]); pts=json.loads((A/'dot-junctions.json').read_text())['points']; radii=[13,15,13]
+base=Polygon(m['rings'][0],m['rings'][1:]); pts=json.loads((A/'dot-junctions.json').read_text())['points']; radii=[13,15,13]
 shape=unary_union([base]+[Point(*p).buffer(r,resolution=128) for p,r in zip(pts[:3],radii)])
 assert shape.is_valid and shape.geom_type=='Polygon'
 def path(poly):
@@ -13,9 +13,9 @@ def path(poly):
 D=path(shape)
 def svg(inv=False,view='0 0 200 200'):
  ink,paper=(P,K) if inv else(K,P)
- dots=''.join(f'<circle cx="{x}" cy="{y}" r="2.6" fill="{paper}"/>' for x,y in pts[3:])
+ dots='' # No interior or lower-terminal dot cutouts in the finished mark.
  return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}"><rect x="-200" y="-200" width="600" height="600" fill="{paper}"/><g transform="translate(0 5)"><path d="{D}" fill="{ink}" fill-rule="evenodd"/>{dots}</g></svg>'
-(A/'dots-crown.svg').write_text(svg());(A/'dots-crown-inverse.svg').write_text(svg(True));(A/'crown-master.json').write_text(json.dumps({'path':D,'topRadii':radii,'points':pts,'translateY':5,'construction':'boolean union of precise polygon and 3 circular terminals; inner point counters remain'},indent=2))
+(A/'dots-crown.svg').write_text(svg());(A/'dots-crown-inverse.svg').write_text(svg(True));(A/'crown-master.json').write_text(json.dumps({'path':D,'topRadii':radii,'points':pts,'translateY':5,'construction':'boolean union of precise polygon and 3 circular terminals; no internal dot cutouts; both lower terminals use exact y156 baseline and square exterior corners'},indent=2))
 board=Image.new('RGB',(1500,1000),P);d=ImageDraw.Draw(board);font='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
 def label(x,y,s,n=22):d.text((x,y),s,font=ImageFont.truetype(font,n),fill=K)
 def paste(s,x,y,w):board.paste(Image.open(io.BytesIO(cairosvg.svg2png(bytestring=s.encode(),output_width=w,output_height=w))).convert('RGB'),(x,y))
