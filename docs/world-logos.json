@@ -75,11 +75,12 @@
     {
       "slug": "kuranpo",
       "source_url": "https://djnaoyaman.github.io/kuranpo/",
-      "checked_at": "2026-10-31T09:53:00Z",
+      "checked_at": "2026-10-31T12:22:00Z",
       "file": "assets/world-logos/kuranpo.svg",
-      "sha256": "c8782606785c66828d39439b040845655d99dde0b2bfbe3c3cd365260b4a6785",
-      "method": "Unmodified official standalone logo currently used by the source site",
-      "asset_url": "https://djnaoyaman.github.io/kuranpo/assets/kuranpo-logo.svg"
+      "sha256": "cf8d8f22b2971526e08bb33452e2f253ac6063a4b450992d8a9356e3fbd8780b",
+      "method": "Unmodified owner-approved bold-circle 鎌ぽ horizontal logo master, same bytes as source-site PR12",
+      "source_evidence": "Owner-selected master on2026-10-31; source-site PR12 pending publication at integration. Not represented as already fetched from live deployment.",
+      "geometry": "くら119%; bold circular 鎌 inぽ; no upper-left seal; original supplied SVG unchanged"
     },
     {
       "slug": "youkai",
