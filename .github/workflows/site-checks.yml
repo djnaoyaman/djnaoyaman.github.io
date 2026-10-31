@@ -19,6 +19,8 @@ jobs:
       - run: python3 tests/check-identity.py
       - run: node --check site.js
       - run: node --check world-atlas.js
+      - run: node --check mina.js
+      - run: python3 tests/check-mina.py
   browser:
     env:
       CHROMIUM_PATH: /usr/bin/google-chrome
@@ -34,6 +36,7 @@ jobs:
       - run: python3 tests/test-details.py
 
       - run: python3 tests/test-world-atlas.py
+      - run: AXE_PATH=node_modules/axe-core/axe.min.js python3 tests/test-mina.py
       - if: ${{ !cancelled() }}
         run: python3 tools/capture-screenshots.py
       - if: ${{ !cancelled() }}
