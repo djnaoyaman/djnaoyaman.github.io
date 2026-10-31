@@ -8,7 +8,7 @@ The14 WORLD cards show each source site's actual brand mark, not Open Graph artw
 - Faithful outline exports from current DOM/font sources: CRATEDIGGIN', Premium Cuts Listed., 花鳥風月、そして魚と虫, 掌蹠膿疱症.com. They are exports of existing wordmarks, not newly proposed identities.
 - Earth Number: owner-approved final C lockup (EN08 symbol + outlined L03 P052 Roman two-line wordmark), shared unchanged with the source-site rollout.
 - myChems: owner-approved proposal02 production outline, ink variant on the existing light frame. The original master is used unchanged; source-site PR3 publication is separate and was pending at integration. This is original myChems lettering, not an official Chemical Brothers mark or a claim of affiliation.
-- 1minutes.: current Arial wordmark reproduced as HTML on its existing dark-colour swatch.
+- 1minutes: owner-approved 05 CONTINUOUS symbol + 03 Liberation Sans outlined master, byte-identical to the source site’s assets/brand-normal.svg at commit13ff4296. Ink artwork is unchanged on the neutral frame; the old Arial DOM swatch is removed. Logo wording does not rename the site or destination.
 
 All frames use the portal's quiet neutral background. Optical width/height limits vary with the original mark's shape; original colours and letter proportions are not changed. The source brands remain independent. Earth Number uses the final C identity selected by the owner on 2026-10-31.
 
