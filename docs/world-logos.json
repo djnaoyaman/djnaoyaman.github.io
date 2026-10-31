@@ -85,22 +85,13 @@
     {
       "slug": "youkai",
       "source_url": "https://djnaoyaman.github.io/youkai/",
-      "checked_at": "2026-10-31T09:53:00Z",
+      "checked_at": "2026-10-31T13:27:00Z",
       "file": "assets/world-logos/youkai.svg",
-      "sha256": "35336138e3d581438d2a84836d4764cd4a8c4037944a5efe099b8a5c004e1b39",
+      "sha256": "e43b656566b163b05d8f95ac37c6c834e0b3c7c85f9f43e9a1ce142518de43e8",
+      "method": "Unmodified owner-selected logo09 production SVG, identical master to source-site brand rollout",
+      "source_evidence": "Owner selected09 and requested related-site application2026-10-31. Approved production master; source-site publication pending at integration.",
       "text": "一見坊の【日本妖怪学体系】",
-      "family": "Noto Sans JP",
-      "weight": 700,
-      "tracking": 0.02,
-      "color": "#111111",
-      "font_css_url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP%3Awght%40700&text=%E4%B8%80%E8%A6%8B%E5%9D%8A%E3%81%AE%E3%80%90%E6%97%A5%E6%9C%AC%E5%A6%96%E6%80%AA%E5%AD%A6%E4%BD%93%E7%B3%BB%E3%80%91&display=swap",
-      "font_url": "https://fonts.gstatic.com/l/font?kit=-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFPYk75vA8Ve_KCMX8F3n60P1oLitz4nTd56GUSTBqVnmFLv8rz_0-XRw9aMOJQ&skey=72472b0eb8793570&v=v57",
-      "font_sha256": "e63774bcb0b6310a76b7fe0700fb87c885150ec5cae2850e90e2d62cf97633a9",
-      "license": "SIL Open Font License 1.1",
-      "license_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/OFL.txt",
-      "source_css_url": "https://djnaoyaman.github.io/youkai/style.css",
-      "source_selector": "nav.topnav .brand",
-      "method": "Google Fonts text-subset exact family/weight; fontTools glyph outlines; Pillow kerning advances; original tracking and ink colour; transparent canvas"
+      "geometry": "1:1 outlined circular seal;朱#C1272D/墨#111111; decorative side bars around author removed per owner correction; character一 retained; all other original geometry unchanged"
     },
     {
       "slug": "sakanamushi",
