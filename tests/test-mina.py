@@ -30,5 +30,19 @@ with sync_playwright() as p:
  a.locator('.construction').scroll_into_view_if_needed();expect(progress).to_have_value('100',timeout=6000);expect(a.locator('#morph-play')).to_have_attribute('aria-pressed','false')
  data=json.loads((R/'assets/mina-study/geometric-data.json').read_text());assert a.locator('#morph-shape').get_attribute('d')==data['paths'][2]
  a.locator('#morph-play').click();a.wait_for_timeout(100);a.evaluate("dispatchEvent(new PageTransitionEvent('pagehide'))");v=progress.input_value();a.wait_for_timeout(150);expect(progress).to_have_value(v)
+
+ # Crown point sequence: independent controls, actual final radii, no autoplay.
+ point=a.locator('#points-progress');expect(point).to_have_value('0')
+ a.locator('#points-play').click();a.wait_for_timeout(300);assert 0<int(point.input_value())<100
+ a.locator('#points-play').click();pv=point.input_value();a.wait_for_timeout(180);expect(point).to_have_value(pv)
+ a.locator('[data-point-stage="2"]').click();expect(point).to_have_value('100')
+ assert a.locator('.identity-dot').count()==11
+ assert [float(a.locator('.identity-dot').nth(i).get_attribute('r')) for i in range(3)]==[13,15,13]
+ expect(a.locator('.points-form')).to_have_attribute('opacity','1')
+ a.locator('[data-point-stage="2"]').press('Home');expect(point).to_have_value('0')
+ a.locator('#points-play').click();expect(point).to_have_value('100',timeout=6500)
+ assert page.locator('#points-play').is_disabled()
+ expect(page.locator('#points-progress')).to_have_value('100')
+ assert not q.locator('.points-tools').is_visible()
  assert not errors,errors;browser.close()
 print('PASS: MINA left-to-right morph / play, pause, reset, offscreen and navigation interruption / three stages, keyboard, pressed state, seven widths, 44px targets, reduced motion, no-JS and axe')

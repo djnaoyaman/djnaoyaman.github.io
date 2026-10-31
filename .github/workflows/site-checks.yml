@@ -20,6 +20,7 @@ jobs:
       - run: node --check site.js
       - run: node --check world-atlas.js
       - run: node --check mina.js
+      - run: node --check mina-points.js
       - run: python3 tests/check-mina.py
   browser:
     env:
