@@ -40,20 +40,13 @@
     {
       "slug": "earthnumber",
       "source_url": "https://djnaoyaman.github.io/earthnumber/",
-      "checked_at": "2026-10-31T09:53:00Z",
+      "checked_at": "2026-10-31T10:11:00Z",
       "file": "assets/world-logos/earthnumber.svg",
-      "sha256": "53d402ff2dfaa9b27430ace2016c52c27e5f6aab8de7ba3265dea861ee03e53f",
-      "method": "Outline export of current live DOM wordmark, not an unselected proposed identity",
-      "text": "earth number",
-      "source_css_url": "https://djnaoyaman.github.io/earthnumber/style.css?v=20261024-2",
-      "family": "DM Sans",
-      "weight": 800,
-      "tracking": "-1.5px at25px",
-      "color": "#191c17",
-      "dot_color": "#0033AD",
-      "font_url": "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAIpthTg.ttf",
-      "font_sha256": "b00c1f73ddaa9d435c49b0777223823e5f4fcf6a06350d532df3d7730375dd9e",
-      "status_note": "EN08 symbol approved separately; pending wordmark proposals not used here."
+      "sha256": "bbf8a1b1919e5998682d870bcda53bc339cd770950e10e6aca40e323c0c108eb",
+      "method": "Owner-approved final C lockup: unchanged EN08 symbol with L03 P052 Roman outlined two-line wordmark",
+      "source_evidence": "Final C selected and application requested by owner on 2026-10-31. Same final production asset shared with Earth Number site; not an OGP crop.",
+      "geometry": "symbol118; P052Roman36.5; gap17; line37; optical y−1; EN08 stroke-to-path union removes internal AA seams, original bounds/12-degree tilt/clip retained",
+      "font_license": "docs/world-logo-licenses/URW-Base35.txt"
     },
     {
       "slug": "chems",
