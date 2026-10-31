@@ -46,3 +46,14 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .wordmark{letter-spacing:.095em;white-space:nowrap}.wordmark .brand-symbol{flex:none;margin-right:.1em}.wordmark span{font-kerning:normal;font-weight:500}
 @media(max-width:380px){.wordmark{font-size:17px;letter-spacing:.055em;gap:8px}.wordmark .brand-symbol{width:24px;height:24px}}
 @media(max-width:700px){.world-atlas-heading{display:block}.world-atlas-heading h2{white-space:normal;font-size:clamp(24px,6vw,32px)}.world-atlas-story{max-width:none;margin-top:14px;font-size:11px}}
+
+/* Official WORLD logos: one quiet frame; preserve each site's original identity. */
+.art-link .world-logo{display:block;width:var(--world-logo-width,260px);max-width:78%;height:auto;max-height:98px;object-fit:contain;filter:none;transform:none}
+.art-link .logo-premiumcuts{--world-logo-width:230px;max-height:112px}
+.art-link .logo-suburbia-classica{--world-logo-width:220px;max-height:104px}
+.art-link .logo-youkai,.art-link .logo-sakanamushi,.art-link .logo-sanreikotaiyoku{--world-logo-width:310px;max-width:84%}
+.art-link .logo-bookkeeping{--world-logo-width:76px;max-height:76px}
+.art-link .logo-omochi-touch{--world-logo-width:170px;max-height:100px}
+.art-link .world-wordmark--minutes{width:auto;max-width:84%;padding:14px 25px;background:#101114;color:#f4f2ed;font-family:Arial,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:32px;font-weight:400;letter-spacing:-.07em;line-height:1.2;white-space:nowrap}
+@media(max-width:700px){.art-link .world-logo{max-height:90px}.art-link .logo-bookkeeping{max-height:68px;width:68px}.art-link .world-wordmark--minutes{font-size:29px;padding:12px 23px}}
+@media print{.art-link .world-logo{max-height:70px}}
