@@ -51,15 +51,14 @@
     {
       "slug": "chems",
       "source_url": "https://djnaoyaman.github.io/chems/",
-      "checked_at": "2026-10-31T09:53:00Z",
+      "checked_at": "2026-10-31T10:49:00Z",
       "file": "assets/world-logos/chems.svg",
-      "sha256": "51518ea6fc71372949b5d55c5d60da442f4c968916cce6e0b2bca142f0634775",
-      "method": "Faithful outline export of current DOM wordmark; exact source font/weight/spacing/colour, no redesign",
-      "source_markup": "<a class=\"home\">my Chems</a>",
-      "source_css": ".home{font-family:\"Noto Sans JP\";font-weight:900;font-size:.88rem;line-height:1.75;letter-spacing:normal;color:#F2F1EC;white-space:nowrap;text-decoration:none}",
-      "font_sha256": "4390e8c344711292f1bbf13378cf741c0b4555735fcbc40dd58cd69bd441724a",
-      "source_evidence": "Current live HTML/CSS; source font and license inspected.",
-      "font_css_url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=myChems"
+      "sha256": "68fd42653db17265a620717ec6543c35153fb980bd2c3efcffee2d3e8f43face",
+      "method": "Unmodified ink variant of owner-approved myChems proposal02 production outline",
+      "source_evidence": "Owner-selected logo master, approved2026-10-31. Source-site PR3 publication pending at integration; not claimed as a currently published source-site asset.",
+      "approved_source": "libfile_d53b14296ca88191a1b5dba142188d3a",
+      "color": "#111111 on existing light neutral card frame",
+      "geometry": "Original approved outline and viewBox125 129 1799 504 unchanged; no font dependency or redesign"
     },
     {
       "slug": "suburbia-classica",
