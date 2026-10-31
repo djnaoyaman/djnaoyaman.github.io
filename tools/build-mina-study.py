@@ -31,3 +31,38 @@ if js.exists():
  source=js.read_text();tail=source[source.index(';\nconst controls='):];js.write_text("'use strict';\n(()=>{const FRAMES="+json.dumps(frames,separators=(',',':'))+tail)
 html=R/'mina.html'
 if html.exists():html.write_text(re.sub(r'(id="morph-shape"[^>]*d=")[^"]*',lambda m:m[1]+paths[0],html.read_text()))
+# Final 03 is a deliberate polygon master, not the raw stroke union.
+# The last ten percent changes matching outline vertices and applies the same
+# micro-bevel progressively. The exact last frame uses the approved master.
+master_file=out/'final-outline.json'
+if master_file.exists():
+ import math
+ master=json.loads(master_file.read_text())
+ oldrings=[]
+ for part in paths[2].strip().split('M')[1:]:
+  r=[[float(v) for v in pair.split(',')] for pair in part.rstrip('Z').split('L')]
+  cleaned=[]
+  for i,b in enumerate(r):
+   a=r[i-1];c=r[(i+1)%len(r)];cross=(b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0])
+   if abs(cross)>.001:cleaned.append(b)
+  oldrings.append(cleaned)
+ targets=json.loads(json.dumps(master['rings']));targets[1].insert(1,[130,120.1666666667]);targets[2]=targets[2][1:]
+ assert [len(x) for x in oldrings]==[len(x) for x in targets]
+ def beveled(r,d):
+  if not d:return r
+  result=[]
+  for i,b in enumerate(r):
+   for p in [r[i-1],r[(i+1)%len(r)]]:
+    length=math.dist(b,p);distance=min(d,length*.24);result.append([b[k]+(p[k]-b[k])*distance/length for k in [0,1]])
+  return result
+ def rings_path(rings):return ''.join('M'+'L'.join(f'{x:.6f},{y:.6f}' for x,y in r)+'Z' for r in rings)
+ frames=[]
+ for k in range(101):
+  if k<=90:
+   j=0 if k<=50 else 1;v=k/50 if j==0 else (k-50)/40;lines=[[a+(b-a)*v for a,b in zip(s,e)] for s,e in zip(stages[j],stages[j+1])];frames.append(outline(lines))
+  else:
+   v=(k-90)/10;rings=[beveled([[a+(b-a)*v for a,b in zip(p,q)] for p,q in zip(old,new)],1.5*v) for old,new in zip(oldrings,targets)];frames.append(rings_path(rings))
+ paths[2]=master['path'];frames[100]=master['path']
+ (out/'geometric-03.svg').write_text(svg(paths[2])+'\n');(out/'geometric-03-inverse.svg').write_text(svg(paths[2],True)+'\n')
+ (out/'geometric-data.json').write_text(json.dumps({'stages':stages,'paths':paths,'frames':frames,'strokeWidth':9,'baseline':[44,156],'finalMaster':'final-outline.json','cornerBevel':1.5},indent=2)+'\n')
+ source=js.read_text();tail=source[source.index(';\nconst controls='):];js.write_text("'use strict';\n(()=>{const FRAMES="+json.dumps(frames,separators=(',',':'))+tail)
