@@ -43,3 +43,6 @@ main/rootの既存GitHub Pages設定で公開。ブラウザの依存ライブ�
 正規URL、プロフィール原稿・出典、各サイトURL、既存robots制限・sitemap方針、CSPを保持。計測IDがないためGA/広告タグは未導入のまま。新しいトラッキング、外部フォント通信、権限、Service Workerは追加しません。
 
 SNS画像キャッシュ更新やiOS/Android実機のインストール表示は自動検査の対象外です。改修一覧と区別は `docs/identity-inventory.md` を参照。
+
+## MINA brand symbol
+The crown-shaped MINA symbol and its point-to-line construction story are documented in [docs/mina-identity.md](docs/mina-identity.md). The public process page is `/mina.html`; all shared site icons derive from the same approved geometry.

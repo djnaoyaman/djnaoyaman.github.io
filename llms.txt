@@ -123,3 +123,7 @@ MIXWELLという考え方が好きで、実践している。音楽も、アー�
 
 ## WORLDS
 各サイトは、それぞれの名前と美意識を持つ「世界」です。トップページでは14のWORLDが点から線、面へとつながり、MIYAZAKINAOYAをかたちづくるSVGアニメーションを掲載。各点とテキスト一覧から既存サイトへ移動できます。動きを減らす設定では完成した図を表示します。
+
+## Brand identity
+- MINA: https://djnaoyaman.github.io/mina.html
+- MIYAZAKIのMIとNAOYAのNA。点がつながり、上の3つの丸を持つ王冠の輪郭になるブランドシンボル。
