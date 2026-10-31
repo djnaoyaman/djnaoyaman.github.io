@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Asia/Tokyo",
+  "pages": [
+    "index.html",
+    "profile.html",
+    "mina.html",
+    "404.html"
+  ]
+}
