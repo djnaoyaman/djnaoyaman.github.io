@@ -144,12 +144,15 @@
     },
     {
       "slug": "bookkeeping",
+      "name": "IL MASTRO",
       "source_url": "https://djnaoyaman.github.io/bookkeeping/",
-      "checked_at": "2026-10-31T09:53:00Z",
-      "file": "assets/world-logos/bookkeeping.svg",
-      "sha256": "91486667cbe9b45f9c1b05542ab802418d0fde14541a7487abe01638850432b8",
-      "method": "Unmodified official standalone logo currently used by the source site",
-      "asset_url": "https://djnaoyaman.github.io/bookkeeping/assets/brand-mark.svg"
+      "checked_at": "2026-10-31T16:23:00Z",
+      "file": "assets/world-logos/il-mastro.png",
+      "sha256": "9dfc1db07d4bf63befaf30e8a114108e43e0c13d5934c7eeb4d664b2405215af",
+      "method": "Same optimized480x520 production PNG as source-site: owner-selected09 decorated merchant05 + P052Italic wordmark, unchanged outline/colours",
+      "source_evidence": "Owner selectedIL MASTRO09 and requested related-site alignment2026-10-31. Same production master as source-site redesign; not claimed as already publicly deployed.",
+      "format": "Transparent surrounding pixels, opaque white illustration interiors. Raster output of hybrid SVG master, not a full-vector illustration.",
+      "font_license": "docs/world-logo-licenses/URW-Base35.txt"
     },
     {
       "slug": "1minutes",
