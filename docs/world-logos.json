@@ -63,13 +63,14 @@
     {
       "slug": "suburbia-classica",
       "source_url": "https://djnaoyaman.github.io/suburbia-classica/",
-      "checked_at": "2026-10-31T09:53:00Z",
-      "file": "assets/world-logos/suburbia-classica.jpeg",
-      "sha256": "7689bdf62a01bb868de5c137a4e53c1a1998b08abe23590a5f989bca921d6111",
-      "method": "Unmodified owner-supplied original logo JPEG, not an OGP crop",
-      "original_name": "IMG_5039.jpeg",
-      "source_evidence": "https://github.com/djnaoyaman/suburbia-classica/blob/main/docs/ogp-supplied-logo-20261025.md",
-      "original_sha256": "7689bdf62a01bb868de5c137a4e53c1a1998b08abe23590a5f989bca921d6111"
+      "checked_at": "2026-10-31T11:12:00Z",
+      "file": "assets/world-logos/suburbia-classica.svg",
+      "sha256": "6abcf20fe4fd54abefbf7ae901599ed5793626c14d2225b2d66417295554814e",
+      "method": "Faithful closed cubic outline of owner-supplied original two-line wordmark; transparent background, no font substitution",
+      "source_original": "libfile_3b6c227568688191922666f6cbd5c487",
+      "source_sha256": "7689bdf62a01bb868de5c137a4e53c1a1998b08abe23590a5f989bca921d6111",
+      "source_evidence": "Owner requested logo-only presentation following the existing lettering on2026-10-31. Original1206x581 letter positions, line spacing and canvas preserved; original orange rectangle intentionally omitted.",
+      "mask_iou": 0.992190001217494
     },
     {
       "slug": "kuranpo",

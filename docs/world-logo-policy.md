@@ -3,7 +3,7 @@
 The14 WORLD cards show each source site's actual brand mark, not Open Graph artwork or cropped social cards. `world-logos.json` records each source, method and output hash.
 
 - Unmodified official SVGs: EXPRESSION,くらんぽ,酸冷交代浴,Book Keeping,OMOCHI TOUCH.
-- SUBURBIA CLASSICA: original owner-supplied logo JPEG, not the derived OGP; original colours retained.
+- SUBURBIA CLASSICA: faithful transparent SVG outline of the original owner-supplied two-line lettering, not a screenshot crop or replacement font. At the owner’s request the orange rectangle is omitted; original letter placement, line spacing and proportions remain unchanged.
 - Faithful outline exports from current DOM/font sources: CRATEDIGGIN', Premium Cuts Listed., 一見坊の【日本妖怪学体系】, 花鳥風月、そして魚と虫, 掌蹠膿疱症.com. They are exports of existing wordmarks, not newly proposed identities.
 - Earth Number: owner-approved final C lockup (EN08 symbol + outlined L03 P052 Roman two-line wordmark), shared unchanged with the source-site rollout.
 - myChems: owner-approved proposal02 production outline, ink variant on the existing light frame. The original master is used unchanged; source-site PR3 publication is separate and was pending at integration. This is original myChems lettering, not an official Chemical Brothers mark or a claim of affiliation.
