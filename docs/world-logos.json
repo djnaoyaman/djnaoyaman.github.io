@@ -154,10 +154,13 @@
     {
       "slug": "1minutes",
       "source_url": "https://djnaoyaman.github.io/1minutes/",
-      "checked_at": "2026-10-31T09:53:00Z",
-      "method": "Current HTML masthead reproduced as DOM text with original Arial400,-.07em tracking,light text on its dark swatch",
-      "text": "1minutes.",
-      "source_css_url": "https://djnaoyaman.github.io/1minutes/style.css"
+      "checked_at": "2026-10-31T17:33:00Z",
+      "file": "assets/world-logos/1minutes.svg",
+      "sha256": "02db58c3b3a51c4ee8e0a40db98f11afebb05fff0593cd36413fb549f785265d",
+      "method": "Unmodified owner-approved 05 CONTINUOUS + 03 Liberation Sans outlined master; byte-identical to source repository assets/brand-normal.svg at deployed commit13ff4296. Site name and destination unchanged.",
+      "asset_url": "https://djnaoyaman.github.io/1minutes/assets/brand-normal.svg",
+      "source_commit": "13ff4296",
+      "license": "SIL Open Font License 1.1 (Liberation Sans lettering)"
     },
     {
       "slug": "omochi-touch",

@@ -54,8 +54,8 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .art-link .logo-youkai,.art-link .logo-sakanamushi,.art-link .logo-sanreikotaiyoku{--world-logo-width:310px;max-width:84%}
 .art-link .logo-bookkeeping{--world-logo-width:76px;max-height:76px}
 .art-link .logo-omochi-touch{--world-logo-width:170px;max-height:100px}
-.art-link .world-wordmark--minutes{width:auto;max-width:84%;padding:14px 25px;background:#101114;color:#f4f2ed;font-family:Arial,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:32px;font-weight:400;letter-spacing:-.07em;line-height:1.2;white-space:nowrap}
-@media(max-width:700px){.art-link .world-logo{max-height:90px}.art-link .logo-bookkeeping{max-height:68px;width:68px}.art-link .world-wordmark--minutes{font-size:29px;padding:12px 23px}}
+
+@media(max-width:700px){.art-link .world-logo{max-height:90px}.art-link .logo-bookkeeping{max-height:68px;width:68px}}
 @media print{.art-link .world-logo{max-height:70px}}
 
 /* The approved circular Youkai seal needs room for its full title and clear space. */
