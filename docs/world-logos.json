@@ -166,6 +166,14 @@
       "sha256": "12ba8305987d1937238827cfbb3182f062be10dce18635d4260b3029dbd1390e",
       "method": "Unmodified official standalone logo currently used by the source site",
       "asset_url": "https://djnaoyaman.github.io/omochi-touch/assets/omochi-touch-header-purple.svg"
+    },
+    {
+      "slug": "design-lineage",
+      "source_url": "https://djnaoyaman.github.io/design-lineage/",
+      "checked_at": "2026-11-01",
+      "file": "assets/world-logos/design-lineage-logo10.png",
+      "sha256": "27ba8dd92c5befe4a0e9d283fd0910938c4f4f68ff2c15bcdb949f76b2886ef4",
+      "method": "Unmodified user-selected logo10 transparent PNG from the DESIGN LINEAGE site owner; same approved identity, no crop or redraw."
     }
   ]
 }

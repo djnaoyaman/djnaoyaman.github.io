@@ -6,7 +6,7 @@ from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self,text):
-  super().__init__();self.ids=[];self.refs=[];self.meta={};self.ld=[];self.in_ld=False;self.headings=[];self.descriptions=[];self.in_desc=False;self.in_h3=False;self.feed(text)
+  super().__init__();self.ids=[];self.refs=[];self.meta={};self.ld=[];self.in_ld=False;self.headings=[];self.descriptions=[];self.in_desc=False;self.in_h3=False;self.heading_text="";self.feed(text)
  def handle_starttag(self,tag,attrs):
   a=dict(attrs)
   if 'id' in a:self.ids.append(a['id'])
@@ -15,15 +15,15 @@ class Page(HTMLParser):
    v=a.get('href') or a.get('src')
    if v:self.refs.append((tag,v))
   if tag=='script' and a.get('type')=='application/ld+json':self.in_ld=True
-  if tag=='h3' and a.get('id','').startswith('project-title-'):self.in_h3=True
+  if tag=='h3' and a.get('id','').startswith('project-title-'):self.in_h3=True;self.heading_text=''
   if tag=='p' and a.get('class')=='description':self.in_desc=True
  def handle_endtag(self,tag):
   if tag=='script':self.in_ld=False
-  if tag=='h3':self.in_h3=False
+  if tag=='h3' and self.in_h3:self.headings.append(self.heading_text);self.in_h3=False
   if tag=='p':self.in_desc=False
  def handle_data(self,data):
   if self.in_ld:self.ld.append(json.loads(data))
-  if self.in_h3:self.headings.append(data)
+  if self.in_h3:self.heading_text+=data
   if self.in_desc:self.descriptions.append(data)
 for filename in ['index.html','404.html']:
  page=Page((ROOT/filename).read_text())
@@ -42,7 +42,7 @@ for filename in ['index.html','404.html']:
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
-  assert collection['numberOfItems']==len(items)==len(page.headings)==14
+  assert collection['numberOfItems']==len(items)==len(page.headings)==15
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
   assert [item['position'] for item in items]==list(range(1,len(items)+1))
@@ -77,4 +77,4 @@ assert 'prefers-color-scheme:dark' in (ROOT/'favicon.svg').read_text()
 ET.parse(ROOT/'favicon.svg');ET.parse(ROOT/'safari-pinned-tab.svg')
 ET.parse(ROOT/'sitemap.xml')
 assert 'Sitemap: https://djnaoyaman.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
-print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 14-project JSON-LD/docs, manifest dimensions, OGP, sitemap')
+print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 15-project JSON-LD/docs, manifest dimensions, OGP, sitemap')

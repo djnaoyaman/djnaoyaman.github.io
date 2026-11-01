@@ -35,7 +35,7 @@ assert p['url']=='https://djnaoyaman.github.io/profile.html'
 assert '<link rel="canonical" href="https://djnaoyaman.github.io/profile.html">' in text
 assert '<meta property="og:url" content="https://djnaoyaman.github.io/profile.html">' in text
 items=graph(home)[2]['mainEntity']['itemListElement']
-assert len(items)==14
+assert len(items)==15
 assert 'profile-works' not in text and 'href="/#worlds"' in text
 assert set(p)=={'@type','@id','name','url'}
 for banned in ['代表取締役','学歴','講演','15歳','父親','50以上','profile-career','profile-aliases']:
@@ -52,7 +52,7 @@ for fragment in ['career','azumane','music','activities','works','approach','lin
  assert 'id="'+fragment+'"' in text
 assert '<details class="author-story">' not in home
 assert len(re.sub('<[^>]+>','',re.search(r'<main.*?</main>',text,re.S)[0]))<600
-print('PASS: concise author intent, source policy, minimal Person, legacy fragments,14 WORLDs retained only on home, local assets and metadata')
+print('PASS: concise author intent, source policy, minimal Person, legacy fragments,15 WORLDs retained only on home, local assets and metadata')
 # Same-site subordinate pages must use the maison shell rather than the retired home CSS.
 for filename in ['profile.html','404.html']:
  sub=(ROOT/filename).read_text(); parsed=Page(sub)
