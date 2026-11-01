@@ -12,7 +12,7 @@ with sync_playwright() as p:
  b=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),args=['--no-sandbox'])
  c=b.new_context(reduced_motion='reduce');c.route('**/*',serve);q=c.new_page()
  (R/'screenshots').mkdir(exist_ok=True)
- for width,height in [(280,900),(390,844),(844,390),(1280,900),(1920,1080)]:
+ for width,height in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':width,'height':height});q.goto(O+'/')
   logos=q.locator('.art-link .world-logo');assert logos.count()==15
   tiles=[]
@@ -29,6 +29,7 @@ with sync_playwright() as p:
    if width in (390,1280):
     tile=Image.open(io.BytesIO(logo.locator('..').screenshot())).convert('RGB');tile.thumbnail((380,160))
     canvas=Image.new('RGB',(400,190),'#f7f6f2');canvas.paste(tile,((400-tile.width)//2,10));ImageDraw.Draw(canvas).text((16,170),f'{i+1:02d} '+logo.get_attribute('class').split()[-1],fill='#262720');tiles.append(canvas)
+  assert q.locator('#project-design-lineage .lineage-title,#project-design-lineage .lineage-subtitle').evaluate_all('els=>els.every(e=>e.scrollWidth<=e.clientWidth)'),width
   if tiles:
    sheet=Image.new('RGB',(800,190*8),'#f7f6f2')
    for i,t in enumerate(tiles):sheet.paste(t,((i%2)*400,(i//2)*190))

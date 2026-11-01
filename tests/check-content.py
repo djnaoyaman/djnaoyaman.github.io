@@ -6,7 +6,7 @@ from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
  def __init__(self,text):
-  super().__init__();self.ids=[];self.refs=[];self.meta={};self.ld=[];self.in_ld=False;self.headings=[];self.descriptions=[];self.in_desc=False;self.in_h3=False;self.feed(text)
+  super().__init__();self.ids=[];self.refs=[];self.meta={};self.ld=[];self.in_ld=False;self.headings=[];self.descriptions=[];self.in_desc=False;self.in_h3=False;self.heading_text="";self.feed(text)
  def handle_starttag(self,tag,attrs):
   a=dict(attrs)
   if 'id' in a:self.ids.append(a['id'])
@@ -15,15 +15,15 @@ class Page(HTMLParser):
    v=a.get('href') or a.get('src')
    if v:self.refs.append((tag,v))
   if tag=='script' and a.get('type')=='application/ld+json':self.in_ld=True
-  if tag=='h3' and a.get('id','').startswith('project-title-'):self.in_h3=True
+  if tag=='h3' and a.get('id','').startswith('project-title-'):self.in_h3=True;self.heading_text=''
   if tag=='p' and a.get('class')=='description':self.in_desc=True
  def handle_endtag(self,tag):
   if tag=='script':self.in_ld=False
-  if tag=='h3':self.in_h3=False
+  if tag=='h3' and self.in_h3:self.headings.append(self.heading_text);self.in_h3=False
   if tag=='p':self.in_desc=False
  def handle_data(self,data):
   if self.in_ld:self.ld.append(json.loads(data))
-  if self.in_h3:self.headings.append(data)
+  if self.in_h3:self.heading_text+=data
   if self.in_desc:self.descriptions.append(data)
 for filename in ['index.html','404.html']:
  page=Page((ROOT/filename).read_text())

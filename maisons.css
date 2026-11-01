@@ -62,6 +62,9 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .art-link .logo-bookkeeping{--world-logo-width:88px;--world-logo-height:92px}
 .art-link .logo-1minutes{--world-logo-width:150px}
 .art-link .logo-design-lineage{--world-logo-width:170px}
+#project-design-lineage .lineage-title,#project-design-lineage .lineage-subtitle{display:block;white-space:nowrap}
+#project-design-lineage .lineage-subtitle{font-size:16px;margin-top:4px}
+#project-design-lineage .lineage-separator{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .art-link .logo-omochi-touch{--world-logo-width:145px}
 @media(max-width:700px){
  .art-link{height:120px;padding:22px}
