@@ -25,13 +25,25 @@ with sync_playwright() as p:
  for width in [280,320,390,600,768,1280,1920]:
   page.set_viewport_size({'width':width,'height':900});page.wait_for_timeout(70);assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
   assert page.locator('.world-hit').evaluate_all('(els)=>els.every(e=>e.getBoundingClientRect().width>=43.5)'),width
+ # All links remain individually focusable; labels and the signature never collide.
+ for width,height in [(280,900),(390,844),(844,390),(1280,900)]:
+  page.set_viewport_size({'width':width,'height':height});page.wait_for_timeout(70)
+  for i in range(14):
+   node=page.locator('.world-node').nth(i);node.focus()
+   assert atlas.get_attribute('data-active')==str(i)
+   assert page.locator('#world-caption-name').inner_text()==items[i]['item']['name']
+  assert page.locator('.world-number, .world-signature-name, .world-signature-note').evaluate_all("""els=>{
+   const r=els.map(e=>e.getBoundingClientRect());
+   return r.every((a,i)=>r.slice(i+1).every(b=>a.right<=b.left||b.right<=a.left||a.bottom<=b.top||b.bottom<=a.top));
+  }"""), (width,height,'label collision')
  page.goto(ORIGIN+'/?theme=music#worlds');page.locator('.world-node').first.focus();page.locator('.world-node').first.press('Enter');assert page.url==items[0]['item']['url'];page.go_back();assert page.locator('.project:visible').count()==4
  reduced=browser.new_context(reduced_motion='reduce',viewport={'width':1280,'height':900});reduced.route('**/*',serve);q=reduced.new_page();q.goto(ORIGIN+'/');assert q.locator('.world-atlas').get_attribute('data-phase')=='complete';assert not q.locator('.world-replay').is_visible();assert q.locator('.world-signature').evaluate('(e)=>getComputedStyle(e).opacity')=='1'
  (ROOT/'screenshots').mkdir(exist_ok=True)
  q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-desktop.png'))
  q.set_viewport_size({'width':390,'height':844});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-mobile.png'))
+ q.set_viewport_size({'width':844,'height':390});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-landscape.png'))
  q.locator('.world-directory summary').click();assert q.locator('.world-directory li a').evaluate_all('(els)=>els.every(e=>e.getBoundingClientRect().height>=44)')
- nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',serve);n=nojs.new_page();n.goto(ORIGIN+'/');assert n.locator('.world-node').count()==14;assert not n.locator('.world-replay').is_visible();n.locator('.world-directory summary').click();assert n.locator('.world-directory li a:visible').count()==14
+ nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',serve);n=nojs.new_page();n.goto(ORIGIN+'/');assert n.locator('.world-node').count()==14;n.set_viewport_size({'width':390,'height':844});n.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-nojs-mobile.png')); assert not n.locator('.world-replay').is_visible();n.locator('.world-directory summary').click();assert n.locator('.world-directory li a:visible').count()==14
  assert not errors,errors
  browser.close()
 print('PASS: 14 real WORLD links, sequence, replay, focus, offscreen/visibility pause, 7 sizes, touch targets, navigation/back, reduced motion, no-JS')
