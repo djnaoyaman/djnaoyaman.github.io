@@ -80,7 +80,10 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .world-atlas .world-map.world-portrait{max-width:560px;max-height:none;margin:0 auto}
 .world-portrait .world-point{fill:#282823;stroke:#eeece5;stroke-width:1.7}
 .world-atlas .world-portrait .world-number{font:8px Arial,sans-serif;letter-spacing:normal;fill:#62675d}
-.world-portrait .world-edge{stroke:var(--edge-color);stroke-width:var(--edge-width);stroke-opacity:1;opacity:1;vector-effect:none}
+.world-portrait .world-edge{stroke:#a5a89c;stroke-width:.82;stroke-opacity:1;opacity:1;vector-effect:none}
+.world-portrait .world-edge.wire-outline{stroke:#92958a;stroke-width:1.05}
+.world-portrait .world-edge.wire-orbit{stroke:#858a7d;stroke-width:1}
+.world-portrait .world-edge.wire-mouth{stroke:#969b8d;stroke-width:.85}
 .world-portrait .world-edge.is-connected{stroke:#62675d}
 .world-atlas .world-portrait .world-signature-name{font:22px Georgia,serif;letter-spacing:1.5px;fill:#282823;stroke:none;stroke-width:1}
 .world-atlas .world-portrait .world-signature-note{font:6.5px Arial,sans-serif;letter-spacing:1.1px;fill:#62675d;stroke:none;stroke-width:1}
