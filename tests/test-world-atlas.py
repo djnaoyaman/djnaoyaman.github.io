@@ -15,6 +15,12 @@ with sync_playwright() as p:
  assert page.locator('.world-node').count()==14
  assert [ORIGIN+x for x in page.locator('.world-node').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')]==[x['item']['url'] for x in items]
  expect(atlas).to_have_attribute('data-phase','complete',timeout=15000)
+ (ROOT/'screenshots').mkdir(exist_ok=True)
+ atlas.screenshot(path=str(ROOT/'screenshots/worlds-motion-complete.png'))
+ page.locator('.world-node').first.focus()
+ for i in range(14):
+  assert page.locator('.world-node').nth(i).evaluate('(e)=>e===document.activeElement')
+  if i<13:page.keyboard.press('Tab')
  first=page.locator('.world-node').first;first.focus();assert page.locator('#world-caption-name').inner_text()==items[0]['item']['name'];assert page.locator('.world-edge.is-connected').count()>0
  page.locator('.world-replay').click();assert atlas.get_attribute('data-phase')=='building'
  page.locator('footer').scroll_into_view_if_needed();expect(atlas).to_have_class(re.compile(r'.*is-paused.*'))
