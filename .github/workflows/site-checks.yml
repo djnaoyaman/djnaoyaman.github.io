@@ -39,6 +39,7 @@ jobs:
       - run: python3 tests/test-details.py
 
       - run: python3 tests/test-world-atlas.py
+      - run: python3 tests/test-card-logos.py
       - run: AXE_PATH=node_modules/axe-core/axe.min.js python3 tests/test-mina.py
       - if: ${{ !cancelled() }}
         run: python3 tools/capture-screenshots.py
