@@ -32,6 +32,12 @@ with sync_playwright() as p:
  for width in [280,320,390,600,768,1280,1920]:
   page.set_viewport_size({'width':width,'height':900});page.wait_for_timeout(70);assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
   assert page.locator('.world-hit').evaluate_all('(els)=>els.every(e=>e.getBoundingClientRect().width>=43.5)'),width
+ # Every visible point resolves to its own link despite responsive hit-area growth.
+ for width,height in [(280,900),(390,844),(844,390),(1280,900)]:
+  page.set_viewport_size({'width':width,'height':height});page.wait_for_timeout(70)
+  for i in range(14):
+   point=page.locator('.world-point').nth(i);point.scroll_into_view_if_needed()
+   assert point.evaluate('e=>{const r=e.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2).closest(".world-node")===e.closest(".world-node")}'),(width,i,'occluded link')
  # All links remain individually focusable; labels and the signature never collide.
  for width,height in [(280,900),(390,844),(844,390),(1280,900)]:
   page.set_viewport_size({'width':width,'height':height});page.wait_for_timeout(70)
@@ -47,6 +53,17 @@ with sync_playwright() as p:
  reduced=browser.new_context(reduced_motion='reduce',viewport={'width':1280,'height':900});reduced.route('**/*',serve);q=reduced.new_page();q.goto(ORIGIN+'/');assert q.locator('.world-atlas').get_attribute('data-phase')=='complete';assert not q.locator('.world-replay').is_visible();assert q.locator('.world-signature').evaluate('(e)=>getComputedStyle(e).opacity')=='1'
  (ROOT/'screenshots').mkdir(exist_ok=True)
  q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-desktop.png'))
+ q.locator('.world-map').screenshot(path=str(ROOT/'screenshots/worlds-approved-integrated.png'))
+ reference=browser.new_context(reduced_motion='reduce',viewport={'width':560,'height':800})
+ ref=reference.new_page();ref.set_content('<style>body{margin:0}svg{display:block;width:560px;height:auto}</style>'+(ROOT/'assets/world-portrait-approved.svg').read_text())
+ ref.locator('svg').screenshot(path=str(ROOT/'screenshots/worlds-approved-reference.png'))
+ visual='els=>els.map(e=>{const s=getComputedStyle(e);return [s.fill,s.stroke,s.strokeWidth,s.strokeOpacity,s.opacity,s.fontFamily,s.fontSize,s.letterSpacing,s.textAnchor]})'
+ for rs,cs in [('path.portrait-plane','.portrait-plane'),('svg>a>circle','.world-point'),('svg>a>text','.world-number'),('svg>text:nth-last-child(2)','.world-signature-name'),('svg>text:last-child','.world-signature-note')]:
+  # Typography is relevant only to text; other shapes inherit unrelated page defaults.
+  a=ref.locator(rs).evaluate_all(visual);b=q.locator(cs).evaluate_all(visual)
+  if 'text' not in rs:a=[x[:5] for x in a];b=[x[:5] for x in b]
+  assert a==b,(rs,a[:1],b[:1],'approved presentation changed')
+ reference.close()
  q.set_viewport_size({'width':390,'height':844});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-mobile.png'))
  q.set_viewport_size({'width':844,'height':390});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-landscape.png'))
  q.locator('.world-directory summary').click();assert q.locator('.world-directory li a').evaluate_all('(els)=>els.every(e=>e.getBoundingClientRect().height>=44)')
