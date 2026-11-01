@@ -7,6 +7,7 @@ assert hashlib.sha256(b).hexdigest()=='db91d21cc1014ce306e7964f15c3c30e3a02c0951
 a=E.fromstring(b)
 h=(R/'index.html').read_text();c=E.fromstring(re.search(r'<svg[^>]*class="world-map world-portrait".*?</svg>',h,re.S)[0])
 assert a.get('viewBox')==c.get('viewBox')=='260 -105 600 735'
+assert a.get('width')==c.get('width')=='720' and a.get('height')==c.get('height')=='880'
 for tag,attrs in [('path',['d','stroke','stroke-width','data-from','data-to']),('rect',['x','y','width','height','fill'])]:
  x=a.findall('.//s:'+tag,ns);y=c.findall('.//s:'+tag,ns)
  assert len(x)==len(y),(tag,len(x),len(y))
