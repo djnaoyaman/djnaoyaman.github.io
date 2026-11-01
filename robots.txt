@@ -16,3 +16,4 @@ Sitemap: https://djnaoyaman.github.io/sakanamushi/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/sanreikotaiyoku/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/suburbia-classica/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/youkai/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/design-lineage/sitemap.xml

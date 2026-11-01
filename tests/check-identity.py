@@ -16,7 +16,7 @@ assert 'ずーっと、あれも、これも。' in home and 'それぞれに名
 assert all('id="'+x+'"' in home for x in ['worlds','maisons','projects'])
 m=json.loads((r/'site.webmanifest').read_text());assert m['name']==m['short_name']=='MIYAZAKINAOYA'
 assert m['shortcuts'][0]['url']=='/#worlds'
-assert hashlib.sha256((r/'robots.txt').read_bytes()).hexdigest()=='bbd38d8c18ce142a0d18297339a0d5649bf8bb7e3581702a949c242167ae81d8'
+assert hashlib.sha256((r/'robots.txt').read_bytes()).hexdigest()=='0774290ac371fab4e63dd73309a471e0d177d7933be0c69e03a6791690986a20'
 print('PASS: three-page MIYAZAKINAOYA/MINA identity, exact copy, dedicated social cards, manifest, aliases, unchanged independent art and robots')
 
 import hashlib
