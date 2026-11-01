@@ -71,3 +71,6 @@ for filename in ['profile.html','404.html']:
  assert 'src="/site.js' not in sub
 assert '音楽も、言葉も、日々の発見も。' in text
 print('PASS: profile/404 shared maison shell, navigation, palette, tagline, anchors and local CSS')
+
+assert 'href="/profile.html">作者について ↗</a>' in home
+assert 'つくるときのこと' not in home
