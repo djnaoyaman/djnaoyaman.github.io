@@ -47,24 +47,26 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 @media(max-width:380px){.wordmark{font-size:17px;letter-spacing:.055em;gap:8px}.wordmark .brand-symbol{width:24px;height:24px}}
 @media(max-width:700px){.world-atlas-heading{display:block}.world-atlas-heading h2{white-space:normal;font-size:clamp(24px,6vw,32px)}.world-atlas-story{max-width:none;margin-top:14px;font-size:11px}}
 
-/* Official WORLD logos: one quiet frame; preserve each site's original identity. */
-.art-link .world-logo{display:block;width:var(--world-logo-width,260px);max-width:78%;height:auto;max-height:98px;object-fit:contain;filter:none;transform:none}
-.art-link .logo-premiumcuts{--world-logo-width:230px;max-height:112px}
-.art-link .logo-suburbia-classica{--world-logo-width:220px;max-height:104px}
-.art-link .logo-youkai,.art-link .logo-sakanamushi,.art-link .logo-sanreikotaiyoku{--world-logo-width:310px;max-width:84%}
-.art-link .logo-bookkeeping{--world-logo-width:76px;max-height:76px}
-.art-link .logo-omochi-touch{--world-logo-width:170px;max-height:100px}
-
-@media(max-width:700px){.art-link .world-logo{max-height:90px}.art-link .logo-bookkeeping{max-height:68px;width:68px}}
-@media print{.art-link .world-logo{max-height:70px}}
-
-/* The approved circular Youkai seal needs room for its full title and clear space. */
-#project-07 .art-link{height:200px;padding:20px}
-#project-07 .art-link .logo-youkai{width:160px;max-width:80%;height:160px;max-height:160px;object-fit:contain}
-
-/* Approved IL MASTRO lockup: preserve its detailed original art on the neutral frame. */
-#project-11 .art-link{height:200px;padding:20px}
-#project-11 .art-link .logo-bookkeeping{width:148px;max-width:80%;height:160px;max-height:160px;object-fit:contain}
+/* Quiet, optically balanced logo cards. Originals remain untouched. */
+.art-link{height:140px;padding:24px}
+.art-link .world-logo{display:block;width:var(--world-logo-width,190px);max-width:76%;height:auto;max-height:var(--world-logo-height,80px);object-fit:contain;filter:none;transform:none}
+.art-link .logo-premiumcuts{--world-logo-width:180px}
+.art-link .logo-earthnumber{--world-logo-width:170px}
+.art-link .logo-chems{--world-logo-width:185px}
+.art-link .logo-suburbia-classica{--world-logo-width:150px}
+.art-link .logo-kuranpo{--world-logo-width:185px}
+.art-link .logo-youkai{--world-logo-width:88px;--world-logo-height:88px}
+.art-link .logo-sakanamushi{--world-logo-width:245px;max-width:82%}
+.art-link .logo-sanreikotaiyoku{--world-logo-width:215px}
+.art-link .logo-ppp{--world-logo-width:230px;max-width:82%}
+.art-link .logo-bookkeeping{--world-logo-width:88px;--world-logo-height:92px}
+.art-link .logo-1minutes{--world-logo-width:150px}
+.art-link .logo-omochi-touch{--world-logo-width:145px}
+@media(max-width:700px){
+ .art-link{height:120px;padding:22px}
+ .art-link .world-logo{width:calc(var(--world-logo-width,190px)*.88);max-height:calc(var(--world-logo-height,80px)*.88)}
+}
+@media print{.art-link{height:100px;padding:15px}.art-link .world-logo{max-height:70px}}
 
 /* The small anatomical seams keep the faceted three-quarter face readable. */
 .world-edge.world-feature{stroke:#62675d;stroke-width:1.15;opacity:.7}
