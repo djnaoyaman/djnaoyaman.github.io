@@ -65,3 +65,12 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 /* Approved IL MASTRO lockup: preserve its detailed original art on the neutral frame. */
 #project-11 .art-link{height:200px;padding:20px}
 #project-11 .art-link .logo-bookkeeping{width:148px;max-width:80%;height:160px;max-height:160px;object-fit:contain}
+
+/* The small anatomical seams keep the faceted three-quarter face readable. */
+.world-edge.world-feature{stroke:#62675d;stroke-width:1.15;opacity:.7}
+/* The no-script fallback uses the same portrait, not a compressed wide mesh. */
+.world-atlas:not([data-layout]) .world-map{max-height:600px}
+.world-atlas:not([data-layout]) .world-signature-name{font-size:19px;letter-spacing:.035em}
+.world-atlas:not([data-layout]) .world-signature-note{font-size:5.6px;letter-spacing:.08em}
+/* Finished edges are continuous at every responsive SVG scale. */
+.world-atlas[data-phase=complete] .world-edge{stroke-dasharray:none}
