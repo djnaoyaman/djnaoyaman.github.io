@@ -39,14 +39,14 @@ with sync_playwright() as p:
  context=browser.new_context(viewport={'width':390,'height':844});context.route('**/*',serve)
  page=context.new_page();page.goto(ORIGIN+'/')
  assert not any(path.endswith('og-image.png') or path.startswith('/screenshots/') for path in requests),'Unnecessary preview preload'
- # Keep the original 90 KB non-artwork budget. The explicitly approved 231-plane
- # portrait has its own fixed digest/120 KB budget; do not simplify it to fit the old mesh.
+ # Keep the non-artwork budget and tighten the old tonal-portrait allowance.
+ # The approved wireframe is small and digest-locked, never simplified for payload.
  core=[(ROOT/name).read_bytes() for name in ['index.html','maisons.css','site.js','world-atlas.js']]
  portrait=re.search(rb'<svg[^>]*class="world-map world-portrait".*?</svg>',core[0],re.S)[0]
  assert sum(map(len,core))-len(portrait)<90000
- assert (ROOT/'assets/world-portrait-approved.svg').stat().st_size<120000
- assert sum(map(len,core))<220000
- assert sum(len(gzip.compress(b,mtime=0)) for b in core)<65000
+ assert (ROOT/'assets/world-portrait-approved.svg').stat().st_size<16000
+ assert sum(map(len,core))<100000
+ assert sum(len(gzip.compress(b,mtime=0)) for b in core)<35000
  # Inline scripts are really blocked by the shipped policy.
  page.evaluate("()=>{let s=document.createElement('script');s.textContent='window.untrustedRan=true';document.head.append(s)}")
  assert page.evaluate('window.untrustedRan') is None
