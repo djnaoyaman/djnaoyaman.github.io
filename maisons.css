@@ -75,15 +75,13 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 /* Finished edges are continuous at every responsive SVG scale. */
 .world-atlas[data-phase=complete] .world-edge{stroke-dasharray:none}
 
-/* The approved portrait is immutable: these values match its SVG presentation. */
+/* Exact user-approved wireframe; no photo-derived shading or filled face planes. */
 .world-atlas{background:#eeece5}
 .world-atlas .world-map.world-portrait{max-width:560px;max-height:none;margin:0 auto}
-.world-portrait .world-point{fill:#282823;stroke:#eeece5;stroke-width:3}
-.world-atlas .world-portrait .world-number{font:11px Arial,sans-serif;letter-spacing:normal;fill:#62675d}
-.world-portrait .world-edge{stroke:#8c8e83;stroke-width:.8;stroke-opacity:.28;opacity:1;vector-effect:none}
-.world-portrait .world-edge.portrait-outline{stroke:#96978d;stroke-width:.7;stroke-opacity:1}
-.world-portrait .world-edge.is-connected{stroke:#62675d;stroke-opacity:.65}
-.world-atlas .world-portrait .world-signature-name{font:29px Georgia,serif;letter-spacing:2px;fill:#282823;stroke:none;stroke-width:1}
-.world-atlas .world-portrait .world-signature-note{font:8px Arial,sans-serif;letter-spacing:1.4px;fill:#62675d;stroke:none;stroke-width:1}
-.atlas-animate .portrait-plane{animation:worldPlane 2s ease 2.2s both}
-@media(prefers-reduced-motion:reduce){.atlas-animate .portrait-plane{animation:none!important}}
+.world-portrait .world-point{fill:#282823;stroke:#eeece5;stroke-width:1.7}
+.world-atlas .world-portrait .world-number{font:8px Arial,sans-serif;letter-spacing:normal;fill:#62675d}
+.world-portrait .world-edge{stroke:var(--edge-color);stroke-width:var(--edge-width);stroke-opacity:1;opacity:1;vector-effect:none}
+.world-portrait .world-edge.is-connected{stroke:#62675d}
+.world-atlas .world-portrait .world-signature-name{font:22px Georgia,serif;letter-spacing:1.5px;fill:#282823;stroke:none;stroke-width:1}
+.world-atlas .world-portrait .world-signature-note{font:6.5px Arial,sans-serif;letter-spacing:1.1px;fill:#62675d;stroke:none;stroke-width:1}
+.atlas-animate .world-support-points{animation:worldPoint 1.2s ease both}

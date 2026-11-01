@@ -59,7 +59,7 @@ with sync_playwright() as p:
  ref=reference.new_page();ref.set_content('<style>body{margin:0}svg{display:block;width:560px;height:auto}</style>'+(ROOT/'assets/world-portrait-approved.svg').read_text())
  ref.locator('svg').screenshot(path=str(ROOT/'screenshots/worlds-approved-reference.png'))
  visual='els=>els.map(e=>{const s=getComputedStyle(e);return [s.fill,s.stroke,s.strokeWidth,s.strokeOpacity,s.opacity,s.fontFamily,s.fontSize,s.letterSpacing,s.textAnchor]})'
- for rs,cs in [('path.portrait-plane','.portrait-plane'),('svg>a>circle','.world-point'),('svg>a>text','.world-number'),('svg>text:nth-last-child(2)','.world-signature-name'),('svg>text:last-child','.world-signature-note')]:
+ for rs,cs in [('svg>g>path','.world-edge'),('svg>g>circle','.world-support-points circle'),('svg>a>circle','.world-point'),('svg>a>text','.world-number'),('svg>text:nth-last-child(2)','.world-signature-name'),('svg>text:last-child','.world-signature-note')]:
   # Typography is relevant only to text; other shapes inherit unrelated page defaults.
   a=ref.locator(rs).evaluate_all(visual);b=q.locator(cs).evaluate_all(visual)
   if 'text' not in rs:a=[x[:5] for x in a];b=[x[:5] for x in b]
