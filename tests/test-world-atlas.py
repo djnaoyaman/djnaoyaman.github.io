@@ -32,6 +32,8 @@ with sync_playwright() as p:
  page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'))")
  for width in [280,320,390,600,768,1280,1920]:
   page.set_viewport_size({'width':width,'height':900});page.wait_for_timeout(70);assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
+  # Bounding circle is 48px; nearest-point clipping reduces close targets.
+  # All centers and the equivalent full-size directory links are checked below.
   assert page.locator('.world-hit').evaluate_all('(els)=>els.every(e=>e.getBoundingClientRect().width>=43.5)'),width
  # Every visible point resolves to its own link despite responsive hit-area growth.
  for width,height in [(280,900),(390,844),(844,390),(1280,900)]:
@@ -59,7 +61,7 @@ with sync_playwright() as p:
  ref=reference.new_page();ref.set_content('<style>body{margin:0}svg{display:block;width:560px;height:auto}</style>'+(ROOT/'assets/world-portrait-approved.svg').read_text())
  ref.locator('svg').screenshot(path=str(ROOT/'screenshots/worlds-approved-reference.png'))
  visual='els=>els.map(e=>{const s=getComputedStyle(e);return [s.fill,s.stroke,s.strokeWidth,s.strokeOpacity,s.opacity,s.fontFamily,s.fontSize,s.letterSpacing,s.textAnchor]})'
- for rs,cs in [('path.portrait-plane','.portrait-plane'),('svg>a>circle','.world-point'),('svg>a>text','.world-number'),('svg>text:nth-last-child(2)','.world-signature-name'),('svg>text:last-child','.world-signature-note')]:
+ for rs,cs in [('svg>g>path','.world-edge'),('svg>g>circle','.world-support-points circle'),('svg>a>circle','.world-point'),('svg>a>text','.world-number'),('svg>text:nth-last-child(2)','.world-signature-name'),('svg>text:last-child','.world-signature-note')]:
   # Typography is relevant only to text; other shapes inherit unrelated page defaults.
   a=ref.locator(rs).evaluate_all(visual);b=q.locator(cs).evaluate_all(visual)
   if 'text' not in rs:a=[x[:5] for x in a];b=[x[:5] for x in b]
@@ -85,4 +87,4 @@ with sync_playwright() as p:
  nojs=browser.new_context(java_script_enabled=False);nojs.route('**/*',serve);n=nojs.new_page();n.goto(ORIGIN+'/');assert n.locator('.world-node').count()==14;n.set_viewport_size({'width':390,'height':844});n.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-nojs-mobile.png')); assert not n.locator('.world-replay').is_visible();n.locator('.world-directory summary').click();assert n.locator('.world-directory li a:visible').count()==14
  assert not errors,errors
  browser.close()
-print('PASS: 14 real WORLD links, sequence, replay, focus, offscreen/visibility pause, 7 sizes, touch targets, navigation/back, reduced motion, no-JS')
+print('PASS: 14 real WORLD links, sequence, replay, focus, offscreen/visibility pause, 7 sizes, 48px candidate circles/nearest-point cells and44px directory links, navigation/back, reduced motion, no-JS')
