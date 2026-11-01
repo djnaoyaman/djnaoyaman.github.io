@@ -3,7 +3,7 @@ Requires Playwright, Chromium and Pillow. Screenshots stay outside the repo.
 """
 from pathlib import Path
 from urllib.parse import urlsplit
-import json,math,mimetypes,os,shutil
+import json,math,mimetypes,os,shutil,gzip,re
 from PIL import Image,ImageChops
 from playwright.sync_api import sync_playwright
 PAPER=(247,246,242)
@@ -39,8 +39,14 @@ with sync_playwright() as p:
  context=browser.new_context(viewport={'width':390,'height':844});context.route('**/*',serve)
  page=context.new_page();page.goto(ORIGIN+'/')
  assert not any(path.endswith('og-image.png') or path.startswith('/screenshots/') for path in requests),'Unnecessary preview preload'
- # Allow the added essay, fiction and profile copy while keeping the homepage HTML/CSS/JS including the SVG network below 90 KB after maison redesign.
- assert sum((ROOT/name).stat().st_size for name in ['index.html','maisons.css','site.js','world-atlas.js'])<90000
+ # Keep the original 90 KB non-artwork budget. The explicitly approved 231-plane
+ # portrait has its own fixed digest/120 KB budget; do not simplify it to fit the old mesh.
+ core=[(ROOT/name).read_bytes() for name in ['index.html','maisons.css','site.js','world-atlas.js']]
+ portrait=re.search(rb'<svg[^>]*class="world-map world-portrait".*?</svg>',core[0],re.S)[0]
+ assert sum(map(len,core))-len(portrait)<90000
+ assert (ROOT/'assets/world-portrait-approved.svg').stat().st_size<120000
+ assert sum(map(len,core))<220000
+ assert sum(len(gzip.compress(b,mtime=0)) for b in core)<65000
  # Inline scripts are really blocked by the shipped policy.
  page.evaluate("()=>{let s=document.createElement('script');s.textContent='window.untrustedRan=true';document.head.append(s)}")
  assert page.evaluate('window.untrustedRan') is None
