@@ -72,3 +72,5 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .world-atlas:not([data-layout]) .world-map{max-height:600px}
 .world-atlas:not([data-layout]) .world-signature-name{font-size:19px;letter-spacing:.035em}
 .world-atlas:not([data-layout]) .world-signature-note{font-size:5.6px;letter-spacing:.08em}
+/* Finished edges are continuous at every responsive SVG scale. */
+.world-atlas[data-phase=complete] .world-edge{stroke-dasharray:none}

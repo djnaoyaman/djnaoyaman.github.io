@@ -15,6 +15,7 @@ with sync_playwright() as p:
  assert page.locator('.world-node').count()==14
  assert [ORIGIN+x for x in page.locator('.world-node').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')]==[x['item']['url'] for x in items]
  expect(atlas).to_have_attribute('data-phase','complete',timeout=15000)
+ assert page.locator('.world-edge').evaluate_all('(els)=>els.every(e=>getComputedStyle(e).strokeDasharray==="none")')
  (ROOT/'screenshots').mkdir(exist_ok=True)
  atlas.screenshot(path=str(ROOT/'screenshots/worlds-motion-complete.png'))
  page.locator('.world-node').first.focus()
