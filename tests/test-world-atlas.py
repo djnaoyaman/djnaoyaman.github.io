@@ -3,6 +3,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 import json,re,mimetypes,os,shutil
 from playwright.sync_api import sync_playwright,expect
+from PIL import Image,ImageChops
 ROOT=Path(__file__).resolve().parents[1];ORIGIN='https://djnaoyaman.github.io'
 def serve(route):
  path=ROOT/(urlsplit(route.request.url).path.lstrip('/') or 'index.html')
@@ -63,6 +64,20 @@ with sync_playwright() as p:
   a=ref.locator(rs).evaluate_all(visual);b=q.locator(cs).evaluate_all(visual)
   if 'text' not in rs:a=[x[:5] for x in a];b=[x[:5] for x in b]
   assert a==b,(rs,a[:1],b[:1],'approved presentation changed')
+ # Normalize only the screenshot origin to avoid fractional page-position crops.
+ # Serialize actual computed presentation; do not redraw/simplify any geometry.
+ normalized=q.locator('.world-map').evaluate("""svg=>{
+  const clone=svg.cloneNode(true), source=[svg,...svg.querySelectorAll('*')], target=[clone,...clone.querySelectorAll('*')];
+  const props=['fill','fill-opacity','fill-rule','stroke','stroke-width','stroke-opacity','stroke-dasharray','stroke-dashoffset','vector-effect','font-family','font-size','font-weight','font-style','letter-spacing','text-anchor','paint-order','opacity','visibility'];
+  source.forEach((e,i)=>{const s=getComputedStyle(e);props.forEach(k=>target[i].style.setProperty(k,s.getPropertyValue(k)))});
+  clone.style.cssText+=';display:block;width:560px;height:auto;margin:0;max-width:none';
+  return clone.outerHTML;
+ }""")
+ aligned=reference.new_page();aligned.set_content('<style>body{margin:0}</style>'+normalized)
+ aligned.locator('svg').screenshot(path=str(ROOT/'screenshots/worlds-approved-integrated-aligned.png'))
+ a=Image.open(ROOT/'screenshots/worlds-approved-reference.png').convert('RGB')
+ b=Image.open(ROOT/'screenshots/worlds-approved-integrated-aligned.png').convert('RGB')
+ assert a.size==b.size and ImageChops.difference(a,b).getbbox() is None,'approved portrait pixels changed'
  reference.close()
  q.set_viewport_size({'width':390,'height':844});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-mobile.png'))
  q.set_viewport_size({'width':844,'height':390});q.locator('.world-atlas').screenshot(path=str(ROOT/'screenshots/worlds-landscape.png'))
