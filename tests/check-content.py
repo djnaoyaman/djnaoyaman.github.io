@@ -46,6 +46,8 @@ for filename in ['index.html','404.html']:
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
   assert [item['position'] for item in items]==list(range(1,len(items)+1))
+  assert f'{len(items)} WORLDS' in (ROOT/'index.html').read_text()
+  assert f'{len(items)}のWebサイト' in page.meta['description']
   assert f'content:"全{len(items)}サイト"' in (ROOT/'maisons.css').read_text()
   for item in items:
    for filename in ['llms.txt','llms-full.txt']:

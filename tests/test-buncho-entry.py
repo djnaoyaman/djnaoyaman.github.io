@@ -34,6 +34,7 @@ with sync_playwright() as p:
  for w,h in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':w,'height':h});q.goto(O+'/',wait_until='networkidle');card=q.locator('#project-buncho-ureshi');card.scroll_into_view_if_needed();logo=card.locator('img');logo.evaluate('e=>e.decode()')
   assert q.locator('.maison.project').count()==16
+  expect(q.locator('#world-caption-category')).to_have_text('16 WORLDS')
   assert card.locator('h3').inner_text()==NAME and logo.get_attribute('alt')==NAME
   assert logo.get_attribute('src')==LOGO
   assert logo.evaluate('e=>[e.naturalWidth,e.naturalHeight]')==[1120,645]
