@@ -62,7 +62,7 @@ a:focus-visible,button:focus-visible{outline-color:var(--ink)}
 .art-link .logo-bookkeeping{--world-logo-width:88px;--world-logo-height:92px}
 .art-link .logo-1minutes{--world-logo-width:150px}
 .art-link .logo-design-lineage{--world-logo-width:170px}
-.art-link .logo-buncho-ureshi{--world-logo-width:180px;mix-blend-mode:multiply;filter:brightness(1.035)}
+.art-link .logo-buncho-ureshi{--world-logo-width:180px;mix-blend-mode:normal;filter:none}
 #project-buncho-ureshi .art-link{isolation:isolate}
 @media(forced-colors:active){.art-link .logo-buncho-ureshi{mix-blend-mode:normal;filter:none}}
 #project-design-lineage .lineage-title,#project-design-lineage .lineage-subtitle{display:block;white-space:nowrap}
