@@ -5,8 +5,18 @@ import hashlib,json,mimetypes,os,shutil,time,urllib.request,io
 from PIL import Image
 from playwright.sync_api import sync_playwright,expect
 R=Path(__file__).resolve().parents[1];O='https://djnaoyaman.github.io';PUBLIC=os.environ.get('PUBLIC_QA')=='1';NAME='文鳥♬文鳥♬文鳥って嬉しいな♪'
-LOGO='/assets/world-logos/buncho-ureshi-refined04.webp';TARGET=O+'/buncho-ureshi/'
+LOGO='/assets/world-logos/buncho-ureshi-refined04-transparent.webp';TARGET=O+'/buncho-ureshi/'
 report={'mode':'public' if PUBLIC else 'candidate','cases':[],'external_requests_blocked':[]}
+original=Image.open(R/'assets/world-logos/buncho-ureshi-refined04.webp').convert('RGB')
+transparent=Image.open(R/LOGO.lstrip('/')).convert('RGBA')
+assert transparent.size==original.size==(1120,645)
+assert transparent.convert('RGB').tobytes()==original.tobytes(),'Original logo RGB must remain exact'
+alpha=transparent.getchannel('A');assert alpha.getextrema()==(0,255)
+assert sum(value==0 for value in alpha.getdata())/(1120*645)>.75
+assert transparent.getpixel((790,100))[3]==255,'White bird must remain opaque'
+assert all(v==0 for box in [(0,0,1120,1),(0,644,1120,645),(0,0,1,645),(1119,0,1120,645)] for v in alpha.crop(box).getdata())
+report['alpha_and_original_rgb']='pass'
+
 def read(url):
  with urllib.request.urlopen(urllib.request.Request(url,headers={'Cache-Control':'no-cache'}),timeout=25) as response:return response.status,response.read()
 if PUBLIC:
@@ -17,7 +27,7 @@ if PUBLIC:
   if status==200 and body==expected:break
   assert time.monotonic()<deadline,'Exact main HTML not deployed within 180 seconds'
   time.sleep(8)
- for url,expected in [(O+LOGO,(R/LOGO.lstrip('/')).read_bytes()),(TARGET+'brand/wordmark-04.webp',(R/LOGO.lstrip('/')).read_bytes())]+[(O+'/'+f,(R/f).read_bytes()) for f in ['maisons.css','world-atlas.js']]:
+ for url,expected in [(O+LOGO,(R/LOGO.lstrip('/')).read_bytes()),(TARGET+'brand/wordmark-04-transparent.webp',(R/LOGO.lstrip('/')).read_bytes())]+[(O+'/'+f,(R/f).read_bytes()) for f in ['maisons.css','world-atlas.js']]:
   status,body=read(url);assert status==200 and body==expected,url
  report['public_index_sha256']=hashlib.sha256((R/'index.html').read_bytes()).hexdigest();report['logo_sha256']=hashlib.sha256((R/LOGO.lstrip('/')).read_bytes()).hexdigest();report['public_assets_exact']=['Buncho logo','source-site logo','maisons.css','world-atlas.js']
 def route(request):
@@ -40,7 +50,8 @@ with sync_playwright() as p:
   assert logo.get_attribute('src')==LOGO
   frame=card.locator('.art-link');image=Image.open(io.BytesIO(frame.screenshot(scale='css'))).convert('RGB')
   pixels=logo.evaluate('''e=>{const r=e.getBoundingClientRect(),p=e.parentElement.getBoundingClientRect(),s=getComputedStyle(e);return {blend:s.mixBlendMode,background:getComputedStyle(e.parentElement).backgroundColor,points:[[r.x-p.x+2,r.y-p.y+2],[r.right-p.x-3,r.y-p.y+2],[r.x-p.x+2,r.bottom-p.y-3],[r.right-p.x-3,r.bottom-p.y-3]]}}''')
-  assert pixels['blend']=='multiply'
+  assert pixels['blend']=='normal'
+  assert logo.evaluate('e=>getComputedStyle(e).filter')=='none'
   expected=[int(x.strip()) for x in pixels['background'].removeprefix('rgb(').removesuffix(')').split(',')]
   for x,y in pixels['points']:
    actual=image.getpixel((int(x),int(y)));assert all(abs(a-b)<=2 for a,b in zip(actual,expected)),(w,actual,expected)

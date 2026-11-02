@@ -180,11 +180,10 @@
       "name": "文鳥♬文鳥♬文鳥って嬉しいな♪",
       "source_url": "https://djnaoyaman.github.io/buncho-ureshi/",
       "checked_at": "2026-11-02",
-      "file": "assets/world-logos/buncho-ureshi-refined04.webp",
-      "sha256": "8d2eb2e7b0a8f8b27c9632d1f5f00dc135f6acb42981d06d2512890afc4c2f2d",
-      "method": "Unmodified production wordmark-04.webp from the owner-requested refined-bird 04 logo. Same pixels and bytes as the published Buncho wordmark, not an Open Graph crop or a redraw.",
-      "asset_url": "https://djnaoyaman.github.io/buncho-ureshi/brand/wordmark-04.webp",
-      "source_commit": "ec8832a5c4e5aaad37f69287f0d42d6c21dd3789",
+      "file": "assets/world-logos/buncho-ureshi-refined04-transparent.webp",
+      "sha256": "76358acafbdb86ee214823d9778b2babef812caf6de9034a9c1f9794a62c0fec",
+      "method": "Same lossless alpha-only derivative as Buncho: original decoded RGB and enclosed white bird preserved; paper background transparent. No redraw or CSS color adjustment.",
+      "asset_url": "https://djnaoyaman.github.io/buncho-ureshi/brand/wordmark-04-transparent.webp",
       "master_sha256": "543193b35d04c436e1370303b5d64a26de63cf282bc6fddc2dc5a52011c5a82a",
       "format": "Raster WebP derivative of the generated refined 04 master; not a pure-vector logo."
     }
