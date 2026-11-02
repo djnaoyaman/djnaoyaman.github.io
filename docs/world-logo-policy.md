@@ -1,6 +1,6 @@
 # WORLD list brand marks
 
-The14 WORLD cards show each source site's actual brand mark, not Open Graph artwork or cropped social cards. `world-logos.json` records each source, method and output hash.
+The 16 WORLD cards show each source site's actual brand mark, not Open Graph artwork or cropped social cards. `world-logos.json` records each source, method and output hash.
 
 - Unmodified official SVGs: EXPRESSION,酸冷交代浴,OMOCHI TOUCH.
 - くらんぽ: unmodified owner-approved horizontal logo master (くら119%, bold-circle 鎌ぽ, no upper-left seal), identical to source-site PR12. Source-site publication was pending at integration; the square Apple icon is not used here.
@@ -19,3 +19,7 @@ The parent portal's MINA identity, Open Graph/Twitter cards,14 destination URLs,
 - IL MASTRO (existing /bookkeeping/ URL retained): unchanged selected09 production PNG lockup, decorated merchant artwork with P052 Italic wordmark. Transparent exterior, original white illustration interiors retained on a light frame. The lockup master combines raster illustration and vector lettering; no claim of fully vector artwork. Source-site rollout pending at integration.
 
 - 掌蹠膿疱症.com: unchanged owner-approved refined SVG (Library v3, 2026-11-01), with each kana reading aligned under its corresponding kanji and no lower .com. The earlier source export remains archived; only this WORLD card switches to the versioned master after the source-site brand is published.
+
+## 2026-11-02 addition
+
+The 16th WORLD is 文鳥♬文鳥♬文鳥って嬉しいな♪. Its refined 04 production WebP is byte-identical to the published source site at ec8832a5. The generated bird logo is a raster asset, not a documentary photo or a vector redraw. Existing 15 card marks and descriptions remain unchanged.
