@@ -23,3 +23,5 @@ The parent portal's MINA identity, Open Graph/Twitter cards,14 destination URLs,
 ## 2026-11-02 addition
 
 The 16th WORLD is 文鳥♬文鳥♬文鳥って嬉しいな♪. Its refined 04 production WebP is byte-identical to the published source site at ec8832a5. The generated bird logo is a raster asset, not a documentary photo or a vector redraw. Existing 15 card marks and descriptions remain unchanged.
+
+The Buncho card alone uses isolated light-frame multiply blending with 1.035 paper-white compensation, matching its source-site fit correction. Its original image bytes and proportions are unchanged. Other WORLD marks are not blended or filtered; forced-colors mode restores normal rendering. Actual rendered corner pixels are checked against the frame color.

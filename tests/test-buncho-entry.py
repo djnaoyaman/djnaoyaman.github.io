@@ -1,7 +1,8 @@
 """Buncho WORLD integration: exact logo, accessible links, mobile and live release."""
 from pathlib import Path
 from urllib.parse import urlsplit
-import hashlib,json,mimetypes,os,shutil,time,urllib.request
+import hashlib,json,mimetypes,os,shutil,time,urllib.request,io
+from PIL import Image
 from playwright.sync_api import sync_playwright,expect
 R=Path(__file__).resolve().parents[1];O='https://djnaoyaman.github.io';PUBLIC=os.environ.get('PUBLIC_QA')=='1';NAME='文鳥♬文鳥♬文鳥って嬉しいな♪'
 LOGO='/assets/world-logos/buncho-ureshi-refined04.webp';TARGET=O+'/buncho-ureshi/'
@@ -37,6 +38,13 @@ with sync_playwright() as p:
   expect(q.locator('#world-caption-category')).to_have_text('16 WORLDS')
   assert card.locator('h3').inner_text()==NAME and logo.get_attribute('alt')==NAME
   assert logo.get_attribute('src')==LOGO
+  frame=card.locator('.art-link');image=Image.open(io.BytesIO(frame.screenshot(scale='css'))).convert('RGB')
+  pixels=logo.evaluate('''e=>{const r=e.getBoundingClientRect(),p=e.parentElement.getBoundingClientRect(),s=getComputedStyle(e);return {blend:s.mixBlendMode,background:getComputedStyle(e.parentElement).backgroundColor,points:[[r.x-p.x+2,r.y-p.y+2],[r.right-p.x-3,r.y-p.y+2],[r.x-p.x+2,r.bottom-p.y-3],[r.right-p.x-3,r.bottom-p.y-3]]}}''')
+  assert pixels['blend']=='multiply'
+  expected=[int(x.strip()) for x in pixels['background'].removeprefix('rgb(').removesuffix(')').split(',')]
+  for x,y in pixels['points']:
+   actual=image.getpixel((int(x),int(y)));assert all(abs(a-b)<=2 for a,b in zip(actual,expected)),(w,actual,expected)
+  assert q.locator('.world-logo:not(.logo-buncho-ureshi)').evaluate_all('els=>els.every(e=>getComputedStyle(e).mixBlendMode==="normal")')
   assert logo.evaluate('e=>[e.naturalWidth,e.naturalHeight]')==[1120,645]
   assert card.locator('.description').inner_text()=='文鳥のことを、子どもといっしょに学ぶ図鑑。写真やクイズで知り、ゲームやアートづくりも楽しめます。'
   assert card.evaluate('e=>e.scrollWidth<=e.clientWidth')
