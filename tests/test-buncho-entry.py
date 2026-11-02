@@ -16,6 +16,7 @@ assert sum(value==0 for value in alpha.getdata())/(1120*645)>.75
 assert transparent.getpixel((790,100))[3]==255,'White bird must remain opaque'
 assert all(v==0 for box in [(0,0,1120,1),(0,644,1120,645),(0,0,1,645),(1119,0,1120,645)] for v in alpha.crop(box).getdata())
 report['alpha_and_original_rgb']='pass'
+assert '/maisons.css?v=20261102-buncho-alpha' in (R/'index.html').read_text(),'Returning visitors must request untinted stylesheet' 
 
 def read(url):
  with urllib.request.urlopen(urllib.request.Request(url,headers={'Cache-Control':'no-cache'}),timeout=25) as response:return response.status,response.read()
