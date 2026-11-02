@@ -2,17 +2,17 @@
 
 ずーっと、あれも、これも。
 
-宮崎直哉の15のWORLD（独立したWebサイト）をつなぐポートフォリオ。公開先は https://djnaoyaman.github.io/ 。MIXWELLは作者自身の実践として紹介します。吉田ファームは対象外です。
+宮崎直哉の16のWORLD（独立したWebサイト）をつなぐポートフォリオ。公開先は https://djnaoyaman.github.io/ 。MIXWELLは作者自身の実践として紹介します。吉田ファームは対象外です。
 
 ## 公開面と共通デザイン
 
-- `/`：WORLDS / JOURNAL / ABOUT。15の点が線へつながり、作者の視点を表す軽量SVGアニメーション。
+- `/`：WORLDS / JOURNAL / ABOUT。16の点が線へつながり、作者の視点を表す軽量SVGアニメーション。
 - `/profile.html`：制作姿勢を短く紹介。作品一覧はトップのWORLDSへ集約。旧プロフィールURLと各フラグメントは維持。
 - `/404.html`：深い未知のURLにもルート相対参照で対応。noindex、復帰導線つき。
 - `maisons.css` は互換性のためファイル名を維持した共通スタイル。名称はWORLDS。`profile.css`、`subpages.css`は配下の読み物レイアウト。
 - `#worlds`が新しい入口。`#projects`と`#maisons`の既存リンクも維持。
 
-アイボリー `#f7f6f2`、墨色 `#282823`、淡グレーを基調に統一。15サイト自身の画像・色・名前は変更しません。公式画像の出典とハッシュは `docs/maison-assets.json`。
+アイボリー `#f7f6f2`、墨色 `#282823`、淡グレーを基調に統一。16サイト自身の画像・色・名前は変更しません。公式画像の出典とハッシュは `docs/maison-assets.json`。
 
 ## ブランド素材
 
@@ -24,7 +24,7 @@
 
 ## 動き・操作
 
-`world-atlas.js` は外部依存なし。15の実サイトへのリンク、キーボードフォーカス、タッチ可能なテキスト一覧、再生ボタン、画面外/非表示時の一時停止、幅変更、履歴復帰に対応。動きを減らす設定とJavaScript無効時は完成図。派手な点滅や無限ループ、本文を隠すイントロはありません。
+`world-atlas.js` は外部依存なし。16の実サイトへのリンク、キーボードフォーカス、タッチ可能なテキスト一覧、再生ボタン、画面外/非表示時の一時停止、幅変更、履歴復帰に対応。動きを減らす設定とJavaScript無効時は完成図。派手な点滅や無限ループ、本文を隠すイントロはありません。
 
 既存の4分野フィルターはURLの `?theme=` と履歴に対応。共有は正規URL、コピー失敗とキャンセルを処理。旧本文と執筆詳細は開閉欄で保持しています。
 
@@ -54,3 +54,7 @@ The footer's **サイト最終更新** is the actual published-source revision d
 For each site release, run `python3 scripts/site-update-date.py --date YYYY-MM-DD` using the actual release date in JST. Commit `site-update.json` and its listed HTML pages with the change; use `--check-content` before committing. CI also checks Git history and rejects a date differing from the latest published-source change. Tests/docs/CI-only edits and SUBURBIA's independently dated weather cache do not advance this date. This is an explicit release step, not an automatic runtime date. A release crossing midnight JST must refresh its date and checks before publication.
 
 The read-only **Site update date** workflow verifies synchronization and captures visible footers at 390/1280px, including repeat loads and JavaScript-disabled checks, with external browser requests blocked. It adds no runtime request, tracking or deployment permission.
+
+## 2026-11-02 — 文鳥 WORLD の追加
+
+16番目に「文鳥♬文鳥♬文鳥って嬉しいな♪」を追加。先行15カードの順序・本文・ロゴは変更せず、同じ公開ロゴをコピーしました。承認済み顔SVGの既存 support 点 temple (681,187) のみをリンクに昇格し、線の形状・既存リンクは維持しています。件数・分類・JSON-LD・llms・サイトマップ案内を同期し、公開版のカード・ロゴ・リンクもCIで確認します。

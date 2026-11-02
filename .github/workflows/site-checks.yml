@@ -40,6 +40,9 @@ jobs:
 
       - run: python3 tests/test-world-atlas.py
       - run: python3 tests/test-card-logos.py
+      - run: python3 tests/test-buncho-entry.py
+      - if: github.event_name == 'push'
+        run: PUBLIC_QA=1 python3 tests/test-buncho-entry.py
       - run: AXE_PATH=node_modules/axe-core/axe.min.js python3 tests/test-mina.py
       - if: ${{ !cancelled() }}
         run: python3 tools/capture-screenshots.py
@@ -47,6 +50,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: identity-screenshots
-          path: screenshots/*.png
+          path: |
+            screenshots/*.png
+            screenshots/buncho-*-report.json
           if-no-files-found: error
           retention-days: 3
