@@ -1,10 +1,13 @@
 """Buncho WORLD integration: exact logo, accessible links, mobile and live release."""
 from pathlib import Path
+from datetime import date
 from urllib.parse import urlsplit
 import hashlib,json,mimetypes,os,shutil,time,urllib.request,io
 from PIL import Image
 from playwright.sync_api import sync_playwright,expect
 R=Path(__file__).resolve().parents[1];O='https://djnaoyaman.github.io';PUBLIC=os.environ.get('PUBLIC_QA')=='1';NAME='文鳥♬文鳥♬文鳥って嬉しいな♪'
+RELEASE_DATE=date.fromisoformat(json.loads((R/'site-update.json').read_text())['date'])
+RELEASE_LABEL=f'{RELEASE_DATE.year}年{RELEASE_DATE.month}月{RELEASE_DATE.day}日（JST）'
 LOGO='/assets/world-logos/buncho-ureshi-refined04-transparent.webp';TARGET=O+'/buncho-ureshi/'
 report={'mode':'public' if PUBLIC else 'candidate','cases':[],'external_requests_blocked':[]}
 original=Image.open(R/'assets/world-logos/buncho-ureshi-refined04.webp').convert('RGB')
@@ -81,6 +84,6 @@ with sync_playwright() as p:
  if PUBLIC:assert destination.value.status==200
  if PUBLIC:
   q.wait_for_load_state('networkidle');assert NAME in q.title();report['live_destination']='HTTP200 confirmed by initial document and correct title'
- nojs=b.new_context(java_script_enabled=False,viewport={'width':390,'height':844});nojs.route('**/*',route);n=nojs.new_page();n.goto(O+'/');assert n.locator('#project-buncho-ureshi').is_visible();n.locator('.world-directory summary').click();assert n.locator('.world-directory a[href="/buncho-ureshi/"]').is_visible();assert n.locator('[data-site-updated]').inner_text()=='2026年11月2日（JST）';report['no_javascript']='pass'
+ nojs=b.new_context(java_script_enabled=False,viewport={'width':390,'height':844});nojs.route('**/*',route);n=nojs.new_page();n.goto(O+'/');assert n.locator('#project-buncho-ureshi').is_visible();n.locator('.world-directory summary').click();assert n.locator('.world-directory a[href="/buncho-ureshi/"]').is_visible();assert n.locator('[data-site-updated]').inner_text()==RELEASE_LABEL;report['no_javascript']='pass'
  assert not errors,errors;b.close()
 report['status']='pass';(R/f'screenshots/buncho-{report["mode"]}-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False))
