@@ -96,7 +96,7 @@
       clearTimeout(announcement);
       status.textContent = '';
       try {
-        await navigator.share({title:document.title,text:'ずーっと、あれも、これも。音楽、表現、自然と文化、暮らしと学び。宮崎直哉のWebプロジェクト集。',url:canonical});
+        await navigator.share({title:document.title,text:'ずーっと、あれも、これも。音楽、表現、自然と文化、暮らしと学び。MINAのWebプロジェクト集。',url:canonical});
       } catch (error) {
         if (ticket === operation && error?.name !== 'AbortError') announce('共有メニューを開けませんでした。「Xでシェア」または「リンクをコピー」をお試しください。');
       } finally { if (shareOperation === ticket) shareButton.disabled = false; }

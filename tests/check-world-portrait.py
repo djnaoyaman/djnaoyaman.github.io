@@ -3,7 +3,9 @@ from pathlib import Path
 import hashlib,re,xml.etree.ElementTree as E
 R=Path(__file__).resolve().parents[1];ns={'s':'http://www.w3.org/2000/svg'}
 b=(R/'assets/world-portrait-approved.svg').read_bytes()
-assert hashlib.sha256(b).hexdigest()=='db91d21cc1014ce306e7964f15c3c30e3a02c09512e0cbc1532b8a2c93821a7a'
+# The sole authorized change to the approved artwork is its MINA signature.
+assert b.count(b'>MINA</text>')==1
+assert hashlib.sha256(b.replace(b'>MINA</text>',b'>MIYAZAKINAOYA</text>')).hexdigest()=='db91d21cc1014ce306e7964f15c3c30e3a02c09512e0cbc1532b8a2c93821a7a'
 a=E.fromstring(b)
 h=(R/'index.html').read_text();c=E.fromstring(re.search(r'<svg[^>]*class="world-map world-portrait".*?</svg>',h,re.S)[0])
 assert a.get('viewBox')==c.get('viewBox')=='260 -105 600 735'
@@ -41,4 +43,4 @@ ep=extra.find('s:circle[@class="world-point"]',ns);assert (ep.get('cx'),ep.get('
 assert extra.find('s:text',ns).text=='16'
 assert not c.findall('.//s:image',ns) and not c.findall('.//s:polygon',ns)
 assert c.find('s:g[@class="world-edges"]',ns).get('fill')=='none'
-print('PASS: approved wireframe digest,49 vertices/90 edges,33 support points,original14 links unchanged plus foreC/temple promoted to15th/16th links/numbers/full accessible labels/signature preserved; no tonal fills or raster')
+print('PASS: approved wireframe digest,49 vertices/90 edges,33 support points,original14 links unchanged plus foreC/temple promoted to15th/16th links/numbers/full accessible labels/MINA signature; geometry preserved; no tonal fills or raster')

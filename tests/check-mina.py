@@ -11,7 +11,7 @@ class Page(HTMLParser):
   for k in ['src','href']:
    u=a.get(k,'')
    if u.startswith('/') and not u.startswith('//'):self.assets.append(urlsplit(u).path)
-p=Page();s=(R/'mina.html').read_text();p.feed(s);assert len(p.ids)==len(set(p.ids));assert all((R/(a.lstrip('/') or 'index.html')).exists() for a in p.assets);assert 'index,follow' in s and 'MINAは、MIYAZAKINAOYAのブランドシンボルです' in s
+p=Page();s=(R/'mina.html').read_text();p.feed(s);assert len(p.ids)==len(set(p.ids));assert all((R/(a.lstrip('/') or 'index.html')).exists() for a in p.assets);assert 'index,follow' in s and 'MINAの4文字を、ひとつのシンボルにしました' in s
 for f in (R/'assets/mina-study').glob('*.svg'):ET.parse(f)
 assert 'eval(' not in (R/'mina.js').read_text()
 print('PASS: MINA draft IDs, local assets, SVG validity, identity process status and non-eval controls')
