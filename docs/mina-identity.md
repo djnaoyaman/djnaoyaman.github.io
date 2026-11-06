@@ -1,8 +1,8 @@
 # MINA identity
 
-MIYAZAKI の MI + NAOYA の NA。点がつながり、私の形になる。
+M・I・N・A、4つの文字。点がつながり、私の形になる。
 
-Approved direction: a single angular crown monogram, three large solid circular terminals, no interior white-dot cutouts. Lower terminals share a y=156 baseline and 10-unit horizontal end face, with exact right-angle outer corners. The N diagonal makes the internal structure intentionally asymmetric. The public wordmark remains MIYAZAKINAOYA.
+Approved direction: a single angular crown monogram, three large solid circular terminals, no interior white-dot cutouts. Lower terminals share a y=156 baseline and 10-unit horizontal end face, with exact right-angle outer corners. The N diagonal makes the internal structure intentionally asymmetric. The public wordmark is MINA. The site presents this name rather than spelling out the author’s personal name.
 
 ## Source and exports
 - Geometry master: `assets/mina-study/crown-master.json` (200-square viewBox).

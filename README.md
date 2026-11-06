@@ -1,8 +1,8 @@
-# MIYAZAKINAOYA
+# MINA
 
 ずーっと、あれも、これも。
 
-宮崎直哉の16のWORLD（独立したWebサイト）をつなぐポートフォリオ。公開先は https://djnaoyaman.github.io/ 。MIXWELLは作者自身の実践として紹介します。吉田ファームは対象外です。
+MINAの16のWORLD（独立したWebサイト）をつなぐポートフォリオ。公開先は https://djnaoyaman.github.io/ 。MIXWELLは作者自身の実践として紹介します。吉田ファームは対象外です。
 
 ## 公開面と共通デザイン
 
@@ -16,7 +16,7 @@
 
 ## ブランド素材
 
-`tools/build-mark.py` がフォントからの自動切り出しではない手設計MINAシンボルを生成。MIYAZAKIのMIとNAOYAのNAを2×2に構成し、通常版と小サイズ版で余白を光学調整しています。
+`tools/build-mark.py` がフォントからの自動切り出しではない手設計MINAシンボルを生成。M・I・N・Aの4文字をひとつの王冠型に構成し、通常版と小サイズ版で余白を光学調整しています。
 
 `python tools/render-assets.py` でSVG、16/32/48 PNG、4サイズICO、180 Apple Touch Icon、192/512通常・maskable、Safari pinned、および1200×630のトップ/プロフィール/404共有画像を再生成。PillowとNoto Sans CJK・Liberation Serifを使用します。共有画像の原稿は `tools/render-share-card.py`、制作確認は `assets-source/share-card.html`（noindex）。
 

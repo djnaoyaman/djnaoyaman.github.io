@@ -68,6 +68,8 @@ with sync_playwright() as p:
     assert ORIGIN+'/' in page.locator('#share-status').inner_text()
     page.locator('#native-share').click();assert page.locator('#share-status').inner_text()==''
     assert page.locator('#native-share').is_enabled()
+    assert page.evaluate('window.shared.title')=='MINA — ずーっと、あれも、これも。'
+    assert 'MINAのWebプロジェクト集。' in page.evaluate('window.shared.text')
     assert not errors,errors
     page.goto(ORIGIN+'/missing/deep/path?invalid=%3Cscript%3E');assert page.title().startswith('ページが見つかりません')
     assert page.locator('a[href="/#projects"]').count()==1
@@ -95,7 +97,7 @@ with sync_playwright() as p:
     for icon in manifest['icons']:assert (ROOT/urlparse(icon['src']).path.lstrip('/')).is_file()
     # The standalone profile must work without JavaScript, and remain readable at each width.
     q.goto(ORIGIN+'/profile.html')
-    assert q.locator('h1').inner_text()=='宮崎 直哉'
+    assert q.locator('h1').inner_text()=='MINA'
     assert q.locator('.profile-works li').count()==0
     assert q.locator('a[href="/#worlds"]').count()>=1
     for width in [280,320,390,600,768,1280]:

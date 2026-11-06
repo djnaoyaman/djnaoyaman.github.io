@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "MIYAZAKINAOYA",
-  "short_name": "MIYAZAKINAOYA",
+  "name": "MINA",
+  "short_name": "MINA",
   "lang": "ja",
   "start_url": "/",
   "scope": "/",
@@ -34,7 +34,7 @@
       "purpose": "maskable"
     }
   ],
-  "description": "ずーっと、あれも、これも。宮崎直哉のWebプロジェクト集。音楽、表現、自然と文化、暮らしと学び。",
+  "description": "ずーっと、あれも、これも。MINAのWebプロジェクト集。音楽、表現、自然と文化、暮らしと学び。",
   "dir": "ltr",
   "display_override": [
     "minimal-ui",
@@ -56,18 +56,18 @@
   ],
   "screenshots": [
     {
-      "src": "/screenshots/mobile.png?v=20261031-crown",
+      "src": "/screenshots/mobile.png?v=20261106-mina",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "MIYAZAKINAOYA — mobile"
+      "label": "MINA — mobile"
     },
     {
-      "src": "/screenshots/desktop.png?v=20261031-crown",
+      "src": "/screenshots/desktop.png?v=20261106-mina",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "MIYAZAKINAOYA — desktop"
+      "label": "MINA — desktop"
     }
   ]
 }
