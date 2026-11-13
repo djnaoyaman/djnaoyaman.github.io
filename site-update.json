@@ -1,10 +1,11 @@
 {
-  "date": "2026-11-06",
+  "date": "2026-11-13",
   "timezone": "Asia/Tokyo",
   "pages": [
     "index.html",
     "profile.html",
     "mina.html",
-    "404.html"
+    "404.html",
+    "inquiry.html"
   ]
 }
