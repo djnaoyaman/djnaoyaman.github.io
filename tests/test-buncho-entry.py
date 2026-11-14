@@ -19,7 +19,7 @@ assert sum(value==0 for value in alpha.getdata())/(1120*645)>.75
 assert transparent.getpixel((790,100))[3]==255,'White bird must remain opaque'
 assert all(v==0 for box in [(0,0,1120,1),(0,644,1120,645),(0,0,1,645),(1119,0,1120,645)] for v in alpha.crop(box).getdata())
 report['alpha_and_original_rgb']='pass'
-assert '/maisons.css?v=20261102-buncho-alpha' in (R/'index.html').read_text(),'Returning visitors must request untinted stylesheet' 
+assert '/maisons.css?v=20261114-game' in (R/'index.html').read_text(),'Returning visitors must request untinted stylesheet' 
 
 def read(url):
  with urllib.request.urlopen(urllib.request.Request(url,headers={'Cache-Control':'no-cache'}),timeout=25) as response:return response.status,response.read()
@@ -48,8 +48,14 @@ with sync_playwright() as p:
  (R/'screenshots').mkdir(exist_ok=True)
  for w,h in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':w,'height':h});q.goto(O+'/',wait_until='networkidle');card=q.locator('#project-buncho-ureshi');card.scroll_into_view_if_needed();logo=card.locator('img');logo.evaluate('e=>e.decode()')
-  assert q.locator('.maison.project').count()==16
-  expect(q.locator('#world-caption-category')).to_have_text('16 WORLDS')
+  assert q.locator('.maison.project').count()==17
+  game=q.locator('#project-buncho-game')
+  assert game.locator('h3').inner_text()=='おもちの文鳥ぐらし'
+  assert game.locator('.visit').get_attribute('href')=='/buncho-ureshi/game/'
+  assert game.evaluate('e=>e.previousElementSibling.id')=='project-buncho-ureshi'
+  assert game.locator('img').get_attribute('src')=='/assets/world-logos/buncho-game.png'
+  assert game.evaluate('e=>e.scrollWidth<=e.clientWidth')
+  expect(q.locator('#world-caption-category')).to_have_text('17 WORLDS')
   assert card.locator('h3').inner_text()==NAME and logo.get_attribute('alt')==NAME
   assert logo.get_attribute('src')==LOGO
   frame=card.locator('.art-link');image=Image.open(io.BytesIO(frame.screenshot(scale='css'))).convert('RGB')
@@ -68,11 +74,11 @@ with sync_playwright() as p:
   assert card.locator('.art-link').get_attribute('href')==card.locator('.visit').get_attribute('href')=='/buncho-ureshi/'
   assert card.locator('.source-link').get_attribute('href')=='https://github.com/djnaoyaman/buncho-ureshi'
   if w in (320,390,1280):card.screenshot(path=str(R/f'screenshots/buncho-{report["mode"]}-card-{w}.png'))
-  q.locator('button[data-theme="life"]').click();assert card.is_visible() and q.locator('.project:visible').count()==4
-  q.locator('button[data-theme="music"]').click();assert not card.is_visible() and q.locator('.project:visible').count()==4
+  q.locator('button[data-theme="life"]').click();assert card.is_visible() and q.locator('.project:visible').count()==5
+  q.locator('button[data-theme="music"]').click();assert not card.is_visible() and q.locator('.project:visible').count()==5
   # Exercise keyboard focus without a stale mouse hover at the scroll destination.
   q.mouse.move(0,0)
-  node=q.locator('.world-node').last;node.focus();assert node.get_attribute('href')=='/buncho-ureshi/'
+  node=q.locator('.world-node[href="/buncho-ureshi/"]');node.focus();assert node.get_attribute('href')=='/buncho-ureshi/'
   expect(q.locator('#world-caption-name')).to_have_text(NAME)
   assert node.evaluate('e=>e===document.activeElement')
   assert q.locator('.world-edge.is-connected').count()>0

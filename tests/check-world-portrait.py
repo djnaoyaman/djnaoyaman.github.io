@@ -19,11 +19,11 @@ ag=a.findall('s:g',ns);cg=c.findall('s:g',ns)
 for x,y in zip(ag,cg):
  assert all(y.get(k)==v for k,v in x.attrib.items())
  assert y.get('aria-hidden')=='true'
-assert len(ag[1])==35 and len(cg[1])==33
-original_support=[x for x in ag[1] if (x.get('cx'),x.get('cy'))not in [('517','43'),('681','187')]]
+assert len(ag[1])==35 and len(cg[1])==32
+original_support=[x for x in ag[1] if (x.get('cx'),x.get('cy'))not in [('517','43'),('681','187'),('650','68')]]
 for x,y in zip(original_support,cg[1]):assert x.attrib==y.attrib
 assert len({p.get('data-from') for p in c.findall('.//s:path',ns)}|{p.get('data-to') for p in c.findall('.//s:path',ns)})==49
-an=a.findall('s:a',ns);cn=c.findall('s:a',ns);assert len(an)==14 and len(cn)==16
+an=a.findall('s:a',ns);cn=c.findall('s:a',ns);assert len(an)==14 and len(cn)==17
 for i,(x,y) in enumerate(zip(an,cn)):
  assert x.get('href')==y.get('href') and x.get('aria-label')==y.get('aria-label')
  assert y.get('data-index')==str(i)
@@ -41,6 +41,9 @@ assert extra.find('s:text',ns).text=='15'
 extra=cn[15];assert extra.get('href')=='/buncho-ureshi/' and extra.get('data-index')=='15'
 ep=extra.find('s:circle[@class="world-point"]',ns);assert (ep.get('cx'),ep.get('cy'),ep.get('r'))==('681','187','4.2')
 assert extra.find('s:text',ns).text=='16'
+extra=cn[16];assert extra.get('href')=='/buncho-ureshi/game/' and extra.get('data-index')=='16'
+ep=extra.find('s:circle[@class="world-point"]',ns);assert (ep.get('cx'),ep.get('cy'),ep.get('r'))==('650','68','4.2')
+assert extra.find('s:text',ns).text=='17'
 assert not c.findall('.//s:image',ns) and not c.findall('.//s:polygon',ns)
 assert c.find('s:g[@class="world-edges"]',ns).get('fill')=='none'
-print('PASS: approved wireframe digest,49 vertices/90 edges,33 support points,original14 links unchanged plus foreC/temple promoted to15th/16th links/numbers/full accessible labels/MINA signature; geometry preserved; no tonal fills or raster')
+print('PASS: approved wireframe digest,49 vertices/90 edges,32 support points,original14 links unchanged plus foreC/temple/foreR promoted to15th/16th/17th links/numbers/full accessible labels/MINA signature; geometry preserved; no tonal fills or raster')
