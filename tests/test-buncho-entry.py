@@ -75,7 +75,7 @@ with sync_playwright() as p:
   assert card.locator('.source-link').get_attribute('href')=='https://github.com/djnaoyaman/buncho-ureshi'
   if w in (320,390,1280):card.screenshot(path=str(R/f'screenshots/buncho-{report["mode"]}-card-{w}.png'))
   q.locator('button[data-theme="life"]').click();assert card.is_visible() and q.locator('.project:visible').count()==5
-  q.locator('button[data-theme="music"]').click();assert not card.is_visible() and q.locator('.project:visible').count()==5
+  q.locator('button[data-theme="music"]').click();assert not card.is_visible() and q.locator('.project:visible').count()==4
   # Exercise keyboard focus without a stale mouse hover at the scroll destination.
   q.mouse.move(0,0)
   node=q.locator('.world-node[href="/buncho-ureshi/"]');node.focus();assert node.get_attribute('href')=='/buncho-ureshi/'
