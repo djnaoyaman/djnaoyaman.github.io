@@ -1,4 +1,4 @@
-"""Verify the smaller16card logos, preserving their original files and aspect ratios."""
+"""Verify the smaller17card logos, preserving their original files and aspect ratios."""
 from pathlib import Path
 from urllib.parse import urlsplit
 import mimetypes,os,shutil,io
@@ -14,9 +14,9 @@ with sync_playwright() as p:
  (R/'screenshots').mkdir(exist_ok=True)
  for width,height in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':width,'height':height});q.goto(O+'/')
-  logos=q.locator('.art-link .world-logo');assert logos.count()==16
+  logos=q.locator('.art-link .world-logo');assert logos.count()==17
   tiles=[]
-  for i in range(16):
+  for i in range(17):
    logo=logos.nth(i);logo.scroll_into_view_if_needed();logo.evaluate('e=>e.decode()')
    metrics=logo.evaluate('''e=>{const a=e.closest('.art-link').getBoundingClientRect(),r=e.getBoundingClientRect(),s=getComputedStyle(e);return {frame:[a.x,a.y,a.width,a.height],box:[r.x,r.y,r.width,r.height],fit:s.objectFit,loaded:e.complete&&e.naturalWidth>0}}''')
    x,y,w,h=metrics['box'];fx,fy,fw,fh=metrics['frame']
@@ -31,7 +31,7 @@ with sync_playwright() as p:
     canvas=Image.new('RGB',(400,190),'#f7f6f2');canvas.paste(tile,((400-tile.width)//2,10));ImageDraw.Draw(canvas).text((16,170),f'{i+1:02d} '+logo.get_attribute('class').split()[-1],fill='#262720');tiles.append(canvas)
   assert q.locator('#project-design-lineage .lineage-title,#project-design-lineage .lineage-subtitle').evaluate_all('els=>els.every(e=>e.scrollWidth<=e.clientWidth)'),width
   if tiles:
-   sheet=Image.new('RGB',(800,190*8),'#f7f6f2')
+   sheet=Image.new('RGB',(800,190*((len(tiles)+1)//2)),'#f7f6f2')
    for i,t in enumerate(tiles):sheet.paste(t,((i%2)*400,(i//2)*190))
    sheet.save(R/f'screenshots/card-logos-{width}.png')
    for number in (5,6,14,15):q.locator('.maison').nth(number).screenshot(path=str(R/f'screenshots/card-{number+1:02d}-{width}.png'))
@@ -39,4 +39,4 @@ with sync_playwright() as p:
  q.locator('.art-link').first.focus();assert q.locator('.art-link').first.evaluate('e=>e===document.activeElement')
  q.locator('.filters button').nth(1).click();assert q.locator('.maison:visible').count()>0
  b.close()
-print('PASS:16original logos,6sizes,centered smaller frames/clear space,contain,keyboard/filter;2all-logo sheets and8full cards')
+print('PASS:17original logos,6sizes,centered smaller frames/clear space,contain,keyboard/filter;2all-logo sheets and8full cards')

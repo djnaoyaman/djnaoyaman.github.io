@@ -42,7 +42,7 @@ for filename in ['index.html','404.html']:
  if filename=='404.html':assert page.meta['robots']=='noindex,follow'
  else:
   graph=page.ld[0]['@graph'];collection=graph[2]['mainEntity'];items=collection['itemListElement']
-  assert collection['numberOfItems']==len(items)==len(page.headings)==16
+  assert collection['numberOfItems']==len(items)==len(page.headings)==17
   assert [item['item']['name'] for item in items]==page.headings
   assert [item['item']['description'] for item in items]==page.descriptions
   assert [item['position'] for item in items]==list(range(1,len(items)+1))
@@ -56,7 +56,7 @@ for filename in ['index.html','404.html']:
 manifest=json.loads((ROOT/'site.webmanifest').read_text())
 robots=(ROOT/'robots.txt').read_text()
 sitemaps={line.split(': ',1)[1] for line in robots.splitlines() if line.startswith('Sitemap: ')}
-expected_sitemaps={'https://djnaoyaman.github.io/sitemap.xml'} | {item['item']['url']+'sitemap.xml' for item in items}
+expected_sitemaps={'https://djnaoyaman.github.io/sitemap.xml'} | {(item['item']['url'].removesuffix('game/') if item['item']['url'].endswith('/buncho-ureshi/game/') else item['item']['url'])+'sitemap.xml' for item in items}
 assert sitemaps==expected_sitemaps, 'Root robots.txt must advertise every public project sitemap'
 assert 'Disallow: /MINERALion/' in robots and 'yoshida-farmer' not in robots
 for icon in manifest['icons']:
@@ -79,4 +79,4 @@ assert 'prefers-color-scheme:dark' in (ROOT/'favicon.svg').read_text()
 ET.parse(ROOT/'favicon.svg');ET.parse(ROOT/'safari-pinned-tab.svg')
 ET.parse(ROOT/'sitemap.xml')
 assert 'Sitemap: https://djnaoyaman.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
-print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 16-project JSON-LD/docs, manifest dimensions, OGP, sitemap')
+print('PASS: IDs, local assets, anchors, CSP, 404 noindex, 17-project JSON-LD/docs, manifest dimensions, OGP, sitemap')

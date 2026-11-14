@@ -186,6 +186,15 @@
       "asset_url": "https://djnaoyaman.github.io/buncho-ureshi/brand/wordmark-04-transparent.webp",
       "master_sha256": "543193b35d04c436e1370303b5d64a26de63cf282bc6fddc2dc5a52011c5a82a",
       "format": "Raster WebP derivative of the generated refined 04 master; not a pure-vector logo."
+    },
+    {
+      "slug": "buncho-game",
+      "source_url": "https://djnaoyaman.github.io/buncho-ureshi/game/",
+      "checked_at": "2026-11-14",
+      "file": "assets/world-logos/buncho-game.png",
+      "sha256": "b214cf45cf7e42ee5ffe26e88e55700c7cd68610ebba90ad7742a37977030cc3",
+      "method": "Unmodified game title artwork used by the source game and home page",
+      "asset_url": "https://djnaoyaman.github.io/buncho-ureshi/game-art/game-title.png"
     }
   ]
 }
