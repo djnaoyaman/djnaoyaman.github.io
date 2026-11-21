@@ -1,4 +1,4 @@
-"""Verify the smaller17card logos, preserving their original files and aspect ratios."""
+"""Verify the smaller18 card logos, preserving their original files and aspect ratios."""
 from pathlib import Path
 from urllib.parse import urlsplit
 import mimetypes,os,shutil,io
@@ -14,9 +14,9 @@ with sync_playwright() as p:
  (R/'screenshots').mkdir(exist_ok=True)
  for width,height in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':width,'height':height});q.goto(O+'/')
-  logos=q.locator('.art-link .world-logo');assert logos.count()==17
+  logos=q.locator('.art-link .world-logo');assert logos.count()==18
   tiles=[]
-  for i in range(17):
+  for i in range(18):
    logo=logos.nth(i);logo.scroll_into_view_if_needed();logo.evaluate('e=>e.decode()')
    metrics=logo.evaluate('''e=>{const a=e.closest('.art-link').getBoundingClientRect(),r=e.getBoundingClientRect(),s=getComputedStyle(e);return {frame:[a.x,a.y,a.width,a.height],box:[r.x,r.y,r.width,r.height],fit:s.objectFit,loaded:e.complete&&e.naturalWidth>0}}''')
    x,y,w,h=metrics['box'];fx,fy,fw,fh=metrics['frame']
@@ -39,4 +39,4 @@ with sync_playwright() as p:
  q.locator('.art-link').first.focus();assert q.locator('.art-link').first.evaluate('e=>e===document.activeElement')
  q.locator('.filters button').nth(1).click();assert q.locator('.maison:visible').count()>0
  b.close()
-print('PASS:17original logos,6sizes,centered smaller frames/clear space,contain,keyboard/filter;2all-logo sheets and8full cards')
+print('PASS:18 original logos,6sizes,centered smaller frames/clear space,contain,keyboard/filter;2all-logo sheets and8full cards')

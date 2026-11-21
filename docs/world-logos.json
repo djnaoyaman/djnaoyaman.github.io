@@ -195,6 +195,16 @@
       "sha256": "b214cf45cf7e42ee5ffe26e88e55700c7cd68610ebba90ad7742a37977030cc3",
       "method": "Unmodified game title artwork used by the source game and home page",
       "asset_url": "https://djnaoyaman.github.io/buncho-ureshi/game-art/game-title.png"
+    },
+    {
+      "slug": "beforeweeat",
+      "name": "Before We Eat",
+      "source_url": "https://djnaoyaman.github.io/beforeweeat/",
+      "checked_at": "2026-11-22",
+      "file": "assets/world-logos/beforeweeat.webp",
+      "sha256": "59ea5429829318a51fde60117a5a23caa3c2f9e55d2da78dc3b346b5d78b3ede",
+      "method": "Unmodified Before We Eat launch wordmark, based on the approved 05-12 direction.",
+      "asset_url": "https://djnaoyaman.github.io/beforeweeat/logo.webp"
     }
   ]
 }

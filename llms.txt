@@ -4,7 +4,7 @@
 
 - 正規URL: https://djnaoyaman.github.io/
 - 作者: MINA
-- 内容: 17のWORLD（Webサイト）を紹介するポートフォリオ。
+- 内容: 18のWORLD（Webサイト）を紹介するポートフォリオ。
 - 本サイトは各テーマへの入口です。個別の内容・出典・改訂情報はリンク先を参照してください。
 
 ## プロジェクト
@@ -22,6 +22,7 @@
 - [掌蹠膿疱症.com](https://djnaoyaman.github.io/ppp/): 掌蹠膿疱症の症状や原因、治療の選択肢を整理した情報サイト。標準的な治療、漢方、セルフケアなど、知りたいテーマごとに読めます。
 - [IL MASTRO](https://djnaoyaman.github.io/bookkeeping/): 日商簿記・全経簿記・USCPAの試験に向けた学習サイト。金額や仕訳を入力する問題を繰り返し解き、間違えた問題を復習できます。
 - [1minutes — ONE MINUTE FOREVER](https://djnaoyaman.github.io/1minutes/): 「60秒は、いつも同じ長さとは限らない。」待つ、集中する、記憶するなど、時間の感じ方を体験するWeb作品。
+- [Before We Eat](https://djnaoyaman.github.io/beforeweeat/): 動物のくらしを知り、お肉を一番おいしくいただく。畜産の記録、部位と栄養の図鑑、本格料理、学校や家庭で使える食育教材を掲載しています。
 
 - [OMOCHI TOUCH](https://djnaoyaman.github.io/omochi-touch/): 白いウェスティ、OMOCHIとつくるアート。写真と音楽を自由に重ねるインタラクティブな遊び場。
 
@@ -116,7 +117,7 @@ FACEBOOK ↗
 違うものを自分なりに混ぜる、MIXWELLという考え方を大切にしています。
 
 ## WORLDS
-各サイトは、それぞれの名前と美意識を持つ「世界」です。トップページでは17のWORLDが点から線、面へとつながり、MINAをかたちづくるSVGアニメーションを掲載。各点とテキスト一覧から既存サイトへ移動できます。動きを減らす設定では完成した図を表示します。
+各サイトは、それぞれの名前と美意識を持つ「世界」です。トップページでは18のWORLDが点から線、面へとつながり、MINAをかたちづくるSVGアニメーションを掲載。各点とテキスト一覧から既存サイトへ移動できます。動きを減らす設定では完成した図を表示します。
 
 ## Brand identity
 - MINA: https://djnaoyaman.github.io/mina.html

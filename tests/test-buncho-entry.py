@@ -48,14 +48,14 @@ with sync_playwright() as p:
  (R/'screenshots').mkdir(exist_ok=True)
  for w,h in [(280,900),(320,844),(390,844),(844,390),(1280,900),(1920,1080)]:
   q.set_viewport_size({'width':w,'height':h});q.goto(O+'/',wait_until='networkidle');card=q.locator('#project-buncho-ureshi');card.scroll_into_view_if_needed();logo=card.locator('img');logo.evaluate('e=>e.decode()')
-  assert q.locator('.maison.project').count()==17
+  assert q.locator('.maison.project').count()==18
   game=q.locator('#project-buncho-game')
   assert game.locator('h3').inner_text()=='おもちの文鳥ぐらし'
   assert game.locator('.visit').get_attribute('href')=='/buncho-ureshi/game/'
   assert game.evaluate('e=>e.previousElementSibling.id')=='project-buncho-ureshi'
   assert game.locator('img').get_attribute('src')=='/assets/world-logos/buncho-game.png'
   assert game.evaluate('e=>e.scrollWidth<=e.clientWidth')
-  expect(q.locator('#world-caption-category')).to_have_text('17 WORLDS')
+  expect(q.locator('#world-caption-category')).to_have_text('18 WORLDS')
   assert card.locator('h3').inner_text()==NAME and logo.get_attribute('alt')==NAME
   assert logo.get_attribute('src')==LOGO
   frame=card.locator('.art-link');image=Image.open(io.BytesIO(frame.screenshot(scale='css'))).convert('RGB')
@@ -74,7 +74,7 @@ with sync_playwright() as p:
   assert card.locator('.art-link').get_attribute('href')==card.locator('.visit').get_attribute('href')=='/buncho-ureshi/'
   assert card.locator('.source-link').get_attribute('href')=='https://github.com/djnaoyaman/buncho-ureshi'
   if w in (320,390,1280):card.screenshot(path=str(R/f'screenshots/buncho-{report["mode"]}-card-{w}.png'))
-  q.locator('button[data-theme="life"]').click();assert card.is_visible() and q.locator('.project:visible').count()==5
+  q.locator('button[data-theme="life"]').click();assert card.is_visible() and q.locator('.project:visible').count()==6
   q.locator('button[data-theme="music"]').click();assert not card.is_visible() and q.locator('.project:visible').count()==4
   # Exercise keyboard focus without a stale mouse hover at the scroll destination.
   q.mouse.move(0,0)
