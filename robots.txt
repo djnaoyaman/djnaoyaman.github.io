@@ -18,3 +18,4 @@ Sitemap: https://djnaoyaman.github.io/suburbia-classica/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/youkai/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/design-lineage/sitemap.xml
 Sitemap: https://djnaoyaman.github.io/buncho-ureshi/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/beforeweeat/sitemap.xml
