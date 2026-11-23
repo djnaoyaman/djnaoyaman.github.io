@@ -1,128 +1,88 @@
-"""Check delivered, first-party HTML without sending analytics events."""
-import concurrent.futures
+"""Check only six release representatives; never send analytics events."""
 import json
 import re
 import sys
-import time
-import urllib.error
 import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
-from collections import defaultdict
 from html.parser import HTMLParser
-from pathlib import Path
 
 ORIGIN = "https://djnaoyaman.github.io"
-SEEDS = json.loads(Path(__file__).with_name("public-html.json").read_text())
+TARGETS = [
+    ("/", "G-PT03XG7KQR", "shared"),
+    ("/profile.html", "G-PT03XG7KQR", "shared"),
+    ("/chems/404.html", "G-GKZHN40P02", "inline"),
+    ("/bookkeeping/404.html", "G-837HXKXW8Q", "inline"),
+    ("/beforeweeat/404.html", "G-HBPDX2M5HR", "inline"),
+    ("/buncho-ureshi/garden35-plan/", "GTM-W9SQSCBT", "gtm"),
+]
+CACHE = {}
+CONFIG = re.compile(r"\b(?:gtag|track)\s*\(\s*['\"]config['\"]\s*,\s*['\"](G-[A-Z0-9]+)")
 
 def fetch(url):
-    for attempt in range(3):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent":"MINA-public-tag-review/1.0", "Cache-Control":"no-cache"})
-            with urllib.request.urlopen(req, timeout=20) as res:
-                return res.status, res.read().decode("utf-8-sig", "replace")
-        except urllib.error.HTTPError as exc:
-            if exc.code < 500 or attempt == 2:
-                return exc.code, exc.read().decode("utf-8-sig", "replace")
-        except OSError as exc:
-            if attempt == 2:
-                return 0, str(exc)
-        time.sleep(1 + attempt)
-    return 0, ""
+    assert urllib.parse.urlsplit(url).netloc == "djnaoyaman.github.io"
+    if url not in CACHE:
+        request = urllib.request.Request(url, headers={
+            "User-Agent": "MINA-limited-release-check/1.0",
+            "Cache-Control": "no-cache",
+        })
+        with urllib.request.urlopen(request, timeout=12) as response:
+            assert response.status == 200, (url, response.status)
+            CACHE[url] = response.read().decode("utf-8-sig")
+    return CACHE[url]
 
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.links, self.srcs, self.js = [], [], []
-        self.active = False
-        self.redirect = False
+        self.srcs, self.base = [], None
     def handle_starttag(self, tag, attrs):
-        a = dict(attrs)
-        if tag == "a" and a.get("href"):
-            self.links.append(a["href"])
-        if tag == "meta" and a.get("http-equiv", "").lower() == "refresh":
-            self.redirect = True
-        if tag == "script":
-            self.active = a.get("type", "").lower() in ("", "text/javascript", "application/javascript", "module")
-            if self.active and a.get("src"):
-                self.srcs.append(a["src"])
-    def handle_endtag(self, tag):
-        if tag == "script":
-            self.active = False
-    def handle_data(self, data):
-        if self.active:
-            self.js.append(data)
+        attrs = dict(attrs)
+        if tag == "base" and attrs.get("href"):
+            self.base = attrs["href"]
+        if tag == "script" and attrs.get("src"):
+            self.srcs.append(attrs["src"])
 
-def local_path(base, current, href):
-    if not href or href.startswith(("#", "?", "mailto:", "tel:", "javascript:", "data:")):
-        return None
-    parsed = urllib.parse.urlsplit(urllib.parse.urljoin(current, href))
-    if parsed.netloc != urllib.parse.urlsplit(base).netloc or parsed.scheme != "https":
-        return None
-    path = parsed.path
-    if base == ORIGIN + "/":
-        if "/" in path.strip("/") or (path.count("/") > 1 and path != "/"):
-            return None
-    if not (parsed.netloc + path).startswith(base.split("://")[1]):
-        return None
-    if not (path.endswith("/") or path.lower().endswith((".htm", ".html"))):
-        return None
-    if path.endswith("/index.html"):
-        path = path[:-10]
-    return parsed.scheme + "://" + parsed.netloc + path
+failed = False
+for path, expected, mode in TARGETS:
+    try:
+        url = ORIGIN + path
+        html = fetch(url)
+        page = Page()
+        page.feed(html)
+        base = urllib.parse.urljoin(url, page.base) if page.base else url
+        sources = [urllib.parse.urljoin(base, src) for src in page.srcs]
+        if mode == "gtm":
+            loaders = [src for src in sources
+                       if urllib.parse.urlsplit(src).path == "/buncho-ureshi/src/analytics-loader.js"]
+            assert len(loaders) == 1, ("shared GTM loaders", loaders)
+            assert expected in fetch(loaders[0]), "Unexpected GTM container"
+            assert "googletagmanager.com/gtm.js" not in html, "Duplicate inline GTM loader"
+            result = {"path": path, "container": expected, "loader_count": 1}
+        else:
+            loaders = [src for src in sources if "googletagmanager.com/gtag/js" in src]
+            assert len(loaders) == 1, ("Google loader count", loaders)
+            assert urllib.parse.parse_qs(urllib.parse.urlsplit(loaders[0]).query).get("id") == [expected]
+            combined = html
+            if mode == "shared":
+                shared = [src for src in sources if urllib.parse.urlsplit(src).path == "/analytics.js"]
+                assert len(shared) == 1, ("initializer count", shared)
+                combined += "\n" + fetch(shared[0])
+                for src in sources:
+                    if urllib.parse.urlsplit(src).path == "/site.js":
+                        assert "v=20261123-ga-shared" in src, "Old homepage script cache key"
+                        combined += "\n" + fetch(src)
+            configs = CONFIG.findall(combined)
+            assert configs == [expected], ("config count or ID", configs)
+            result = {"path": path, "measurement_id": expected,
+                      "loader_count": 1, "config_count": 1}
+        print("GA_SMOKE " + json.dumps(result, ensure_ascii=False), flush=True)
+    except Exception as error:
+        failed = True
+        print("GA_SMOKE " + json.dumps({"path": path, "error": str(error)}), flush=True)
 
-def audit(site, extra, executor):
-    base = "https://yoshida-farm.co.jp/" if site == "yoshida-farmer" else ORIGIN + ("/" if site == "djnaoyaman.github.io" else "/" + site + "/")
-    todo = {base}
-    for p in extra:
-        u = local_path(base, base, p)
-        if u:
-            todo.add(u)
-    status, xml = fetch(base + "sitemap.xml")
-    if status == 200:
-        for el in ET.fromstring(xml).iter():
-            if el.tag.split("}")[-1] == "loc":
-                u = local_path(base, base, el.text)
-                if u:
-                    todo.add(u)
-    processed, scripts = {}, {}
-    while todo:
-        batch = sorted(todo)
-        todo = set()
-        for url, (code, html) in zip(batch, executor.map(fetch, batch)):
-            if code != 200:
-                processed[url] = ("HTTP " + str(code),)
-                continue
-            page = Page()
-            page.feed(html)
-            linked = (local_path(base, url, link) for link in page.links)
-            todo.update(u for u in linked if u)
-            direct = [s for s in page.srcs if re.search(r"googletagmanager\.com/gtag/js", s)]
-            combined = "\n".join(page.js)
-            for src in page.srcs:
-                absolute = urllib.parse.urljoin(url, src)
-                if urllib.parse.urlsplit(absolute).netloc != urllib.parse.urlsplit(base).netloc:
-                    continue
-                if absolute not in scripts:
-                    sc, js = fetch(absolute)
-                    scripts[absolute] = js if sc == 200 and re.search(r"googletagmanager\.com/(?:gtag|gtm)|['\"]config['\"]\s*,",js) else ""
-                combined += "\n" + scripts[absolute]
-            configs = re.findall(r"(?:\bgtag|\btrack)\s*\(\s*['\"]config['\"]\s*,\s*['\"](G-[A-Z0-9]+)", combined)
-            gtms = sorted(set(re.findall(r"\bGTM-[A-Z0-9]+", combined)))
-            dynamic = len(re.findall(r"googletagmanager\.com/gtag/js", combined))
-            loader_ids = [urllib.parse.parse_qs(urllib.parse.urlsplit(s).query).get("id",["?"])[0] for s in direct]
-            processed[url] = ("redirect" if page.redirect else "page", tuple(loader_ids), tuple(configs), tuple(gtms), dynamic)
-        todo.difference_update(processed)
-    groups = defaultdict(list)
-    for u, g in sorted(processed.items()):
-        groups[g].append(u[len(base):] or "/")
-    for g, paths in groups.items():
-        print("TAG_AUDIT",json.dumps([site,g,len(paths),paths[:8]],ensure_ascii=False), flush=True)
-
-if __name__ == "__main__":
-    with concurrent.futures.ThreadPoolExecutor(max_workers=7) as executor:
-        for site, extra in SEEDS.items():
-            try:
-                audit(site, extra, executor)
-            except Exception as exc:
-                print("AUDIT_ERROR", site, str(exc), flush=True)
+print("GA_SMOKE_SUMMARY " + json.dumps({
+    "html_pages": len(TARGETS),
+    "first_party_requests": len(CACHE),
+    "analytics_requests": 0,
+    "passed": not failed,
+}), flush=True)
+sys.exit(1 if failed else 0)
