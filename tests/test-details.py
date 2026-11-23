@@ -10,6 +10,9 @@ PAPER=(247,246,242)
 ROOT=Path(__file__).resolve().parents[1];ORIGIN='https://djnaoyaman.github.io'
 requests=[]
 def serve(route):
+ # Keep the known Google tag offline during UI checks.
+ if route.request.url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR':
+  return route.fulfill(status=200,body='',content_type='application/javascript')
  u=urlsplit(route.request.url);requests.append(u.path)
  assert u.netloc=='djnaoyaman.github.io',route.request.url
  file=ROOT/(u.path.lstrip('/') or 'index.html')

@@ -6,6 +6,9 @@ from playwright.sync_api import sync_playwright,expect
 from PIL import Image,ImageChops
 ROOT=Path(__file__).resolve().parents[1];ORIGIN='https://djnaoyaman.github.io'
 def serve(route):
+ # Keep the known Google tag offline during UI checks.
+ if route.request.url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR':
+  return route.fulfill(status=200,body='',content_type='application/javascript')
  path=ROOT/(urlsplit(route.request.url).path.lstrip('/') or 'index.html')
  route.fulfill(status=200 if path.is_file() else 404,body=(path if path.is_file() else ROOT/'404.html').read_bytes(),content_type=mimetypes.guess_type(path)[0] or 'text/html')
 items=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',(ROOT/'index.html').read_text(),re.S)[1])['@graph'][2]['mainEntity']['itemListElement']

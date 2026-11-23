@@ -9,6 +9,9 @@ ROOT=Path(__file__).resolve().parents[1]
 ORIGIN='https://djnaoyaman.github.io'
 
 def route(request):
+    # Keep the known Google tag offline during UI checks.
+    if request.request.url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR':
+        return request.fulfill(status=200,body='',content_type='application/javascript')
     path=urlparse(request.request.url).path
     local=ROOT/(path.lstrip('/') or 'index.html')
     if not local.is_file():

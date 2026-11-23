@@ -23,7 +23,10 @@ for tag,url in page.links:
  u=urlsplit(url)
  assert u.scheme in ('','https'),url
  if url.startswith('#'):assert u.fragment in page.ids,url
- if tag!='a' and u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),url
+ if tag!='a':
+  if u.netloc and u.netloc!='djnaoyaman.github.io':
+   assert tag=='script' and url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR',url
+  elif u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),url
 assert 'href="/profile.html"' in home
 assert 'href="/"' in text
 assert 'href="/profile.css?' in text and 'href="/profile.css?' not in home
@@ -67,7 +70,10 @@ for filename in ['profile.html','404.html']:
  for tag,url in parsed.links:
   u=urlsplit(url)
   if url.startswith('#'):assert u.fragment in parsed.ids,(filename,url)
-  if tag!='a' and u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),(filename,url)
+  if tag!='a':
+   if u.netloc and u.netloc!='djnaoyaman.github.io':
+    assert tag=='script' and url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR',(filename,url)
+   elif u.path.startswith('/'):assert (ROOT/u.path.lstrip('/')).is_file(),(filename,url)
  assert 'src="/site.js' not in sub
 assert '音楽も、言葉も、日々の発見も。' in text
 print('PASS: profile/404 shared maison shell, navigation, palette, tagline, anchors and local CSS')

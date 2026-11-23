@@ -5,6 +5,9 @@ import os,shutil,mimetypes,json
 from playwright.sync_api import sync_playwright,expect
 R=Path(__file__).resolve().parents[1];O='https://djnaoyaman.github.io'
 def serve(route):
+ # Keep the known Google tag offline during UI checks.
+ if route.request.url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR':
+  return route.fulfill(status=200,body='',content_type='application/javascript')
  p=R/(urlsplit(route.request.url).path.lstrip('/') or 'index.html')
  route.fulfill(status=200 if p.is_file() else 404,body=(p if p.is_file() else R/'404.html').read_bytes(),content_type=mimetypes.guess_type(p)[0] or 'text/html')
 with sync_playwright() as p:

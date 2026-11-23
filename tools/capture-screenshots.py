@@ -5,6 +5,9 @@ import mimetypes,os,shutil
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 def serve(route):
+ # Keep the known Google tag offline during UI checks.
+ if route.request.url=='https://www.googletagmanager.com/gtag/js?id=G-PT03XG7KQR':
+  return route.fulfill(status=200,body='',content_type='application/javascript')
  path=ROOT/(urlsplit(route.request.url).path.lstrip('/') or 'index.html')
  route.fulfill(body=path.read_bytes(),content_type=mimetypes.guess_type(path)[0] or 'application/octet-stream')
 with sync_playwright() as p:
