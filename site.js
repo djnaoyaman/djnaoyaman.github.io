@@ -23,6 +23,7 @@
     buttons.forEach(button => {
       button.querySelector('span').textContent = projects.filter(project => button.dataset.theme === 'all' || project.dataset.theme === button.dataset.theme).length;
       button.addEventListener('click', () => {
+        const changed = button.getAttribute('aria-pressed') !== 'true';
         const url = new URL(location.href);
         const theme = button.dataset.theme;
         if (theme === 'all') url.searchParams.delete('theme');
@@ -31,6 +32,7 @@
           try { history.pushState(null, '', url); } catch { /* Filtering remains available if history is restricted. */ }
         }
         apply(theme);
+        if (changed) window.minaTrack?.('select_filter', {filter_name:'project_theme', filter_value:theme});
       });
     });
     apply(readTheme());
@@ -81,6 +83,7 @@
       copyButton.disabled = true;
       try {
         await navigator.clipboard.writeText(canonical);
+        if (ticket === operation) window.minaTrack?.('share', {method:'copy_link', content_type:'website', item_id:'mina'});
         if (ticket === operation) announce('リンクをコピーしました。');
       } catch {
         if (ticket === operation) announce(`コピーできませんでした。次のURLを選択してコピーしてください：${canonical}`);
@@ -97,9 +100,11 @@
       status.textContent = '';
       try {
         await navigator.share({title:document.title,text:'ずーっと、あれも、これも。音楽、表現、自然と文化、暮らしと学び。MINAのWebプロジェクト集。',url:canonical});
+        if (ticket === operation) window.minaTrack?.('share', {method:'native', content_type:'website', item_id:'mina'});
       } catch (error) {
         if (ticket === operation && error?.name !== 'AbortError') announce('共有メニューを開けませんでした。「Xでシェア」または「リンクをコピー」をお試しください。');
       } finally { if (shareOperation === ticket) shareButton.disabled = false; }
     });
   }
 })();
+
