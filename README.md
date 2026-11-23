@@ -40,7 +40,7 @@ main/rootの既存GitHub Pages設定で公開。ブラウザの依存ライブ�
 
 ## 保全と検証範囲
 
-正規URL、プロフィール原稿・出典、各サイトURL、既存robots制限・sitemap方針、CSPを保持。計測IDがないためGA/広告タグは未導入のまま。新しいトラッキング、外部フォント通信、権限、Service Workerは追加しません。
+正規URL、プロフィール原稿・出典、各サイトURL、既存robots制限・sitemap方針を保持。公開5ページはGA4 `G-PT03XG7KQR` を一度だけ読み込み、共通の `analytics.js` で初期化します。既存の `creator_site_visit` 計測も共通処理へ集約しています。404は未知のURL文字列を送らず固定の `/404.html` として計測します。CSPはGoogle Analyticsに必要な通信先だけを追加し、インラインスクリプトの制限を維持します。外部フォント、Service Workerは追加しません。
 
 SNS画像キャッシュ更新やiOS/Android実機のインストール表示は自動検査の対象外です。改修一覧と区別は `docs/identity-inventory.md` を参照。
 

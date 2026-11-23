@@ -103,20 +103,3 @@
     });
   }
 })();
-
-if (document.querySelector('script[data-mina-ga]')) {
-  window.dataLayer = window.dataLayer || [];
-  function track() { window.dataLayer.push(arguments); }
-  track('js', new Date());
-  track('config', 'G-PT03XG7KQR');
-  document.addEventListener('click', event => {
-    const link = event.target.closest?.('a[href]');
-    if (!link) return;
-    const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin) return;
-    const project = url.pathname.split('/')[1];
-    if (project && /^[a-z0-9_-]+$/.test(project)) {
-      track('event', 'creator_site_visit', {target_site: project});
-    }
-  });
-}
